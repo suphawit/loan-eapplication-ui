@@ -1,0 +1,121 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.businessOwner" id="businessOwner" class="border">
+        <legend>Business Owner</legend>
+        <div class="form-data">
+            <div class="form-group row" *ngIf="!fieldProps.gtbusinessOwnerIncomePerMonth.hidden">
+                <label class="col-form-label col-sm-3">
+                    รายได้ต่อเดือน :
+                    <span class="form-required-field" *ngIf="fieldProps.gtbusinessOwnerIncomePerMonth.required">*</span>
+                </label>
+                <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.gtbusinessOwnerIncomePerMonth.editing">
+                    <input type="text" name="gtbusinessOwnerIncomePerMonth" class="form-control text-right" [required]="fieldProps.gtbusinessOwnerIncomePerMonth.required"
+                        [(ngModel)]="formData.gtbusinessOwnerIncomePerMonth" #gtbusinessOwnerIncomePerMonth="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                    <ng-container *ngIf="gtbusinessOwnerIncomePerMonth?.invalid && submitted">
+                        <span *ngIf="gtbusinessOwnerIncomePerMonth.errors.required" class="help-block with-errors">Please enter a value</span>
+                        <span *ngIf="gtbusinessOwnerIncomePerMonth.errors.currency" class="help-block with-errors">{{ gtbusinessOwnerIncomePerMonth.errors.currency.message }}</span>
+                    </ng-container>
+                </div>
+                <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.gtbusinessOwnerIncomePerMonth.editing">
+                    {{ formData.gtbusinessOwnerIncomePerMonth }}
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="!fieldProps.gtbusinessOwnerProfitPerMonth.hidden">
+                <label class="col-form-label col-sm-3">
+                    กําไรต่อเดือน :
+                    <span class="form-required-field" *ngIf="fieldProps.gtbusinessOwnerProfitPerMonth.required">*</span>
+                </label>
+                <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.gtbusinessOwnerProfitPerMonth.editing">
+                    <input type="text" name="gtbusinessOwnerProfitPerMonth" class="form-control text-right" [required]="fieldProps.gtbusinessOwnerProfitPerMonth.required"
+                        [(ngModel)]="formData.gtbusinessOwnerProfitPerMonth" #gtbusinessOwnerProfitPerMonth="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                    <ng-container *ngIf="gtbusinessOwnerProfitPerMonth?.invalid && submitted">
+                        <span *ngIf="gtbusinessOwnerProfitPerMonth.errors.required" class="help-block with-errors">Please enter a value</span>
+                        <span *ngIf="gtbusinessOwnerProfitPerMonth.errors.currency" class="help-block with-errors">{{ gtbusinessOwnerProfitPerMonth.errors.currency.message }}</span>
+                    </ng-container>
+                </div>
+                <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.gtbusinessOwnerProfitPerMonth.editing">
+                    {{ formData.gtbusinessOwnerProfitPerMonth }}
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="!fieldProps.gtbusinessOwnerAssetSize.hidden">
+                <label class="col-form-label col-sm-3">
+                    ขนาดสินทรัพย์ :
+                    <span class="form-required-field" *ngIf="fieldProps.gtbusinessOwnerAssetSize.required">*</span>
+                </label>
+                <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.gtbusinessOwnerAssetSize.editing">
+                    <input type="text" name="gtbusinessOwnerAssetSize" class="form-control text-right" [required]="fieldProps.gtbusinessOwnerAssetSize.required"
+                        [(ngModel)]="formData.gtbusinessOwnerAssetSize" #gtbusinessOwnerAssetSize="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                    <ng-container *ngIf="gtbusinessOwnerAssetSize?.invalid && submitted">
+                        <span *ngIf="gtbusinessOwnerAssetSize.errors.required" class="help-block with-errors">Please enter a value</span>
+                        <span *ngIf="gtbusinessOwnerAssetSize.errors.currency" class="help-block with-errors">{{ gtbusinessOwnerAssetSize.errors.currency.message }}</span>
+                    </ng-container>
+                </div>
+                <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.gtbusinessOwnerAssetSize.editing">
+                    {{ formData.gtbusinessOwnerAssetSize }}
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="!fieldProps.gtbusinessOwnerRegisterCapital.hidden">
+                <label class="col-form-label col-sm-3">
+                    ทุนจดทะเบียน :
+                    <span class="form-required-field" *ngIf="fieldProps.gtbusinessOwnerRegisterCapital.required">*</span>
+                </label>
+                <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.gtbusinessOwnerRegisterCapital.editing">
+                    <input type="text" name="gtbusinessOwnerRegisterCapital" class="form-control text-right" [required]="fieldProps.gtbusinessOwnerRegisterCapital.required"
+                        [(ngModel)]="formData.gtbusinessOwnerRegisterCapital" #gtbusinessOwnerRegisterCapital="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                    <ng-container *ngIf="gtbusinessOwnerRegisterCapital?.invalid && submitted">
+                        <span *ngIf="gtbusinessOwnerRegisterCapital.errors.required" class="help-block with-errors">Please enter a value</span>
+                        <span *ngIf="gtbusinessOwnerRegisterCapital.errors.currency" class="help-block with-errors">{{ gtbusinessOwnerRegisterCapital.errors.currency.message }}</span>
+                    </ng-container>
+                </div>
+                <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.gtbusinessOwnerRegisterCapital.editing">
+                    {{ formData.gtbusinessOwnerRegisterCapital }}
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="!fieldProps.gtbusinessOwnerPaidCapital.hidden">
+                <label class="col-form-label col-sm-3">
+                    ทุนชําระแล้ว :
+                    <span class="form-required-field" *ngIf="fieldProps.gtbusinessOwnerPaidCapital.required">*</span>
+                </label>
+                <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.gtbusinessOwnerPaidCapital.editing">
+                    <input type="text" name="gtbusinessOwnerPaidCapital" class="form-control text-right" [required]="fieldProps.gtbusinessOwnerPaidCapital.required"
+                        [(ngModel)]="formData.gtbusinessOwnerPaidCapital" #gtbusinessOwnerPaidCapital="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                    <ng-container *ngIf="gtbusinessOwnerPaidCapital?.invalid && submitted">
+                        <span *ngIf="gtbusinessOwnerPaidCapital.errors.required" class="help-block with-errors">Please enter a value</span>
+                        <span *ngIf="gtbusinessOwnerPaidCapital.errors.currency" class="help-block with-errors">{{ gtbusinessOwnerPaidCapital.errors.currency.message }}</span>
+                    </ng-container>
+                </div>
+                <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.gtbusinessOwnerPaidCapital.editing">
+                    {{ formData.gtbusinessOwnerPaidCapital }}
+                </div>
+            </div>
+            <custom-select name="gtnumberOfEmployee" label="จํานวนพนักงาน :" placeholder="-- Select --"
+                [(ngModel)]="formData.gtnumberOfEmployee" [hidden]="fieldProps.gtnumberOfEmployee.hidden"
+                [required]="fieldProps.gtnumberOfEmployee.required" [editing]="fieldProps.gtnumberOfEmployee.editing"
+                [submitted]="submitted"
+                [selectedValue] = "formData.gtnumberOfEmployee"
+                [displayName]="displayName.gtnumberOfEmployee"
+                [options]="ddl?.numOfEmployees">
+            </custom-select>
+            <custom-datepicker name="gtbusinessOwnerRegisterDate" label="วันที่โอนกรรมสิทธิ์รถยนต์ :" [(ngModel)]="formData.gtbusinessOwnerRegisterDate"
+                [hidden]="fieldProps.gtbusinessOwnerRegisterDate.hidden" [required]="fieldProps.gtbusinessOwnerRegisterDate.required"
+                [editing]="fieldProps.gtbusinessOwnerRegisterDate.editing" [submitted]="submitted">
+            </custom-datepicker>
+            <div class="form-group row" *ngIf="!fieldProps.gtbusinessOwnerExportAmtPerMonth.hidden">
+                <label class="col-form-label col-sm-3">
+                    (ถ้ามีส่งออก) ยอดส่งออกเดือนละ :
+                    <span class="form-required-field" *ngIf="fieldProps.gtbusinessOwnerExportAmtPerMonth.required">*</span>
+                </label>
+                <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.gtbusinessOwnerExportAmtPerMonth.editing">
+                    <input type="text" name="gtbusinessOwnerExportAmtPerMonth" class="form-control text-right" [required]="fieldProps.gtbusinessOwnerExportAmtPerMonth.required"
+                        [(ngModel)]="formData.gtbusinessOwnerExportAmtPerMonth" #gtbusinessOwnerExportAmtPerMonth="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                    <ng-container *ngIf="gtbusinessOwnerExportAmtPerMonth?.invalid && submitted">
+                        <span *ngIf="gtbusinessOwnerExportAmtPerMonth.errors.required" class="help-block with-errors">Please enter a value</span>
+                        <span *ngIf="gtbusinessOwnerExportAmtPerMonth.errors.currency" class="help-block with-errors">{{ gtbusinessOwnerExportAmtPerMonth.errors.currency.message }}</span>
+                    </ng-container>
+                </div>
+                <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.gtbusinessOwnerExportAmtPerMonth.editing">
+                    {{ formData.gtbusinessOwnerExportAmtPerMonth }}
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>

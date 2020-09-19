@@ -1,0 +1,62 @@
+<fieldset *ngIf="hidden" id=`${prefix}Person` class="border">
+    <legend>{{header}}</legend>
+    <div class="form-data">
+        <button class="add" type="button" (click)="pushPersonField()">Add</button>
+        <div class="card mb-10" *ngFor="let person of formData[personObjectName]; index as i; trackBy: trackByFn;">
+            <!-- <h5 class="card-header">คนที่ {{i+1}}</h5> -->
+            <div class="card-body">
+                <button type="button" class="close" [ngClass]="{'disabled': formData[personObjectName].length ==1 }" aria-label="Close" (click)="removePersonField(i)">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <custom-select name="{{personObjectName+'relation'+i}}" label="ความสัมพันธ์กับลูกค้าหลัก :" placeholder="-- Select --"
+                    [hidden]="false" [(ngModel)]="formData[personObjectName][i].relation"
+                    [required]="false" [editing]="true"
+                    [submitted]="submitted"
+                    [displayName]=""
+                    [selectedValue]="formData[personObjectName][i].relation"
+                    [options]="ddl?.relations">
+                </custom-select>
+
+                <custom-text-field name="{{personObjectName+'idNo'+i}}" label="เลขที่บัตรประชาชน :"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData[personObjectName][i].idNo"
+                    [hidden]="false"
+                    [required]="false"
+                    [editing]="true"
+                    [submitted]="submitted"
+                    maxlength="{{ maxlen.idNo }}"
+                    numberFormatter>
+                </custom-text-field>
+
+                <custom-text-field name="{{personObjectName+'firstNameTh'+i}}" label="ชื่อ (ไทย) :"
+                    inputCss="col-sm-4 col-xs-9"
+                    [(ngModel)]="formData[personObjectName][i].firstNameTh"
+                    [hidden]="false"
+                    [required]="false"
+                    [editing]="true"
+                    [submitted]="submitted"
+                    maxlength="{{ maxlen.firstNameTh }}">
+                </custom-text-field>
+
+                <custom-text-field name="{{personObjectName+'lastNameTh'+i}}" label="นามสกุล (ไทย) :"
+                    inputCss="col-sm-4 col-xs-9"
+                    [(ngModel)]="formData[personObjectName][i].lastNameTh"
+                    [hidden]="false"
+                    [required]="false"
+                    [editing]="true"
+                    [submitted]="submitted"
+                    maxlength="{{ maxlen.lastNameTh }}">
+                </custom-text-field>
+
+                <custom-text-field name="{{personObjectName+'phoneNo'+i}}" label="เบอร์ติดต่อ :"
+                    inputCss="col-sm-4 col-xs-9"
+                    [(ngModel)]="formData[personObjectName][i].phoneNo"
+                    [hidden]="false"
+                    [required]="false"
+                    [editing]="true"
+                    [submitted]="submitted"
+                    maxlength="{{ maxlen.phoneNo }}">
+                </custom-text-field>
+            </div>
+        </div>
+    </div>
+</fieldset>

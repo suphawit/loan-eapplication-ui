@@ -1,0 +1,73 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.livingCondition" id="livingCondition" class="border">
+        <legend>Co Borrower Living Condition</legend>
+        <div class="form-data">
+            <custom-select name="colivingHomeType" label="ประเภทบ้าน :" placeholder="-- Select --"
+                [(ngModel)]="formData.colivingHomeType" [hidden]="fieldProps.colivingHomeType.hidden"
+                [required]="fieldProps.colivingHomeType.required" [editing]="fieldProps.colivingHomeType.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.colivingHomeType"
+                [selectedValue] = "formData.colivingHomeType"
+                [options]="ddl?.homeTypes">
+            </custom-select>
+            <div class="form-group row" *ngIf="!fieldProps.colivingHomeYear.hidden">
+                <label class="col-form-label col-sm-3">
+                    อยู่มานานกี่ปี :
+                    <span class="form-required-field" *ngIf="fieldProps.colivingHomeYear.required">*</span>
+                </label>
+                <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.colivingHomeYear.editing">
+                    <input type="text" name="colivingHomeYear" class="form-control text-right" [required]="fieldProps.colivingHomeYear.required"
+                        [(ngModel)]="formData.colivingHomeYear" #colivingHomeYear="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                    <ng-container *ngIf="colivingHomeYear?.invalid && submitted">
+                        <span *ngIf="colivingHomeYear.errors.required" class="help-block with-errors">Please enter a value</span>
+                        <span *ngIf="colivingHomeYear.errors.currency" class="help-block with-errors">{{ colivingHomeYear.errors.currency.message }}</span>
+                    </ng-container>
+                </div>
+                <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.colivingHomeYear.editing">
+                    {{ formData.colivingHomeYear }}
+                </div>
+            </div>
+            <div class="form-group row" *ngFor="let status of ddl?.residentStatuses; trackBy: trackByFn; let i = index">
+                <label class="col-form-label" class="col-sm-3" *ngIf="status.name"
+                    [hidden]="fieldProps.colivingHomeStatus.hidden">
+                    <input type="radio" name="colivingHomeStatus" id="radio-{{status.value}}" [(ngModel)]="formData.colivingHomeStatus"
+                        [value]="status.value" (change)="residentStatusCheckChange()"
+                        [required]="fieldProps.colivingHomeStatus.required" />
+                    <span class="padding-left-10">{{ status.name }}</span>
+                </label>
+                <ng-container *ngIf="status.value === '2' && !fieldProps.corelationship.hidden">
+                    <div class="col-sm-4 col-xs-9">
+                        <select class="form-control" name="corelationship" [(ngModel)]="formData.corelationship"
+                            [required]="fieldProps.corelationship.required" #relationship="ngModel">
+                            <option value="" selected>-- Select--</option>
+                            <option [value]="relationship.value" [selected]="formData.corelationship === relationship.value"
+                                *ngFor="let relationship of ddl?.relationships; trackBy: trackByFn;">
+                                {{ relationship.name }}
+                            </option>
+                        </select>
+                        <ng-container *ngIf="relationship?.invalid && submitted">
+                            <span *ngIf="relationship.errors.required" class="help-block with-errors">Please enter a value</span>
+                        </ng-container>
+                    </div>
+                    <div class="form-required-field" *ngIf="fieldProps.corelationship.required">*</div>
+                    <div class="clearfix"></div>
+                </ng-container>
+                <ng-container *ngIf="status.value === '3' && !fieldProps.corentPerMonth.hidden">
+                    <div class="col-sm-4 col-xs-9">
+                        <input type="text" name="corentPerMonth" class="form-control" [required]="fieldProps.corentPerMonth.required"
+                            [(ngModel)]="formData.corentPerMonth" #rentPerMonth="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                        <ng-container *ngIf="rentPerMonth?.invalid && submitted">
+                            <span *ngIf="rentPerMonth.errors.required" class="help-block with-errors">Please enter a value</span>
+                            <span *ngIf="rentPerMonth.errors.currency" class="help-block with-errors">{{ rentPerMonth.errors.currency.message }}</span>
+                        </ng-container>
+                    </div>
+                    <div class="form-required-field" *ngIf="fieldProps.corentPerMonth.required">*</div>
+                    <div class="clearfix"></div>
+                </ng-container>
+            </div>
+            <ng-container *ngIf="!form.valid && submitted">
+                <span *ngIf="util.isNullOrEmpty(formData.cofinanHomeStatus)" class="help-block with-errors">Please enter a value</span>
+            </ng-container>
+        </div>
+    </fieldset>
+</form>

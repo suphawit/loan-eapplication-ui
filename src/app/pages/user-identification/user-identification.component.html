@@ -1,0 +1,29 @@
+<h2 class="page-title">ระบุตัวตน</h2>
+<hr class="side">
+
+<div class="form-data">
+    <form [formGroup]="userIdForm">
+        <div class="form-group col-md-12" formControlValidator [control]="userIdForm?.controls.docTypeId" [submitted]="submitted">
+            <label class="font-bold">โปรดระบุประเภทบัตร</label>
+            <select class="form-control" formControlName="docTypeId">
+                <option value="">-- Select --</option>
+                <option [ngValue]="docType.value" *ngFor="let docType of ddl?.cardTypes; trackBy: trackByFn;">
+                    {{ docType.name }}
+                </option>
+            </select>
+            <span class="help-block with-errors"></span>
+        </div>
+        <div class="form-group col-md-12" formControlValidator [control]="userIdForm?.controls.idNo" [submitted]="submitted">
+            <label class="font-bold">โปรดระบุเลขที่บัตร</label>
+            <input type="text" class="form-control" formControlName="idNo" />
+            <span class="help-block with-errors"></span>
+        </div>
+    </form>
+</div>
+
+<div class="footer-actions">
+    <div class="form-actions">
+        <button type="button" class="btn primary-dark btn-block" (click)="goToPreCalPage()"> คำนวณสินเชื่อเบื้องต้น </button>
+        <button type="button" class="btn primary-dark btn-block" [disabled]="true"> ขอสินเชื่อ </button>
+    </div>
+</div>

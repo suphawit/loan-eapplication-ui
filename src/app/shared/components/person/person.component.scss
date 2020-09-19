@@ -1,0 +1,20 @@
+.form-data {
+    position: relative;
+    margin-top: 50px;
+    .add {
+        position: absolute;
+        top: -50px;
+        right: -38px;
+    }
+    .card-body {
+        position: relative;
+        .close {
+            position: absolute;
+            right: 20px;
+            &.disabled {
+                opacity: .1;
+                cursor: default;
+            }
+        }
+    }
+}

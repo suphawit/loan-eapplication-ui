@@ -1,0 +1,23 @@
+<div class="form-group row">
+    <label class="col-form-label" [ngClass]="labelCss"
+        *ngIf="label" [attr.for]="identifier">
+        {{ label }}<span class="form-required-field" *ngIf="required">*</span>
+    </label>
+    <div [ngClass]="inputCss" [hidden]="!editing">
+        <select class="form-control" [(ngModel)]="value" [id]="identifier" [required]="required"
+            [ngClass]="{ invalid: (invalid | async) }">
+            <option value="" selected *ngIf="placeholder">{{ placeholder }}</option>
+            <option *ngFor="let option of options; trackBy: trackByFn;"
+                [value]="option.value" [selected]="selectedValue === option.value">
+                    {{ option.name }}
+            </option>
+        </select>
+        <validation [@flyInOut]="'in,out'" *ngIf="submitted && invalid | async"
+            [messages]="failures | async">
+        </validation>
+    </div>
+    <div class="clearfix"></div>
+    <div [hidden]="editing" [ngClass]="inputCss">
+        {{ displayName }}
+    </div>
+</div>

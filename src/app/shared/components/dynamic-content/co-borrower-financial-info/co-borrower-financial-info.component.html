@@ -1,0 +1,120 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.incomeInfo" id="incomeInfo" class="border">
+        <legend>Co Borrower Income Information</legend>
+        <div class="form-data">
+            <custom-input-filter name="cocountryOfIncome" label="Country of Income :" placeholder="Autocomplete"
+                [(ngModel)]="formData.cocountryOfIncome" [hidden]="fieldProps.cocountryOfIncome.hidden"
+                [required]="fieldProps.cocountryOfIncome.required" [editing]="fieldProps.cocountryOfIncome.editing"
+                [submitted]="submitted"
+                [selectedValue] = "formData.cocountryOfIncome"
+                [displayName]="displayName.cocountryOfIncome"
+                [options]="ddl?.countries">
+            </custom-input-filter>
+            <div class="form-group row" *ngIf="!fieldProps.comainIncomeAmt.hidden">
+                <label class="col-form-label col-sm-3">
+                    รายได้หลักเท่าไหร่ (เช่น เงินเดือน) :
+                    <span class="form-required-field" *ngIf="fieldProps.comainIncomeAmt.required">*</span>
+                </label>
+                <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.comainIncomeAmt.editing">
+                    <input type="text" name="comainIncomeAmt" class="form-control text-right" [required]="fieldProps.comainIncomeAmt.required"
+                        [(ngModel)]="formData.comainIncomeAmt" #comainIncomeAmt="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                    <ng-container *ngIf="comainIncomeAmt?.invalid && submitted">
+                        <span *ngIf="comainIncomeAmt.errors.required" class="help-block with-errors">Please enter a value</span>
+                        <span *ngIf="comainIncomeAmt.errors.currency" class="help-block with-errors">{{ comainIncomeAmt.errors.currency.message }}</span>
+                    </ng-container>
+                </div>
+                <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.comainIncomeAmt.editing">
+                    {{ formData.comainIncomeAmt }}
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="!fieldProps.coinvestmentIncomeAmt.hidden">
+                <label class="col-form-label col-sm-3">
+                    รายได้จากการลงทุนเท่าไหร่ :
+                    <span class="form-required-field" *ngIf="fieldProps.coinvestmentIncomeAmt.required">*</span>
+                </label>
+                <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.coinvestmentIncomeAmt.editing">
+                    <input type="text" name="coinvestmentIncomeAmt" class="form-control text-right" [required]="fieldProps.coinvestmentIncomeAmt.required"
+                        [(ngModel)]="formData.coinvestmentIncomeAmt" #coinvestmentIncomeAmt="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                    <ng-container *ngIf="coinvestmentIncomeAmt?.invalid && submitted">
+                        <span *ngIf="coinvestmentIncomeAmt.errors.required" class="help-block with-errors">Please enter a value</span>
+                        <span *ngIf="coinvestmentIncomeAmt.errors.currency" class="help-block with-errors">{{ coinvestmentIncomeAmt.errors.currency.message }}</span>
+                    </ng-container>
+                </div>
+                <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.coinvestmentIncomeAmt.editing">
+                    {{ formData.coinvestmentIncomeAmt }}
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="!fieldProps.cobusinessIncomeAmt.hidden">
+                <label class="col-form-label col-sm-3">
+                    รายได้จากการประกอบธุรกิจ :
+                    <span class="form-required-field" *ngIf="fieldProps.cobusinessIncomeAmt.required">*</span>
+                </label>
+                <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.cobusinessIncomeAmt.editing">
+                    <input type="text" name="cobusinessIncomeAmt" class="form-control text-right" [required]="fieldProps.cobusinessIncomeAmt.required"
+                        [(ngModel)]="formData.cobusinessIncomeAmt" #cobusinessIncomeAmt="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                    <ng-container *ngIf="cobusinessIncomeAmt?.invalid && submitted">
+                        <span *ngIf="cobusinessIncomeAmt.errors.required" class="help-block with-errors">Please enter a value</span>
+                        <span *ngIf="cobusinessIncomeAmt.errors.currency" class="help-block with-errors">{{ cobusinessIncomeAmt.errors.currency.message }}</span>
+                    </ng-container>
+                </div>
+                <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.cobusinessIncomeAmt.editing">
+                    {{ formData.cobusinessIncomeAmt }}
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="!fieldProps.cootherIncomeAmt.hidden">
+                <label class="col-form-label col-sm-3">
+                    รายได้อื่นๆ :
+                    <span class="form-required-field" *ngIf="fieldProps.cootherIncomeAmt.required">*</span>
+                </label>
+                <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.cootherIncomeAmt.editing">
+                    <input type="text" name="cootherIncomeAmt" class="form-control text-right" [required]="fieldProps.cootherIncomeAmt.required"
+                        [(ngModel)]="formData.cootherIncomeAmt" #cootherIncomeAmt="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                    <ng-container *ngIf="cootherIncomeAmt?.invalid && submitted">
+                        <span *ngIf="cootherIncomeAmt.errors.required" class="help-block with-errors">Please enter a value</span>
+                        <span *ngIf="cootherIncomeAmt.errors.currency" class="help-block with-errors">{{ cootherIncomeAmt.errors.currency.message }}</span>
+                    </ng-container>
+                </div>
+                <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.cootherIncomeAmt.editing">
+                    {{ formData.cootherIncomeAmt }}
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset *ngIf="!hideSection.wealthInfo" id="wealthInfo" class="border">
+        <legend>Wealth Information</legend>
+        <div class="form-data">
+            <custom-select name="copersonalAssetAmt" label="มูลค่าสินทรัพย์ส่วนตัว :" placeholder="-- Select --"
+                [(ngModel)]="formData.copersonalAssetAmt" [hidden]="fieldProps.copersonalAssetAmt.hidden"
+                [required]="fieldProps.copersonalAssetAmt.required" [editing]="fieldProps.copersonalAssetAmt.editing"
+                [submitted]="submitted"
+                [selectedValue] = "formData.copersonalAssetAmt"
+                [displayName]="displayName.copersonalAssetAmt"
+                [options]="ddl?.personalAssetAmts">
+            </custom-select>
+        </div>
+    </fieldset>
+    <fieldset *ngIf="!hideSection.debtInfo" id="debtInfo" class="border">
+        <legend>Debt Information</legend>
+        <div class="form-data">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-3 subtitle">
+                    โปรดเลือกประวัติเครดิต
+                </label>
+            </div>
+            <custom-text-field name="concbSelfCreditScore" label="NCB Self Credit Score :"
+                [(ngModel)]="formData.concbSelfCreditScore" [hidden]="fieldProps.concbSelfCreditScore.hidden"
+                [required]="fieldProps.concbSelfCreditScore.required" [editing]="fieldProps.concbSelfCreditScore.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.ncbSelfCreditScore }}">
+            </custom-text-field>
+            <div class="form-group" *ngFor="let ncb of ddl?.ncbs; trackBy: trackByFn; let i = index">
+                <label class="col-form-label" class="col-sm-3" *ngIf="ncb.name"
+                    [hidden]="fieldProps.concbEConsent.hidden">
+                    <input type="radio" name="concbEConsent" id="radio-{{ncb.value}}" [(ngModel)]="formData.concbEConsent"
+                        [value]="ncb.value"
+                        [required]="fieldProps.concbEConsent.required" />
+                    <span class="padding-left-10">{{ ncb.name }}</span>
+                </label>
+            </div>
+        </div>
+    </fieldset>
+</form>

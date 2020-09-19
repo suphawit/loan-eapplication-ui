@@ -1,0 +1,89 @@
+<h2 class="page-title">คำนวณสินเชื่อเบื้องต้น</h2>
+<br/>
+<breadcrumb [hidden]="!title"
+    [title]="title"
+    [stepNo]="nextPage?.nextStepNo"
+    [totalStepNo]="nextPage?.totalStepNo">
+</breadcrumb>
+
+<div class="form-page">
+    <form name="form" #form="ngForm" class="form-horizontal" novalidate>
+        <fieldset id="priceOffer" class="border">
+            <legend>
+                Installment Plan
+            </legend>
+            <div class="form-data">
+                <ng-container *ngIf="isAutoloan">
+                    <h3 class="text-center">
+                        ราคาประเมิน {{ formData.carGoodRetail | number }} บาท
+                    </h3>
+                    <h3 text-center class="text-center" *ngFor="let info of loanInfo; trackBy: trackByFn;">
+                        ยอดจัดสูงสุด {{ info.maxLoanAmt | number }} บาท (เทอมสูงสุดที่ {{ info.totalTerm }})
+                    </h3>
+                    <h3 class="text-center">ยอดที่ต้องการกู้</h3>
+                    <input type="text" class="form-control" [(ngModel)]="formData.loanAmount"
+                        [ngClass]="" [required]="false" [ngModelOptions]="{standalone:true}" />
+                </ng-container>
+                <ng-container *ngIf="isNewCar">
+                    <h3 class="text-center">
+                        ราคาขาย {{ formData.carSellPrice | number }} บาท
+                    </h3>
+                    <h3 class="text-center">
+                        ราคารวมอุปกรณ์เสริมและส่วนลด {{ formData.totalPrice | number }} บาท
+                    </h3>
+                    <h3 class="text-center">ดาวน์ขั้นต่ำ {{ minDownPercent }}%</h3>
+                    <h4 class="text-center">เงินดาวน์</h4>
+                    <input type="text" class="form-control" [(ngModel)]="formData.downAmount"
+                        [ngClass]="" [required]="false" [ngModelOptions]="{standalone:true}" />
+                        <h4 class="text-center">(ดาวน์ {{ formData.percentDown }}%)</h4>
+                </ng-container>
+                <ng-container *ngIf="isPloan">
+                    <h4 class="text-center">
+                        ยอดกู้สูงสุด {{ formData.loanAmount | number }} บาท
+                    </h4>
+                </ng-container>
+                <div class="clearfix"></div><br>
+                <div>
+                    <div class="table-scrollable">
+                        <table class="table table-bordered"  *ngFor="let type of installmentTypes; trackBy: trackByFn; let i=index; let fst = first;">
+                            <thead>
+                                <tr>
+                                    <th>Term</th>
+                                    <th>งวดที่</th>
+                                    <th>ยอดสินเชื่อ</th>
+                                    <th>ค่างวด</th>
+                                    <th>ดอกเบี้ย</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let price of type?.priceOffers[0]?.prices" (click)="getPriceDetail(price)">   
+                                <tr *ngFor="let ins of price.installments; trackBy: trackByFn; let i=index; let fst = first;">
+                                    <td class="text-center" >
+                                        <span [hidden]="!fst">{{ price.totalTerm }}</span>
+                                    </td>
+                                    <td class="text-center" >
+                                        {{ ins.desc }}
+                                    </td>
+                                    <td class="text-center" >
+                                        <span [hidden]="!fst">{{ price.loanAmt }}</span>
+                                    </td>
+                                    <td class="text-center" >
+                                        {{ ins.insAmt }}
+                                    </td>
+                                    <td class="text-center" >
+                                        {{ ins.rate }}%
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<div class="footer-actions">
+    <div class="form-actions">
+        <button type="button" class="btn primary-dark btn-block" (click)="goToNextPage()"> ถัดไป </button>
+    </div>
+</div>

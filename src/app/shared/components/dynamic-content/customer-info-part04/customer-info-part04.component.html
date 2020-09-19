@@ -1,0 +1,96 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.familyInfo" id="familyInfo" class="border">
+        <legend>Family Information</legend>
+        <div class="form-data">
+            <custom-select name="maritalStatus" label="สถานะสมรส :" placeholder="-- Select --"
+                [hidden]="fieldProps.maritalStatus.hidden" [(ngModel)]="formData.maritalStatus"
+                [required]="fieldProps.maritalStatus.required" [editing]="fieldProps.maritalStatus.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.maritalStatus"
+                [selectedValue]="formData.maritalStatus"
+                (change)="showSpouseChild()"
+                [options]="ddl?.maritalStatus">
+            </custom-select>
+
+            <custom-text-field name="spouseIdNo" label="เลขที่บัตรประชาชนของคู่สมรส :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.spouseIdNo" [hidden]="fieldProps.spouseIdNo.hidden"
+                [required]="fieldProps.spouseIdNo.required" [editing]="fieldProps.spouseIdNo.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.idNo }}">
+            </custom-text-field>
+
+            <custom-text-field name="spouseFirstNameTh" label="ชื่อ(ไทย) :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.spouseFirstNameTh" [hidden]="fieldProps.spouseFirstNameTh.hidden"
+                [required]="fieldProps.spouseFirstNameTh.required" [editing]="fieldProps.spouseFirstNameTh.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.firstNameTh }}">
+            </custom-text-field>
+
+            <custom-text-field name="spouseLastNameTh" label="นามสกุล(ไทย) :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.spouseLastNameTh" [hidden]="fieldProps.spouseLastNameTh.hidden"
+                [required]="fieldProps.spouseLastNameTh.required" [editing]="fieldProps.spouseLastNameTh.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.lastNameTh }}">
+            </custom-text-field>
+
+            <custom-text-field name="spousePhoneNo" label="เบอร์ติดต่อ :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.spousePhoneNo" [hidden]="fieldProps.spousePhoneNo.hidden"
+                [required]="fieldProps.spousePhoneNo.required" [editing]="fieldProps.spousePhoneNo.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.phone }}" currencyFormatter currencyValidator>
+            </custom-text-field>
+
+            <custom-select name="childNo" label="จำนวนบุตร: (เลือกจำนวน) :" placeholder="-- Select --"
+                [hidden]="fieldProps.childNo.hidden" [(ngModel)]="formData.childNo"
+                [required]="fieldProps.childNo.required" [editing]="fieldProps.childNo.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.childNo"
+                [selectedValue]="formData.childNo"
+                (change)="childrenCountSelectChange()"
+                [options]="ddl?.childrenCount">
+            </custom-select>
+
+            <custom-text-field name="childIdNo1" label="เลขที่บัตรประชาชนของบุตรคนที่ 1 :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.childIdNo1" [hidden]="fieldProps.childIdNo1.hidden"
+                [required]="fieldProps.childIdNo1.required" [editing]="fieldProps.childIdNo1.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.idNo }}"
+                currencyFormatter currencyValidator>
+            </custom-text-field>
+
+            <custom-text-field name="childIdNo2" label="เลขที่บัตรประชาชนของบุตรคนที่ 2 :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.childIdNo2" [hidden]="fieldProps.childIdNo2.hidden"
+                [required]="fieldProps.childIdNo2.required" [editing]="fieldProps.childIdNo2.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.idNo }}"
+                currencyFormatter currencyValidator>
+            </custom-text-field>
+
+            <custom-text-field name="childIdNo3" label="เลขที่บัตรประชาชนของบุตรคนที่ 3 :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.childIdNo3" [hidden]="fieldProps.childIdNo3.hidden"
+                [required]="fieldProps.childIdNo3.required" [editing]="fieldProps.childIdNo3.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.idNo }}"
+                currencyFormatter currencyValidator>
+            </custom-text-field>
+
+            <custom-text-field name="childIdNo4" label="เลขที่บัตรประชาชนของบุตรคนที่ 4 :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.childIdNo4" [hidden]="fieldProps.childIdNo4.hidden"
+                [required]="fieldProps.childIdNo4.required" [editing]="fieldProps.childIdNo4.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.idNo }}"
+                currencyFormatter currencyValidator>
+            </custom-text-field>
+        </div>
+    </fieldset>
+
+    <fieldset *ngIf="!hideSection.educationInfo" id="educationInfo" class="border">
+        <legend>Education Information</legend>
+        <div class="form-data">
+            <custom-select name="educationLevel" label="ระดับการศึกษาสูงสุด :" placeholder="-- Select --"
+                [hidden]="fieldProps.educationLevel.hidden" [(ngModel)]="formData.educationLevel"
+                [required]="fieldProps.educationLevel.required" [editing]="fieldProps.educationLevel.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.educationLevel"
+                [selectedValue]="formData.educationLevel"
+                [options]="ddl?.educationLevels">
+            </custom-select>
+        </div>
+    </fieldset>
+    <app-person [hidden]="!hideSection.contactPerson" [prefix]="'contact'" [header]="'บุคคลติดต่อกรณีจำเป็น'" [formData]="formData"></app-person>
+    <app-person [hidden]="!hideSection.guarantorPerson" [prefix]="'guarantor'" [header]="'ผู้ค้ำประกัน'" [formData]="formData"></app-person>
+    <app-person [hidden]="!hideSection.coborrowerPerson" [prefix]="'coborrower'" [header]="'ผู้กู้ร่วม'" [formData]="formData"></app-person>
+
+</form>

@@ -1,0 +1,24 @@
+<h2 class="page-title">คำนวณสินเชื่อเบื้องต้น</h2>
+<!-- <hr class="side"> -->
+<br/>
+<breadcrumb [hidden]="!title"
+    [title]="title"
+    [stepNo]="nextPage?.nextStepNo"
+    [totalStepNo]="nextPage?.totalStepNo">
+</breadcrumb>
+
+<div class="form-page">
+    <!-- <ng-container *ngFor="let component of componentList; trackBy: trackByFn;">
+        <app-dynamic-content *ngIf="component.componentCode" [componentName]="component.componentCode"
+            [params]="{ fieldList: component.fieldList, submitted: submitted }">
+        </app-dynamic-content>
+    </ng-container> -->
+    <app-dynamic-content *ngIf="selectedComponent" [componentName]="selectedComponent.componentCode"
+        [params]="{ fieldList: selectedComponent.fieldList, submitted: submitted, componentData: componentData }">
+    </app-dynamic-content>
+</div>
+<div class="footer-actions">
+    <div class="form-actions">
+        <button type="button" class="btn primary-dark btn-block" (click)="goToNextPage()"> Next </button>
+    </div>
+</div>

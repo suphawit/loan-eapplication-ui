@@ -1,0 +1,73 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.info" id="info" class="border">
+        <legend>Information</legend>
+        <div class="form-data">
+            <custom-radio-button-list
+                name="everHPwithKKPFlg"
+                label="ลูกค้าเคยผ่อนเช่าซื้อกับ KK หรือไม่? : "
+                [(ngModel)]="formData.everHPwithKKPFlg"
+                [required]="fieldProps.everHPwithKKPFlg.required"
+                [hidden]="fieldProps.everHPwithKKPFlg.hidden"
+                [selectedValue] = "formData.everHPwithKKPFlg"
+                [editing]="fieldProps.everHPwithKKPFlg.editing"
+                [displayName]="displayName.everHPwithKKPFlg"
+                [submitted]="submitted"
+                [choices]="ddl?.everHPwithKKPFlg">
+            </custom-radio-button-list>
+
+            <div class="form-group row" *ngIf="!fieldProps.referenceInstallmentAmtHP.hidden">
+                <label class="col-form-label col-sm-3">
+                    ค่างวดสินเชื่อเช่าซื้อ (HP) สำหรับอ้างอิง (สัญญายังผ่อนอยู่ หรือปิดไม่เกิน 6 เดือน) :
+                    <span class="form-required-field" *ngIf="fieldProps.referenceInstallmentAmtHP.required">*</span>
+                </label>
+                <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.referenceInstallmentAmtHP.editing">
+                    <input type="text" name="referenceInstallmentAmtHP" class="form-control text-right" [required]="fieldProps.referenceInstallmentAmtHP.required"
+                        [(ngModel)]="formData.referenceInstallmentAmtHP" #referenceInstallmentAmtHP="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                    <ng-container *ngIf="referenceInstallmentAmtHP?.invalid && submitted">
+                        <span *ngIf="referenceInstallmentAmtHP.errors.required" class="help-block with-errors">Please enter a value</span>
+                        <span *ngIf="referenceInstallmentAmtHP.errors.currency" class="help-block with-errors">{{ referenceInstallmentAmtHP.errors.currency.message }}</span>
+                    </ng-container>
+                </div>
+                <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.referenceInstallmentAmtHP.editing">
+                    {{ formData.referenceInstallmentAmtHP }}
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="!fieldProps.referenceInstallmentAmtPL.hidden">
+                <label class="col-form-label col-sm-3">
+                    ค่างวดสินเชื่อบุคคล (PL) สำหรับอ้างอิง (สัญญายังผ่อนอยู่ หรือปิดไม่เกิน 6 เดือน) :
+                    <span class="form-required-field" *ngIf="fieldProps.referenceInstallmentAmtPL.required">*</span>
+                </label>
+                <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.referenceInstallmentAmtPL.editing">
+                    <input type="text" name="referenceInstallmentAmtPL" class="form-control text-right" [required]="fieldProps.referenceInstallmentAmtPL.required"
+                        [(ngModel)]="formData.referenceInstallmentAmtPL" #referenceInstallmentAmtPL="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                    <ng-container *ngIf="referenceInstallmentAmtPL?.invalid && submitted">
+                        <span *ngIf="referenceInstallmentAmtPL.errors.required" class="help-block with-errors">Please enter a value</span>
+                        <span *ngIf="referenceInstallmentAmtPL.errors.currency" class="help-block with-errors">{{ referenceInstallmentAmtPL.errors.currency.message }}</span>
+                    </ng-container>
+                </div>
+                <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.referenceInstallmentAmtPL.editing">
+                    {{ formData.referenceInstallmentAmtPL }}
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="!fieldProps.referenceCreditLimitAmtHP.hidden">
+                <label class="col-form-label col-sm-3">
+                    ยอดจัดสินเชื่อบุคคล (PL) สำหรับอ้างอิง (สัญญายังผ่อนอยู่ หรือปิดไม่เกิน 6 เดือน) :
+                    <span class="form-required-field" *ngIf="fieldProps.referenceCreditLimitAmtHP.required">*</span>
+                </label>
+                <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.referenceCreditLimitAmtHP.editing">
+                    <input type="text" name="referenceCreditLimitAmtHP" class="form-control text-right" [required]="fieldProps.referenceCreditLimitAmtHP.required"
+                        [(ngModel)]="formData.referenceCreditLimitAmtHP" #referenceCreditLimitAmtHP="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                    <ng-container *ngIf="referenceCreditLimitAmtHP?.invalid && submitted">
+                        <span *ngIf="referenceCreditLimitAmtHP.errors.required" class="help-block with-errors">Please enter a value</span>
+                        <span *ngIf="referenceCreditLimitAmtHP.errors.currency" class="help-block with-errors">{{ referenceCreditLimitAmtHP.errors.currency.message }}</span>
+                    </ng-container>
+                </div>
+                <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.referenceCreditLimitAmtHP.editing">
+                    {{ formData.referenceCreditLimitAmtHP }}
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>

@@ -1,0 +1,28 @@
+<div class="form-group row">
+    <label class="col-form-label" [ngClass]="labelCss"
+        *ngIf="label" [attr.for]="identifier">
+        {{ label }}
+        <span class="form-required-field" *ngIf="required">*</span>
+    </label>
+    <div [ngClass]="inputCss" [hidden]="!editing">
+        <div class="input-group datepicker-input">
+            <input type="text" class="form-control" [placeholder]="placeholder" [(ngModel)]="value"
+                [ngClass]="{ invalid: (invalid | async) }" [id]="identifier" [required]="required"
+                #dp="bsDatepicker" bsDatepicker autocomplete="off"
+                [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass:'theme-default' }"
+            />
+            <span class="input-group-addon">
+                <button class=" btn default calendar" type="button" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen">
+                    <span class="fa fa-calendar"></span>
+                </button>
+            </span>
+        </div>
+        <validation [@flyInOut]="'in,out'" *ngIf="submitted && invalid | async"
+            [messages]="failures | async">
+        </validation>
+    </div>
+    <div class="clearfix"></div>
+    <div [ngClass]="inputCss" [hidden]="editing">
+        {{ value }}
+    </div>
+</div>

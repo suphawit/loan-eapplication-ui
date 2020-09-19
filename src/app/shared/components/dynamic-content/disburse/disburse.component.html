@@ -1,0 +1,218 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.disburse" id="disburse" class="border">
+        <legend>Disburse</legend>
+        <div class="form-data">
+            <div class="form-group" [hidden]="fieldProps.disbursementMethod.hidden">
+                <label class="col-form-label">
+                    ช่องทางการรับเงิน (เข้าบัญชีตัวเอง หรือผู้ขาย) :
+                    <span class="form-required-field" *ngIf="fieldProps.disbursementMethod.required">*</span>
+                </label>
+                <div class="form-group">
+                    <div>
+                        <label class="col-form-label" class="col-sm-12">
+                            <input type="radio" name="disbursementMethod" id="radio-{{formData.disbursementMethod}}" [(ngModel)]="formData.disbursementMethod"
+                                [value]="1"
+                                [required]="fieldProps.disbursementMethod.required" />
+                            <span class="padding-left-10">จ่ายผ่าน Promptpay บัตรประชาชน (ได้เงินเร็วสุด)</span>
+                        </label>
+                        <custom-text-field *ngIf="formData.disbursementMethod == 1"
+                            labelCss="padding-left-54"
+                            name="promptpayIdNo" label="รหัสบัตรประชาชน:"
+                            currencyFormatter currencyValidator [maxDigit]="maxlen.idNo"
+                            [(ngModel)]="formData.promptpayIdNo" [hidden]="fieldProps.promptpayIdNo.hidden"
+                            [required]="fieldProps.promptpayIdNo.required" [editing]="fieldProps.promptpayIdNo.editing"
+                            [submitted]="submitted">
+                        </custom-text-field>
+                    </div>
+                    <div>
+                        <label class="col-form-label" class="col-sm-12">
+                            <input type="radio" name="disbursementMethod" id="radio-{{formData.disbursementMethod}}" [(ngModel)]="formData.disbursementMethod"
+                                [value]="2"
+                                [required]="fieldProps.disbursementMethod.required" />
+                            <span class="padding-left-10">โอนเงินเข้าบัญชีธนาคาร</span>
+                        </label>
+
+                        <ng-container *ngIf="formData.disbursementMethod == 2">
+                            <custom-input-filter placeholder="Autocomplete"
+                                labelCss="padding-left-54"
+                                name="bankTransfer" label="ธนาคาร :"
+                                [(ngModel)]="formData.bankTransfer" [hidden]="fieldProps.bankTransfer.hidden"
+                                [required]="fieldProps.bankTransfer.required" [editing]="fieldProps.bankTransfer.editing"
+                                [submitted]="submitted"
+                                [selectedValue] = "formData.bankTransfer"
+                                [displayName]="displayName.bankTransfer"
+                                [options]="[]">
+                            </custom-input-filter>
+                            <custom-text-field
+                                labelCss="padding-left-54"
+                                name="accountNoTransfer" label="เลขที่บัญชีธนาคาร:"
+                                [(ngModel)]="formData.accountNoTransfer" [hidden]="fieldProps.accountNoTransfer.hidden"
+                                [required]="fieldProps.accountNoTransfer.required" [editing]="fieldProps.accountNoTransfer.editing"
+                                [submitted]="submitted">
+                            </custom-text-field>
+                        </ng-container>
+                    </div>
+                    <div>
+                        <label class="col-form-label" class="col-sm-12">
+                            <input type="radio" name="disbursementMethod" id="radio-{{formData.disbursementMethod}}" [(ngModel)]="formData.disbursementMethod"
+                                [value]="3"
+                                [required]="fieldProps.disbursementMethod.required" />
+                            <span class="padding-left-10">จ่ายด้วยเช็ค</span>
+                        </label>
+                        <ng-container *ngIf="formData.disbursementMethod == 3">
+                            <custom-text-field name="chequeFirstNameItem1"
+                                labelCss="padding-left-54"
+                                label="ใบที่ 1 - ชื่อผู้รับเงิน:"
+                                [(ngModel)]="formData.chequeFirstNameItem1" [hidden]="fieldProps.chequeFirstNameItem1.hidden"
+                                [required]="fieldProps.chequeFirstNameItem1.required" [editing]="fieldProps.chequeFirstNameItem1.editing"
+                                [submitted]="submitted">
+                            </custom-text-field>
+
+                            <custom-text-field name="chequeLastNameItem1"
+                                labelCss="padding-left-54"
+                                label="ใบที่ 1 - นามสกุลผู้รับเงิน :"
+                                [(ngModel)]="formData.chequeLastNameItem1" [hidden]="fieldProps.chequeLastNameItem1.hidden"
+                                [required]="fieldProps.chequeLastNameItem1.required" [editing]="fieldProps.chequeLastNameItem1.editing"
+                                [submitted]="submitted">
+                            </custom-text-field>
+                            <custom-text-field name="chequeAmtItem1"
+                                labelCss="padding-left-54"
+                                label="ใบที่ 1 - จำนวนเงิน :"
+                                currencyFormatter currencyValidator
+                                [(ngModel)]="formData.chequeAmtItem1" [hidden]="fieldProps.chequeAmtItem1.hidden"
+                                [required]="fieldProps.chequeAmtItem1.required" [editing]="fieldProps.chequeAmtItem1.editing"
+                                [submitted]="submitted">
+                            </custom-text-field>
+
+                            <custom-text-field name="chequeFirstNameItem2"
+                                labelCss="padding-left-54"
+                                label="ใบที่ 2 - ชื่อผู้รับเงิน :"
+                                [(ngModel)]="formData.chequeFirstNameItem2" [hidden]="fieldProps.chequeFirstNameItem2.hidden"
+                                [required]="fieldProps.chequeFirstNameItem2.required" [editing]="fieldProps.chequeFirstNameItem2.editing"
+                                [submitted]="submitted">
+                            </custom-text-field>
+                            <custom-text-field name="chequeLastNameItem2"
+                                labelCss="padding-left-54"
+                                label="ใบที่ 2 - นามสกุลผู้รับเงิน :"
+                                [(ngModel)]="formData.chequeLastNameItem2" [hidden]="fieldProps.chequeLastNameItem2.hidden"
+                                [required]="fieldProps.chequeLastNameItem2.required" [editing]="fieldProps.chequeLastNameItem2.editing"
+                                [submitted]="submitted">
+                            </custom-text-field>
+                            <custom-text-field name="chequeAmtItem2"
+                                labelCss="padding-left-54"
+                                label="ใบที่ 2 - จำนวนเงิน :"
+                                currencyFormatter currencyValidator
+                                [(ngModel)]="formData.chequeAmtItem2" [hidden]="fieldProps.chequeAmtItem2.hidden"
+                                [required]="fieldProps.chequeAmtItem2.required" [editing]="fieldProps.chequeAmtItem2.editing"
+                                [submitted]="submitted">
+                            </custom-text-field>
+
+                            <custom-text-field name="chequeFirstNameItem3"
+                                labelCss="padding-left-54"
+                                label="ใบที่ 3 - ชื่อผู้รับเงิน :"
+                                [(ngModel)]="formData.chequeFirstNameItem3" [hidden]="fieldProps.chequeFirstNameItem3.hidden"
+                                [required]="fieldProps.chequeFirstNameItem3.required" [editing]="fieldProps.chequeFirstNameItem3.editing"
+                                [submitted]="submitted">
+                            </custom-text-field>
+                            <custom-text-field name="chequeLastNameItem3"
+                                labelCss="padding-left-54"
+                                label="ใบที่ 3 - นามสกุลผู้รับเงิน :"
+                                [(ngModel)]="formData.chequeLastNameItem3" [hidden]="fieldProps.chequeLastNameItem3.hidden"
+                                [required]="fieldProps.chequeLastNameItem3.required" [editing]="fieldProps.chequeLastNameItem3.editing"
+                                [submitted]="submitted">
+                            </custom-text-field>
+                            <custom-text-field name="chequeAmtItem3"
+                                labelCss="padding-left-54"
+                                label="ใบที่ 3 - จำนวนเงิน :"
+                                currencyFormatter currencyValidator
+                                [(ngModel)]="formData.chequeAmtItem3" [hidden]="fieldProps.chequeAmtItem3.hidden"
+                                [required]="fieldProps.chequeAmtItem3.required" [editing]="fieldProps.chequeAmtItem3.editing"
+                                [submitted]="submitted">
+                            </custom-text-field>
+                        </ng-container>
+                    </div>
+
+                    <ng-container *ngIf="fieldProps.disbursementMethod?.invalid && submitted">
+                        <span *ngIf="fieldProps.disbursementMethod.errors.required" class="help-block with-errors">Please enter a value</span>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div class="form-group" [hidden]="fieldProps.repaymentMethod.hidden">
+
+                <label class="col-form-label">
+                    วิธีการชำระเงินคืน:
+                    <span class="form-required-field" *ngIf="fieldProps.repaymentMethod.required">*</span>
+                </label>
+                <div class="form-group">
+                    <div>
+                        <label class="col-form-label" class="col-sm-12">
+                            <input type="radio" name="repaymentMethod" id="radio-{{formData.repaymentMethod}}" [(ngModel)]="formData.repaymentMethod"
+                                [value]="1"
+                                [required]="fieldProps.repaymentMethod.required" />
+                            <span class="padding-left-10">ชำระเอง เมื่อครบกำหนดรายเดือน (Bill Payment)</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="col-form-label" class="col-sm-12">
+                            <input type="radio" name="repaymentMethod" id="radio-{{formData.repaymentMethod}}" [(ngModel)]="formData.repaymentMethod"
+                                [value]="2"
+                                [required]="fieldProps.repaymentMethod.required" />
+                            <span class="padding-left-10">รับบริการแจ้งเตือนผ่าน Mobile Banking (Pay Alert) ผ่านระบบ Promptpay ตามที่ท่านเคยลงทะเบียนเอาไว้</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="col-form-label" class="col-sm-12">
+                            <input type="radio" name="repaymentMethod" id="radio-{{formData.repaymentMethod}}" [(ngModel)]="formData.repaymentMethod"
+                                [value]="3"
+                                [required]="fieldProps.repaymentMethod.required" />
+                            <span class="padding-left-10">หักบัญชีอัตโนมัติ (Direct Debit) จากบัญชีธนาคาร</span>
+                        </label>
+                        <ng-container *ngIf="formData.repaymentMethod == 3">
+                            <custom-input-filter placeholder="Autocomplete"
+                                labelCss="padding-left-54"
+                                name="bankDirectDebit" label="ธนาคาร :"
+                                [(ngModel)]="formData.bankDirectDebit" [hidden]="fieldProps.bankDirectDebit.hidden"
+                                [required]="fieldProps.bankDirectDebit.required" [editing]="fieldProps.bankDirectDebit.editing"
+                                [submitted]="submitted"
+                                [selectedValue] = "formData.bankDirectDebit"
+                                [displayName]="displayName.bankDirectDebit"
+                                [options]="[]">
+                            </custom-input-filter>
+                            <custom-text-field
+                                labelCss="padding-left-54"
+                                name="accountDirectDebit" label="เลขที่บัญชีธนาคาร:"
+                                [(ngModel)]="formData.accountDirectDebit" [hidden]="fieldProps.accountDirectDebit.hidden"
+                                [required]="fieldProps.accountDirectDebit.required" [editing]="fieldProps.accountDirectDebit.editing"
+                                [submitted]="submitted">
+                            </custom-text-field>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <custom-radio-button-list
+                name="notificationMethod"
+                label="ช่องทางการรับเอกสาร หรือการแจ้งเตือน:"
+                [(ngModel)]="formData.notificationMethod"
+                [required]="fieldProps.notificationMethod.required"
+                [hidden]="fieldProps.notificationMethod.hidden"
+                [selectedValue] = "formData.notificationMethod"
+                [editing]="fieldProps.notificationMethod.editing"
+                [displayName]="displayName.notificationMethod"
+                [submitted]="submitted"
+                [choices]="[
+                    {
+                        name: 'ผ่านช่องทาง Electronic (Email/SMS) (Free)',
+                        value: '1'
+                    },
+                    {
+                        name: 'ผ่านการจัดส่งไปรษณีย์ (ค่าบริการรายเดือนๆละ 10 บาท โดยค่าธรรมเนียมทั้งหมดบริจาคเข้า ”มูลนิธิเกียรตินาคิน” เพื่อมอบให้กับองค์กรด้านสิ่งแวดล้อมต่อไป)',
+                        value: '2'
+                    }
+                ]"
+            >
+            </custom-radio-button-list>
+        </div>
+    </fieldset>
+</form>

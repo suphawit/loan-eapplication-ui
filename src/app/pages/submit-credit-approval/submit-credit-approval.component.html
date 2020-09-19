@@ -1,0 +1,15 @@
+<h2 class="page-title">Submit CA</h2>
+<hr class="side">
+
+<div class="form-data">
+    <ng-container *ngFor="let component of componentList; trackBy: trackByFn;">
+        <app-dynamic-content *ngIf="component.componentCode" [componentName]="component.componentCode"
+            [params]="{ fieldList: component.fieldList, submitted: submitted }">
+        </app-dynamic-content>
+    </ng-container>
+</div>
+<div class="footer-actions" >
+    <div class="form-actions margin-top-10 margin-bottom-10" style="margin-left: auto; margin-right: auto; width: 20%;">
+        <button type="button" class="btn green btn-lg btn-block margin-left-5" (click)="onSave()"> Submit CA </button>
+    </div>
+</div>

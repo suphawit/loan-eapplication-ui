@@ -1,0 +1,90 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.basicInfo" id="basicInfo" class="border">
+        <legend>Basic Information</legend>
+        <div class="form-data">
+        <custom-select name="docTypeId" label="ประเภทบัตร :" placeholder="-- Select --"
+            [(ngModel)]="formData.docTypeId" [hidden]="fieldProps.docTypeId.hidden"
+            [required]="fieldProps.docTypeId.required" [editing]="fieldProps.docTypeId.editing"
+            [submitted]="submitted" (change)="docTypeSelectChange()"
+            [displayName]="displayName.docTypeId"
+            [selectedValue] = "formData.docTypeId"
+            [options]="ddl?.cardTypes">
+        </custom-select>
+
+        <custom-text-field name="idNo" label="รหัสบัตรประชาชน :" [(ngModel)]="formData.idNo"
+            [hidden]="fieldProps.idNo.hidden" [required]="fieldProps.idNo.required"
+            [editing]="fieldProps.idNo.editing" [submitted]="submitted"
+            [maxlength]="maxlen.idNo" [minlength]="maxlen.idNo">
+        </custom-text-field>
+
+        <custom-select name="titleTh" label="คำนำหน้าชื่อ :" placeholder="-- Select --"
+            [(ngModel)]="formData.titleTh" [hidden]="fieldProps.titleTh.hidden"
+            [required]="fieldProps.titleTh.required" [editing]="fieldProps.titleTh.editing"
+            [submitted]="submitted"
+            [displayName]="displayName.titleTh"
+            [selectedValue] = "formData.titleTh"
+            [options]="ddl?.titleThs">
+        </custom-select>
+
+        <custom-text-field name="firstNameTh" label="ชื่อภาษาไทย :" [(ngModel)]="formData.firstNameTh"
+            [hidden]="fieldProps.firstNameTh.hidden" [required]="fieldProps.firstNameTh.required"
+            [editing]="fieldProps.firstNameTh.editing" [submitted]="submitted"
+            [maxlength]="maxlen.firstNameTh">
+        </custom-text-field>
+
+        <custom-text-field name="lastNameTh" label="นามสกุลภาษาไทย :" [(ngModel)]="formData.lastNameTh"
+            [hidden]="fieldProps.lastNameTh.hidden" [required]="fieldProps.lastNameTh.required"
+            [editing]="fieldProps.lastNameTh.editing" [submitted]="submitted"
+            [maxlength]="maxlen.lastNameTh">
+        </custom-text-field>
+
+        <custom-select name="titleEn" label="คำนำหน้าชื่อ :" placeholder="-- Select --"
+            [(ngModel)]="formData.titleEn" [hidden]="fieldProps.titleEn.hidden"
+            [required]="fieldProps.titleEn.required" [editing]="fieldProps.titleEn.editing"
+            [submitted]="submitted"
+            [displayName]="displayName.titleEn"
+            [selectedValue] = "formData.titleEn"
+            [options]="ddl?.titleEns">
+        </custom-select>
+
+        <custom-text-field name="firstNameEn" label="ชื่อภาษาอังกฤษ :" [(ngModel)]="formData.firstNameEn"
+            [hidden]="fieldProps.firstNameEn.hidden" [required]="fieldProps.firstNameEn.required"
+            [editing]="fieldProps.firstNameEn.editing" [submitted]="submitted"
+            [maxlength]="maxlen.firstNameEn" textFormatter >
+        </custom-text-field>
+
+        <custom-text-field name="lastNameEn" label="นามสกุลภาษาอังกฤษ :" [(ngModel)]="formData.lastNameEn"
+            [hidden]="fieldProps.lastNameEn.hidden" [required]="fieldProps.lastNameEn.required"
+            [editing]="fieldProps.lastNameEn.editing" [submitted]="submitted"
+            [maxlength]="maxlen.lastNameEn" textFormatter >
+        </custom-text-field>
+
+        <custom-datepicker name="birthDate" label="วันเกิด :" [(ngModel)]="formData.birthDate"
+            [hidden]="fieldProps.birthDate.hidden" [required]="fieldProps.birthDate.required"
+            [editing]="fieldProps.birthDate.editing" [submitted]="submitted">
+        </custom-datepicker>
+
+        <custom-input-filter name="nationality" label="สัญชาติ :" placeholder="Autocomplete"
+            [(ngModel)]="formData.nationality" [hidden]="fieldProps.nationality.hidden"
+            [required]="fieldProps.nationality.required" [editing]="fieldProps.nationality.editing"
+            [submitted]="submitted" (onComplete)="nationalitySelectChange($event)"
+            [displayName]="displayName.nationality"
+            [selectedValue] = "formData.nationality"
+            [options]="ddl?.nationalities">
+        </custom-input-filter>
+
+        <custom-radio-button-list
+            name="gender"
+            label="เพศ :"
+            [(ngModel)]="formData.gender"
+            [required]="fieldProps.gender.required"
+            [hidden]="fieldProps.gender.hidden"
+            [selectedValue] = "formData.gender"
+            [editing]="fieldProps.gender.editing"
+            [displayName]="displayName.gender"
+            [submitted]="submitted"
+            [choices]="ddl?.genders">
+        </custom-radio-button-list>
+    </div>
+    </fieldset>
+</form>

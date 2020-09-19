@@ -1,0 +1,86 @@
+
+
+<fieldset *ngIf="section" id="{{ sectionId }}" class="border">
+    <legend>{{ header }}</legend>
+    <div class="form-data">
+
+        <custom-text-field name="{{ fieldNames.addrNumber }}" label="เลขที่ :" [(ngModel)]="formData[fieldNames.addrNumber]"
+            [hidden]="fieldProps[fieldNames.addrNumber].hidden" [required]="fieldProps[fieldNames.addrNumber].required"
+            [editing]="fieldProps[fieldNames.addrNumber].editing" [submitted]="submitted"
+            [maxlength]="maxlen.addrNumber">
+        </custom-text-field>
+
+        <custom-text-field name="{{ fieldNames.moo }}" label="หมู่ที่ :" [(ngModel)]="formData[fieldNames.moo]"
+            [hidden]="fieldProps[fieldNames.moo].hidden" [required]="fieldProps[fieldNames.moo].required"
+            [editing]="fieldProps[fieldNames.moo].editing" [submitted]="submitted"
+            [maxlength]="maxlen.moo">
+        </custom-text-field>
+
+        <custom-text-field name="{{ fieldNames.floor }}" label="ชั้น :" [(ngModel)]="formData[fieldNames.floor]"
+            [hidden]="fieldProps[fieldNames.floor].hidden" [required]="fieldProps[fieldNames.floor].required"
+            [editing]="fieldProps[fieldNames.floor].editing" [submitted]="submitted"
+            [maxlength]="maxlen.floor">
+        </custom-text-field>
+
+        <custom-text-field name="{{ fieldNames.room }}" label="ห้อง :" [(ngModel)]="formData[fieldNames.room]"
+            [hidden]="fieldProps[fieldNames.room].hidden" [required]="fieldProps[fieldNames.room].required"
+            [editing]="fieldProps[fieldNames.room].editing" [submitted]="submitted"
+            [maxlength]="maxlen.room">
+        </custom-text-field>
+
+        <custom-text-field name="{{ fieldNames.village }}" label="อาคาร/หมู่บ้าน :" [(ngModel)]="formData[fieldNames.village]"
+            [hidden]="fieldProps[fieldNames.village].hidden" [required]="fieldProps[fieldNames.village].required"
+            [editing]="fieldProps[fieldNames.village].editing" [submitted]="submitted"
+            [maxlength]="maxlen.village">
+        </custom-text-field>
+
+        <custom-text-field name="{{ fieldNames.soi }}" label="ตรอก/ซอย :" [(ngModel)]="formData[fieldNames.soi]"
+            [hidden]="fieldProps[fieldNames.soi].hidden" [required]="fieldProps[fieldNames.soi].required"
+            [editing]="fieldProps[fieldNames.soi].editing" [submitted]="submitted"
+            [maxlength]="maxlen.soi">
+        </custom-text-field>
+
+        <custom-text-field name="{{ fieldNames.road }}" label="ถนน :" [(ngModel)]="formData[fieldNames.road]"
+            [hidden]="fieldProps[fieldNames.road].hidden" [required]="fieldProps[fieldNames.road].required"
+            [editing]="fieldProps[fieldNames.road].editing" [submitted]="submitted"
+            [maxlength]="maxlen.road">
+        </custom-text-field>
+        <custom-input-filter name="{{ fieldNames.province }}" label="จังหวัด :" placeholder="Autocomplete"
+            [(ngModel)]="formData[fieldNames.province]" [hidden]="fieldProps[fieldNames.province].hidden"
+            [required]="fieldProps[fieldNames.province].required" [editing]="fieldProps[fieldNames.province].editing"
+            [submitted]="submitted" (onComplete)="provinceSelectChange()"
+            [displayName]="displayName[fieldNames.province]"
+            [selectedValue]="formData[fieldNames.province]"
+            [options]="ddl?.provinces">
+        </custom-input-filter>
+        <custom-input-filter name="{{ fieldNames.district }}" label="เขต/อำเภอ :" placeholder="Autocomplete"
+            [hidden]="fieldProps[fieldNames.district].hidden" [(ngModel)]="formData[fieldNames.district]"
+            [required]="fieldProps[fieldNames.district].required" [editing]="fieldProps[fieldNames.district].editing"
+            [submitted]="submitted" (onComplete)="districtSelectChange()"
+            [displayName]="displayName[fieldNames.district]"
+            [selectedValue]="formData[fieldNames.district]"
+            [options]="ddl?.districts">
+        </custom-input-filter>
+        <custom-input-filter name="{{ fieldNames.subdistrict }}" label="แขวง/ตำบล :" placeholder="Autocomplete"
+            [hidden]="fieldProps[fieldNames.subdistrict].hidden" [(ngModel)]="formData[fieldNames.subdistrict]"
+            [required]="fieldProps[fieldNames.subdistrict].required" [editing]="fieldProps[fieldNames.subdistrict].editing"
+            [submitted]="submitted"
+            [displayName]="displayName[fieldNames.subdistrict]"
+            [selectedValue]="formData[fieldNames.subdistrict]"
+            [options]="ddl?.subdistricts">
+        </custom-input-filter>
+        <custom-text-field name="{{ fieldNames.postal }}" label=" รหัสไปรษณีย์ :" [(ngModel)]="formData[fieldNames.postal]"
+            [hidden]="fieldProps[fieldNames.postal].hidden" [required]="fieldProps[fieldNames.postal].required"
+            [editing]="fieldProps[fieldNames.postal].editing" [submitted]="submitted"
+            [maxlength]="maxlen.postal" [minlength]="maxlen.postal"
+            (change)="autofillProvinceDistrict()"
+            numberFormatter>
+        </custom-text-field>
+
+        <custom-text-field name="{{ fieldNames.beneficiaryName }}" label="ชื่อผู้รับผลประโยชน์ :" [(ngModel)]="formData[fieldNames.beneficiaryName]"
+            [hidden]="fieldProps[fieldNames.beneficiaryName].hidden" [required]="fieldProps[fieldNames.beneficiaryName].required"
+            [editing]="fieldProps[fieldNames.beneficiaryName].editing" [submitted]="submitted"
+        >
+        </custom-text-field>
+    </div>
+</fieldset>

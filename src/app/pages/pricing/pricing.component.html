@@ -1,0 +1,434 @@
+<h2 class="page-title">คำนวณสินเชื่อเบื้องต้น</h2>
+<br/>
+<breadcrumb [hidden]="!title"
+    [title]="title"
+    [stepNo]="nextPage?.nextStepNo"
+    [totalStepNo]="nextPage?.totalStepNo">
+</breadcrumb>
+
+<div class="form-page">
+    <form name="form" #form="ngForm" class="form-horizontal" novalidate>
+        <fieldset id="campaignInfo" class="border">
+            <legend>
+                Campaign Information
+            </legend>
+            <div class="form-data">
+                <div class="form-group row">
+                    <label class="col-form-label" class="col-sm-12">
+                    Product Program <span class="form-required-field">*</span>
+                    </label>
+                    <select name="pdpg" class="form-control" [(ngModel)]="formData.pdpg"
+                     [ngModelOptions]="{standalone: true}" [disabled]="!isValid"
+                    [required]="false" [ngClass]="" (change)="pdpgCallback($event.target.value)">
+                        <option *ngFor="let pdpg of pdpgList; trackBy: trackByFn;" 
+                        [value]="pdpg" [selected]="formData.pdpg.value === pdpg.value">
+                            {{ pdpg.name }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-form-label" class="col-sm-12">
+                    Campaign Name <span class="form-required-field">*</span>
+                    </label>
+                    <select name="campaign" class="form-control" [(ngModel)]="formData.campaignDisplay"
+                    [ngModelOptions]="{standalone: true}" [disabled]="!isValid || !this.formData.pdpg" 
+                    [required]="false" [ngClass]="" (change)="onSelectCampaign($event.target.value)">
+                        <option *ngFor="let campaign of filterCampaignList; trackBy: trackByFn;"
+                        [value]="campaign.value" [selected]="formData.campaignDisplay === campaign.value">
+                            {{ campaign.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+            <ng-container *ngIf="formData.campaign">
+                <div class="form-data">
+                    <label class="col-form-label col-sm-12">
+                        วิธีการคำนวณแคมเปญ <span class="form-required-field">*</span>
+                    </label>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-radio padding-left-15">
+                                    <input type="radio" name="campaignCalChoice"
+                                        [hidden]="false" [(ngModel)]="formData.campaignCalChoice"
+                                        [value]="'standard'"  [required]="false" /> แบบมาตรฐาน
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-radio padding-left-15">
+                                    <input type="radio" name="campaignCalChoice" 
+                                        [hidden]="false" [(ngModel)]="formData.campaignCalChoice"
+                                        [value]="'custom'" [required]="false" /> แบบกำหนดเอง
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <fieldset *ngIf="installmentTypeList" class="border">
+                    <div class="clearfix"></div>
+                    <legend>
+                        Installment type
+                    </legend>
+                    <div class="form-group">
+                        <div class="input-radio col-sm-4 col-xs-9 padding-left-15" 
+                            *ngFor="let installmentType of installmentTypeList; trackBy: trackByFn;">
+                            <div class="col">
+                                <input type="radio" name="installmentType" [(ngModel)]="formData.installmentType"
+                                [value]="installmentType" />
+                                {{ installmentType.name }}
+                            </div>
+                        </div>
+                    </div>  
+                </fieldset>  
+                <fieldset *ngIf="carShieldList" class="border">
+                    <div class="clearfix"></div>
+                    <legend>
+                        ประกันชีวิตคุ้มครองสินเชื่อ
+                    </legend>
+                        <div class="form-group">
+                            <div class="input-radio padding-left-15" 
+                                *ngFor="let carShield of carShieldList; trackBy: trackByFn;">
+                                <div class="col">
+                                    <input type="radio" name="carShield" [(ngModel)]="formData.carShield"
+                                    [value]="carShield" />
+                                    {{ carShield.name }}
+                                </div>
+                            </div>
+                            <div class="input-radio padding-left-15">
+                                <div class="col">
+                                    <input type="checkbox"name="cashFlag" [(ngModel)]="formData.cashFlag"
+                                    [value]="true" />
+                                     จ่ายเงินสด
+                                </div>
+                            </div>
+                        </div>
+                </fieldset>
+                <fieldset *ngIf="insuranceMotorList" class="border">
+                    <div class="clearfix"></div>
+                    <legend>
+                        ประกันรถยนต์
+                    </legend>
+                    <div class="form-group">
+                        <div class="input-radio padding-left-15" *ngFor="let insMotor of insuranceMotorList; trackBy: trackByFn;">
+                            <div class="col">
+                                <input type="radio" name="insuranceMotor" [(ngModel)]="formData.insuranceMotor"
+                                [value]="insMotor" />
+                                {{ insMotor.name }}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset *ngIf="insurancePaList" class="border">
+                    <div class="clearfix"></div>
+                    <legend>
+                        ประกันเครื่องรถยนต์
+                    </legend>
+                    <div class="form-group">
+                        <div class="input-radio padding-left-15" *ngFor="let insPa of insurancePaList; trackBy: trackByFn;">
+                            <div class="col">
+                                <input type="radio" name="insurancePa" [(ngModel)]="formData.insurancePa"
+                                    [value]="insPa" />
+                                {{ insPa.name }}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset *ngIf="insuranceEwList" class="border">
+                    <div class="clearfix"></div>
+                    <legend>
+                        ประกันอุบัติเหตุ
+                    </legend>
+                    <div class="form-group">
+                        <div class="input-radio padding-left-15" *ngFor="let insEw of insuranceEwList; trackBy: trackByFn;">
+                            <div class="col">
+                                <input type="radio" name="insuranceEw" [(ngModel)]="formData.insuranceEw"
+                                [value]="insEw" />
+                                {{ insEw.name }}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset *ngIf="insuranceActList" class="border">
+                    <div class="clearfix"></div>
+                    <legend>
+                        พรบ.
+                    </legend>
+                    <div class="form-group">
+                        <div class="input-radio padding-left-15" *ngFor="let insAct of insuranceActList; trackBy: trackByFn;">
+                            <div class="col">
+                                <input type="radio" name="insuranceAct" [(ngModel)]="formData.insuranceAct"
+                                [value]="insAct" />
+                                {{ insAct.name }}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- -------- Campaign Deduct ------------ -->
+                <fieldset *ngIf="formData.campaignCalChoice == 'standard'" class="border">
+                    <legend>
+                        Campaign Deduction
+                    </legend>
+                    <div class="form-data">
+                        <label class="col-form-label col-sm-12">
+                            การเพิ่มอัตราดอกเบี้ย
+                        </label>
+                        <input type="text" class="form-control" [(ngModel)]="formData.addInterestRate"
+                        [ngClass]="" [required]="false" autocomplete="off" [ngModelOptions]="{standalone:true}"
+                        text-right />
+                        <!-- RateFactorGroup > SubGroup > RateFactor -->
+                        <div *ngIf="rateFactorGroups && rateFactorGroups?.length > 0">
+                        <div class="clearfix"></div>
+                        <ng-container *ngFor="let rateFactorGroup of rateFactorGroups; trackBy: trackByFn;"> 
+                            <ng-container *ngIf="rateFactorGroup.value === 'COND'">
+                                <ng-container *ngFor="let rateFactorSubGroup of rateFactorGroup.rateFactorSubGroups; trackBy: trackByFn;">                    
+                                    <label class="col-form-label col-sm-12">{{ rateFactorSubGroup?.name }}</label>
+                                    <div class="container toggle">
+                                        <div class="row text-center">
+                                            <div class="col" *ngFor="let rateFactor of rateFactorSubGroup.rateFactors; trackBy: trackByFn;"
+                                            [ngClass]="{ 'selected': rateFactor.value === formData.rateFactor[rateFactorGroup.value][rateFactorSubGroup.value]?.value }"
+                                            (click)="onSelectRateFactor(rateFactorGroup?.value, rateFactorSubGroup?.value, rateFactor)">
+                                            {{ rateFactor.name }}
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </ng-container>
+                            </ng-container>  
+                        </ng-container>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </fieldset>
+                <fieldset *ngIf="formData.campaignCalChoice == 'custom'" class="border">
+                    <legend>
+                        Campaign Deduction
+                    </legend>
+                    <div class="form-data">
+                        <div class="container">
+                            <div class="row">
+                            <div class="col">
+                                <label class="col-form-label col-sm-12">
+                                    อัตราดอกเบี้ยกำหนดเอง (%) <span class="form-required-field">(*)</span>
+                                </label>
+                                <input type="text" class="form-control" [(ngModel)]="formData.customInterestRate"
+                                [ngClass]="" [required]="false" autocomplete="off" [ngModelOptions]="{standalone:true}"
+                                text-right />
+                            </div>
+                            <div class="col">
+                                <label class="col-form-label col-sm-12">
+                                    เทอมกำหนดเอง <span class="form-required-field">(*)</span>
+                                </label>
+                                <input type="text" class="form-control" [(ngModel)]="formData.customTerm"
+                                [ngClass]="" [required]="false" autocomplete="off" [ngModelOptions]="{standalone:true}"
+                                text-right />
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="clearfix"></div>
+                <fieldset class="border">
+                    <legend>
+                        Commission
+                    </legend>
+                    <div class="form-data">
+                        <label class="col-form-label col-sm-12">
+                            วิธีการคำนวณ Commission
+                        </label>
+                        <div class="input-radio padding-left-15">
+                            <input type="radio" name="commissionChoice"
+                                [hidden]="false" [(ngModel)]="formData.commissionChoice"
+                                [value]="'standard'"  [required]="false" /> แบบมาตรฐาน
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                            <div class="col">
+                                <label class="col-form-label col-sm-12">
+                                    %Commission <span class="form-required-field">(*)</span>
+                                </label>
+                                <select name="comPercent" class="form-control" [(ngModel)]="formData.comPercent" [ngModelOptions]="{standalone: true}"  
+                                [required]="false" [ngClass]="">
+                                    <option *ngFor="let comPercent of comPercentList; trackBy: trackByFn;"
+                                    [value]="comPercent" [selected]="formData.comPercent === comPercent">
+                                {{ comPercent }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label class="col-form-label col-sm-12">
+                                    Term Commission <span class="form-required-field">(*)</span>
+                                </label>
+                                <select name="comTerm" class="form-control" [(ngModel)]="formData.comTerm" [ngModelOptions]="{standalone: true}"  
+                                [required]="false" [ngClass]="">
+                                    <option *ngFor="let comTerm of comTermList; trackBy: trackByFn;"
+                                    [value]="comTerm" [selected]="formData.comTerm === comTerm">
+                                    {{ comTerm }}
+                                    </option>
+                                </select>
+                            </div>
+                            </div>
+                        </div>
+
+                        <ng-container *ngFor="let rateFactorGroup of rateFactorGroups; trackBy: trackByFn;"> 
+                            <ng-container *ngIf="rateFactorGroup.value === 'COM'">
+                                <ng-container *ngFor="let rateFactorSubGroup of rateFactorGroup.rateFactorSubGroups; trackBy: trackByFn;">                    
+                                    <label class="col-form-label col-sm-12">{{ rateFactorSubGroup?.name }}</label>
+                                    <div class="container toggle">
+                                        <div class="row">
+                                            <div class="col text-center" *ngFor="let rateFactor of rateFactorSubGroup.rateFactors; trackBy: trackByFn;"
+                                            [ngClass]="{ 'selected': rateFactor.value === formData.rateFactor[rateFactorGroup.value][rateFactorSubGroup.value]?.value }"
+                                            (click)="onSelectRateFactor(rateFactorGroup?.value, rateFactorSubGroup?.value, rateFactor)">
+                                                {{ rateFactor.name }}
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </ng-container>
+                            </ng-container>  
+                        </ng-container>
+
+                        <div class="input-radio padding-left-15">
+                            <input type="radio" name="commissionChoice" 
+                                [hidden]="false" [(ngModel)]="formData.commissionChoice"
+                                [value]="'custom'" [required]="false" /> แบบกำหนดเอง
+                        </div>
+                        <label class="col-form-label col-sm-6">
+                            จำนวน Commission <span class="form-required-field">(*)</span>
+                        </label>
+                        <input type="text" class="form-control" [(ngModel)]="formData.comAmount"
+                        [ngClass]="" [required]="false" autocomplete="off" [ngModelOptions]="{standalone:true}"
+                        text-right />
+                    </div>
+                    <br>
+                </fieldset>
+                <fieldset class="border">
+                    <div class="clearfix"></div>
+                    <legend>
+                        ค่าส่งเสริมการขาย
+                    </legend>
+                    <div class="form-data">
+                        <label class="col-form-label col-sm-12">
+                            Incentive
+                        </label>
+                        <input type="text" class="form-control" [(ngModel)]="formData.incentive"
+                        [ngClass]="" [required]="false" autocomplete="off" [ngModelOptions]="{standalone:true}"
+                        text-right />
+                        <label class="col-form-label col-sm-12">
+                            Subsidy
+                        </label>
+                        <input type="text" class="form-control" [(ngModel)]="formData.subsidy"
+                        [ngClass]="" [required]="false" autocomplete="off" [ngModelOptions]="{standalone:true}"
+                        text-right />
+                        <label class="col-form-label col-sm-12">
+                            ค่าส่งเสริมการขาย - เข้า (ช่วยดาวน์)
+                        </label>
+                        <input type="text" class="form-control" [(ngModel)]="formData.salesPromotionInDown"
+                        [ngClass]="" [required]="false" autocomplete="off" [ngModelOptions]="{standalone:true}"
+                        text-right />
+                        <label class="col-form-label col-sm-12">
+                            ค่าส่งเสริมการขาย - เข้า (ช่วยผ่อน)
+                        </label>
+                        <input type="text" class="form-control" [(ngModel)]="formData.salesPromotionInInstallment"
+                        [ngClass]="" [required]="false" autocomplete="off" [ngModelOptions]="{standalone:true}"
+                        text-right />
+                        <label class="col-form-label col-sm-12">
+                            ค่าส่งเสริมการขาย - ออก
+                        </label>
+                        <input type="text" class="form-control" [(ngModel)]="formData.salesPromotionOut"
+                        [ngClass]="" [required]="false" autocomplete="off" [ngModelOptions]="{standalone:true}"
+                        text-right />
+                        <label class="col-form-label col-sm-12">
+                            รายละเอียดเสริมการขาย
+                        </label>
+                        <textarea style="overflow:auto;resize:none;width:98%" rows=8 [(ngModel)]="formData.salesPromotionDesc" [ngModelOptions]="{standalone:true}">
+                            {{ formData.salesPromotionDesc}}
+                        </textarea>
+                    </div>
+                </fieldset>
+                <fieldset *ngIf="deductList && deductList?.length > 0" class="border">
+                    <div class="clearfix"></div>
+                    <legend>
+                        PDPG Deduction
+                    </legend>
+                    <div class="form-data">
+                        <ng-container *ngFor="let deduct of deductList; trackBy: trackByFn;">
+                        <label class="col-form-label col-sm-12">{{ deduct?.title }}</label>
+                        <div class="container toggle">
+                            <div class="row">
+                                <div class="col text-center" *ngFor="let option of deduct.options; trackBy: trackByFn;"
+                                [ngClass]="{ 'selected': option.value === formData.deduct[deduct?.seq]?.value }"
+                                (click)="onSelectDeduct(deduct?.seq, option)">
+                                    {{ option.value }}
+                                </div>
+                            </div>
+                        </div>    
+                    </ng-container>
+                    </div>
+                </fieldset>
+                <div class="clearfix"></div>
+                <fieldset class="border">
+                    <legend>
+                        รายละเอียดอื่นๆ
+                    </legend>
+                    <div class="form-data">
+                    <label class="col-form-label col-sm-12">
+                        การโอนรถ<span class="form-required-field">*</span>
+                    </label>
+                    <div class="container" *ngIf="!isNewCar">
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-radio">
+                                    <input type="radio" name="carTransfer"
+                                        [hidden]="false" [(ngModel)]="formData.carTransfer"
+                                        [value]="'kk'"  [required]="false" /> KK โอน
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-radio">
+                                    <input type="radio" name="carTransfer" 
+                                        [hidden]="false" [(ngModel)]="formData.carTransfer"
+                                        [value]="'dealer'" [required]="false" /> คู่ค้าโอน
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <label class="col-form-label col-sm-12">
+                        Over Campaign Flag<span class="form-required-field">*</span>
+                    </label>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-radio">
+                                    <input type="radio" name="overCampaignFlag"
+                                        [hidden]="false" [(ngModel)]="formData.overCampaignFlag"
+                                        [value]="'N'"  [required]="false" /> No
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-radio">
+                                    <input type="radio" name="overCampaignFlag" 
+                                        [hidden]="false" [(ngModel)]="formData.overCampaignFlag"
+                                        [value]="'Y'" [required]="false" /> Yes
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <label class="col-form-label col-sm-12">
+                        รายละเอียด Over Campaign
+                    </label>
+                    <textarea style="overflow:auto;resize:none;width:98%" rows=8 [(ngModel)]="formData.overCampaignDesc"
+                    [ngModelOptions]="{standalone:true}">
+                        {{ formData.salesPromotionDesc}}
+                    </textarea>
+                </div>
+            </fieldset>
+            </ng-container>
+    </form>
+</div>
+
+<div class="footer-actions">
+    <div class="form-actions">
+        <button type="button" class="btn primary-dark btn-block" (click)="goToNextPage()"> ถัดไป </button>
+    </div>
+</div>

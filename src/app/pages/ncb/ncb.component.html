@@ -1,0 +1,18 @@
+<h2 class="page-title">คำนวณสินเชื่อเบื้องต้น</h2>
+<!-- <hr class="side"> -->
+<br />
+<breadcrumb [hidden]="!title"
+    [title]="title"
+    [stepNo]="nextPage?.nextStepNo"
+    [totalStepNo]="nextPage?.totalStepNo">
+</breadcrumb>
+
+<div class="form-page">
+
+</div>
+
+<div class="footer-actions">
+    <div class="form-actions">
+        <button type="button" class="btn primary-dark btn-block" (click)="goToNextPage()"> ถัดไป </button>
+    </div>
+</div>

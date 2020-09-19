@@ -1,0 +1,123 @@
+$topnav-background-color: #FFF;
+:host {
+    display: block;
+}
+.login-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    background: $topnav-background-color;
+    text-align: center;
+    color: #104E8B;
+    padding: 3em;
+
+    .col-lg-4 {
+        padding: 0;
+    }
+
+    .input-lg {
+        height: 46px;
+        padding: 10px 16px;
+        font-size: 18px!important;
+        line-height: 1.3333333;
+        border-radius: 0;
+    }
+
+    .input-underline {
+        background: 0 0;
+        border: none;
+        box-shadow: none;
+        border-bottom: 2px solid rgba(16,78,139, 0.5);
+        color: #104E8B;
+        border-radius: 0;
+    }
+
+    .input-underline:focus {
+        border-bottom: 2px solid #104E8B;
+        box-shadow: none;
+    }
+
+    .rounded-btn {
+        -webkit-border-radius: 50px;
+        border-radius: 50px;
+        color: #104E8B;
+        background: $topnav-background-color;
+        border: 2px solid rgba(16,78,139, 0.8);
+        font-size: 18px;
+        line-height: 40px;
+        padding: 0 25px;
+    }
+    .rounded-btn:hover,
+    .rounded-btn:focus,
+    .rounded-btn:active,
+    .rounded-btn:visited {
+        color: #104E8B;
+        border: 2px solid rgba(16,78,139, 1);
+        outline: none;
+    }
+
+    .squared-btn {
+        color: #104E8B;
+        background: $topnav-background-color;
+        border: 2px solid rgba(16,78,139, 0.8);
+        font-size: 18px;
+        line-height: 40px;
+        padding: 0 25px;
+    }
+    .squared-btn:hover,
+    .squared-btn:focus,
+    .squared-btn:active,
+    .squared-btn:visited {
+        color: #104E8B;
+        border: 2px solid rgba(16,78,139, 1);
+        outline: none;
+    }
+
+    h1 {
+        font-weight: 300;
+        margin-top: 20px;
+        font-size: 35px;
+        small {
+            color: rgba(16,78,139, 0.7);
+        }
+    }
+
+    .form-group {
+        padding: 8px 0;
+        input::-webkit-input-placeholder {
+            color: rgba(16,78,139, 0.6)!important;
+        }
+
+        input:-moz-placeholder {
+            /* Firefox 18- */
+            color: rgba(16,78,139, 0.6)!important;
+        }
+
+        input::-moz-placeholder {
+            /* Firefox 19+ */
+            color: rgba(16,78,139, 0.6)!important;
+        }
+
+        input:-ms-input-placeholder {
+            color: rgba(16,78,139, 0.6)!important;
+        }
+    }
+    .form-content {
+        padding: 25px 0;
+    }
+    .user-avatar {
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        border: 2px solid #104E8B;
+    }
+    .btn.rounded-btn,.btn.squared-btn {
+        text-decoration: none;
+    }
+
+    .help-block.with-errors {
+        text-align: left!important;
+    }
+}

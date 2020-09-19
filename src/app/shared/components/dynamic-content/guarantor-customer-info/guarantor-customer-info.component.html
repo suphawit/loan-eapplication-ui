@@ -1,0 +1,416 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.basicInfo" id="basicInfo" class="border">
+        <legend>Basic Information</legend>
+        <div class="form-data">
+            <custom-select name="gtdocTypeId" label="ประเภทบัตร :" placeholder="-- Select --"
+                [(ngModel)]="formData.gtdocTypeId" [hidden]="fieldProps.gtdocTypeId.hidden"
+                [required]="fieldProps.gtdocTypeId.required" [editing]="fieldProps.gtdocTypeId.editing"
+                [submitted]="submitted" (change)="docTypeSelectChange()"
+                [displayName]="displayName.gtdocTypeId"
+                [selectedValue] = "formData.gtdocTypeId"
+                [options]="ddl?.cardTypes">
+            </custom-select>
+
+            <custom-text-field name="gtidNo" label="รหัสบัตรประชาชน :" [(ngModel)]="formData.gtidNo"
+                [hidden]="fieldProps.gtidNo.hidden" [required]="fieldProps.gtidNo.required"
+                [editing]="fieldProps.gtidNo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.idNo" [minlength]="maxlen.idNo"
+                numberFormatter>
+            </custom-text-field>
+
+            <custom-select name="gttitleTh" label="คำนำหน้าชื่อ :" placeholder="-- Select --"
+                [(ngModel)]="formData.gttitleTh" [hidden]="fieldProps.gttitleTh.hidden"
+                [required]="fieldProps.gttitleTh.required" [editing]="fieldProps.gttitleTh.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.gttitleTh"
+                [selectedValue] = "formData.gttitleTh"
+                [options]="ddl?.titleThs">
+            </custom-select>
+
+            <custom-text-field name="gtfirstNameTh" label="ชื่อภาษาไทย :" [(ngModel)]="formData.gtfirstNameTh"
+                [hidden]="fieldProps.gtfirstNameTh.hidden" [required]="fieldProps.gtfirstNameTh.required"
+                [editing]="fieldProps.gtfirstNameTh.editing" [submitted]="submitted"
+                [maxlength]="maxlen.firstNameTh">
+            </custom-text-field>
+
+            <custom-text-field name="gtlastNameTh" label="นามสกุลภาษาไทย :" [(ngModel)]="formData.gtlastNameTh"
+                [hidden]="fieldProps.gtlastNameTh.hidden" [required]="fieldProps.gtlastNameTh.required"
+                [editing]="fieldProps.gtlastNameTh.editing" [submitted]="submitted"
+                [maxlength]="maxlen.lastNameTh">
+            </custom-text-field>
+
+            <custom-select name="gttitleEn" label="คำนำหน้าชื่อ :" placeholder="-- Select --"
+                [(ngModel)]="formData.gttitleEn" [hidden]="fieldProps.gttitleEn.hidden"
+                [required]="fieldProps.gttitleEn.required" [editing]="fieldProps.gttitleEn.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.gttitleEn"
+                [selectedValue] = "formData.gttitleEn"
+                [options]="ddl?.titleEns">
+            </custom-select>
+
+            <custom-text-field name="gtfirstNameEn" label="ชื่อภาษาอังกฤษ :" [(ngModel)]="formData.gtfirstNameEn"
+                [hidden]="fieldProps.gtfirstNameEn.hidden" [required]="fieldProps.gtfirstNameEn.required"
+                [editing]="fieldProps.gtfirstNameEn.editing" [submitted]="submitted"
+                [maxlength]="maxlen.firstNameEn" textFormatter >
+            </custom-text-field>
+
+            <custom-text-field name="gtlastNameEn" label="นามสกุลภาษาอังกฤษ :" [(ngModel)]="formData.gtlastNameEn"
+                [hidden]="fieldProps.gtlastNameEn.hidden" [required]="fieldProps.gtlastNameEn.required"
+                [editing]="fieldProps.gtlastNameEn.editing" [submitted]="submitted"
+                [maxlength]="maxlen.lastNameEn" textFormatter >
+            </custom-text-field>
+
+            <custom-datepicker name="gtbirthDate" label="วันเกิด :" [(ngModel)]="formData.gtbirthDate"
+                [hidden]="fieldProps.gtbirthDate.hidden" [required]="fieldProps.gtbirthDate.required"
+                [editing]="fieldProps.gtbirthDate.editing" [submitted]="submitted">
+            </custom-datepicker>
+
+            <custom-input-filter name="gtnationality" label="สัญชาติ :" placeholder="Autocomplete"
+                [(ngModel)]="formData.gtnationality" [hidden]="fieldProps.gtnationality.hidden"
+                [required]="fieldProps.gtnationality.required" [editing]="fieldProps.gtnationality.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.gtnationality"
+                [selectedValue] = "formData.gtnationality"
+                [options]="ddl?.nationalities">
+            </custom-input-filter>
+
+            <custom-radio-button-list
+                name="gtgender"
+                label="เพศ :"
+                [(ngModel)]="formData.gtgender"
+                [required]="fieldProps.gtgender.required"
+                [hidden]="fieldProps.gtgender.hidden"
+                [selectedValue] = "formData.gtgender"
+                [editing]="fieldProps.gtgender.editing"
+                [displayName]="displayName.gtgender"
+                [submitted]="submitted"
+                [choices]="ddl?.genders">
+            </custom-radio-button-list>
+        </div>
+    </fieldset>
+    <fieldset *ngIf="!hideSection.contactInfo" id="contactInfo" class="border">
+        <legend>Contact Information</legend>
+        <div class="form-data">
+
+            <custom-text-field name="gtmobileNo" label="เบอร์ติดต่อ(1) :" [(ngModel)]="formData.gtmobileNo"
+                [hidden]="fieldProps.gtmobileNo.hidden" [required]="fieldProps.gtmobileNo.required"
+                [editing]="fieldProps.gtmobileNo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.mobileNo" numberFormatter>
+            </custom-text-field>
+
+            <custom-text-field name="gtphoneNo" label="เบอร์ติดต่อ(2) :" [(ngModel)]="formData.gtphoneNo"
+                [hidden]="fieldProps.gtphoneNo.hidden" [required]="fieldProps.gtphoneNo.required"
+                [editing]="fieldProps.gtphoneNo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.phoneNo">
+            </custom-text-field>
+
+            <custom-text-field name="gtemail" label="Personal Email :" [(ngModel)]="formData.gtemail"
+                [hidden]="fieldProps.gtemail.hidden" [required]="fieldProps.gtemail.required"
+                [editing]="fieldProps.gtemail.editing" [submitted]="submitted"
+                [maxlength]="maxlen.email" email>
+            </custom-text-field>
+            <custom-text-field name="gtcompanyEmail" label="Company Email :" [(ngModel)]="formData.gtcompanyEmail"
+                [hidden]="fieldProps.gtcompanyEmail.hidden" [required]="fieldProps.gtcompanyEmail.required"
+                [editing]="fieldProps.gtcompanyEmail.editing" [submitted]="submitted"
+                [maxlength]="maxlen.companyEmail" email>
+            </custom-text-field>
+
+            <custom-text-field name="gtappleId" label="Apple ID :" [(ngModel)]="formData.gtappleId"
+                [hidden]="fieldProps.gtappleId.hidden" [required]="fieldProps.gtappleId.required"
+                [editing]="fieldProps.gtappleId.editing" [submitted]="submitted"
+                [maxlength]="maxlen.appleId">
+            </custom-text-field>
+
+            <custom-text-field name="gtgoogleId" label="Google ID :" [(ngModel)]="formData.gtgoogleId"
+                [hidden]="fieldProps.gtgoogleId.hidden" [required]="fieldProps.gtgoogleId.required"
+                [editing]="fieldProps.gtgoogleId.editing" [submitted]="submitted"
+                [maxlength]="maxlen.googleId">
+            </custom-text-field>
+
+            <custom-text-field name="gtlineId" label="Line ID :" [(ngModel)]="formData.gtlineId"
+                [hidden]="fieldProps.gtlineId.hidden" [required]="fieldProps.gtlineId.required"
+                [editing]="fieldProps.gtlineId.editing" [submitted]="submitted"
+                [maxlength]="maxlen.lineId">
+            </custom-text-field>
+
+            <custom-text-field name="gtfacebookAcc" label="Facebook Account :" [(ngModel)]="formData.gtfacebookAcc"
+                [hidden]="fieldProps.gtfacebookAcc.hidden" [required]="fieldProps.gtfacebookAcc.required"
+                [editing]="fieldProps.gtfacebookAcc.editing" [submitted]="submitted"
+                [maxlength]="maxlen.facebookAcc">
+            </custom-text-field>
+
+            <custom-text-field name="gttwitter" label="Twitter :" [(ngModel)]="formData.gttwitter"
+                [hidden]="fieldProps.gttwitter.hidden" [required]="fieldProps.gttwitter.required"
+                [editing]="fieldProps.gttwitter.editing" [submitted]="submitted"
+                [maxlength]="maxlen.twitter">
+            </custom-text-field>
+        </div>
+    </fieldset>
+
+    <fieldset *ngIf="!hideSection.workingInfo" id="workingInfo" class="border">
+        <legend>Working Information</legend>
+        <div class="form-data">
+            <custom-select name="gtcurrentOccupation" label="อาชีพหลัก :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtcurrentOccupation" [hidden]="fieldProps.gtcurrentOccupation.hidden"
+                [required]="fieldProps.gtcurrentOccupation.required" [editing]="fieldProps.gtcurrentOccupation.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.gtcurrentOccupation"
+                [selectedValue]="formData.gtcurrentOccupation"
+                (change)="changeOccupation('gtcurrentOccupation', 'gtcurrentSubOccupation')"
+                [options]="ddl?.occupations">
+            </custom-select>
+
+            <custom-select name="gtcurrentSubOccupation" label="อาชีพย่อย :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtcurrentSubOccupation" [hidden]="fieldProps.gtcurrentSubOccupation.hidden"
+                [required]="fieldProps.gtcurrentSubOccupation.required" [editing]="fieldProps.gtcurrentSubOccupation.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.gtcurrentSubOccupation"
+                [selectedValue]="formData.gtcurrentSubOccupation"
+                [options]="ddl?.subOccupations">
+            </custom-select>
+            <custom-select name="gtcurrentJobBusinessType" label="ประเภทธุรกิจ :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtcurrentJobBusinessType" [hidden]="fieldProps.gtcurrentJobBusinessType.hidden"
+                [required]="fieldProps.gtcurrentJobBusinessType.required" [editing]="fieldProps.gtcurrentJobBusinessType.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.gtcurrentJobBusinessType"
+                [selectedValue]="formData.gtcurrentJobBusinessType"
+                [options]="ddl?.jobBusinessTypes">
+            </custom-select>
+            <custom-select name="gtcurrentOfficeTitle" label="คำนำหน้าบ. :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtcurrentOfficeTitle" [hidden]="fieldProps.gtcurrentOfficeTitle.hidden"
+                [required]="fieldProps.gtcurrentOfficeTitle.required" [editing]="fieldProps.gtcurrentOfficeTitle.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.gtcurrentOfficeTitle"
+                [selectedValue]="formData.gtcurrentOfficeTitle"
+                [options]="ddl?.officeTitles">
+            </custom-select>
+            <custom-select name="gtcurrentOfficeName" label="ชื่อบริษัท :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtcurrentOfficeName" [hidden]="fieldProps.gtcurrentOfficeName.hidden"
+                [required]="fieldProps.gtcurrentOfficeName.required" [editing]="fieldProps.gtcurrentOfficeName.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.gtcurrentOfficeName"
+                [selectedValue]="formData.gtcurrentOfficeName"
+                [options]="ddl?.companyNames">
+            </custom-select>
+            <custom-select name="gtcurrentCompanyType" label=" ประเภทบริษัท :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtcurrentCompanyType" [hidden]="fieldProps.gtcurrentOfficeName.hidden"
+                [required]="fieldProps.gtcurrentCompanyType.required" [editing]="fieldProps.gtcurrentCompanyType.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.gtcurrentCompanyType"
+                [selectedValue]="formData.gtcurrentCompanyType"
+                [options]="ddl?.companyTypes">
+            </custom-select>
+
+            <custom-text-field name="gtofficePhoneNo" label="เบอร์ติดต่อที่บริษัท :" [(ngModel)]="formData.gtofficePhoneNo"
+                [hidden]="fieldProps.gtofficePhoneNo.hidden" [required]="fieldProps.gtofficePhoneNo.required"
+                [editing]="fieldProps.gtofficePhoneNo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.phoneNo" >
+            </custom-text-field>
+
+            <custom-text-field name="gtexpWorkYear" label="ประสบการณ์ทำงาน (กี่ปี) :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtexpWorkYear" [hidden]="fieldProps.gtexpWorkYear.hidden"
+                [required]="fieldProps.gtexpWorkYear.required" [editing]="fieldProps.gtexpWorkYear.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.expWorkYear }}" (change)="expWorkYearTextChange()" numberFormatter>
+            </custom-text-field>
+
+            <custom-text-field name="gtexpWorkMonth" label="ประสบการณ์ทำงาน (กี่เดือน) :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtexpWorkMonth" [hidden]="fieldProps.gtexpWorkMonth.hidden"
+                [required]="fieldProps.gtexpWorkMonth.required" [editing]="fieldProps.gtexpWorkMonth.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.expWorkMonth }}" (change)="greaterThanYear('gtexpWorkMonth')" numberFormatter>
+            </custom-text-field>
+
+            <custom-select name="gtcurrentJobPosition" label="ตำแหน่งงานปัจจุบัน :" placeholder="-- Select --"
+                [hidden]="fieldProps.gtcurrentJobPosition.hidden" [(ngModel)]="formData.gtcurrentJobPosition"
+                [required]="fieldProps.gtcurrentJobPosition.required" [editing]="fieldProps.gtcurrentJobPosition.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.gtcurrentJobPosition"
+                [selectedValue]="formData.gtcurrentJobPosition"
+                [options]="ddl?.jobPositions">
+            </custom-select>
+
+            <custom-text-field name="gtotherOccupation" label="อาชีพเสริม (ถ้ามี) :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtotherOccupation" [hidden]="fieldProps.gtotherOccupation.hidden"
+                [required]="fieldProps.gtotherOccupation.required" [editing]="fieldProps.gtotherOccupation.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.otherOccupation }}">
+            </custom-text-field>
+
+            <!-- Work experience less than 1 year -->
+
+            <ng-container *ngIf="formData.gtexpWorkYear<1">
+                <legend>Working Information(Less than year)</legend>
+                <custom-select name="gtl1YOccupation" label="อาชีพ :" placeholder="-- Select --"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtl1YOccupation" [hidden]="fieldProps.gtl1YOccupation.hidden"
+                    [required]="fieldProps.gtl1YOccupation.required" [editing]="fieldProps.gtl1YOccupation.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.gtl1YOccupation"
+                    [selectedValue]="formData.gtl1YOccupation"
+                    (change)="changeOccupation('gtl1YOccupation', 'gtl1YSubOccupation')"
+                    [options]="ddl?.occupations">
+                </custom-select>
+                <custom-select name="gtl1YSubOccupation" label="อาชีพย่อย :" placeholder="-- Select --"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtl1YSubOccupation" [hidden]="fieldProps.gtl1YSubOccupation.hidden"
+                    [required]="fieldProps.gtl1YSubOccupation.required" [editing]="fieldProps.gtl1YSubOccupation.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.gtl1YSubOccupation"
+                    [selectedValue]="formData.gtl1YSubOccupation"
+                    [options]="ddl?.subOccupations">
+                </custom-select>
+                <custom-input-filter name="gtl1YJobBusinessType" label="ประเภทธุรกิจ :" placeholder="Autocomplete"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtl1YJobBusinessType" [hidden]="fieldProps.gtl1YJobBusinessType.hidden"
+                    [required]="fieldProps.gtl1YJobBusinessType.required" [editing]="fieldProps.gtl1YJobBusinessType.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.gtl1YJobBusinessType"
+                    [selectedValue]="formData.gtl1YJobBusinessType"
+                    [options]="ddl?.jobBusinessTypes">
+                </custom-input-filter>
+                <custom-select name="gtl1YOfficeTitle" label="คำนำหน้าบ. :" placeholder="-- Select --"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtl1YOfficeTitle" [hidden]="fieldProps.gtl1YOfficeTitle.hidden"
+                    [required]="fieldProps.gtl1YOfficeTitle.required" [editing]="fieldProps.gtl1YOfficeTitle.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.gtl1YOfficeTitle"
+                    [selectedValue]="formData.gtl1YOfficeTitle"
+                    [options]="ddl?.officeTitles">
+                </custom-select>
+                <custom-select name="gtl1YOfficeName" label="ชื่อบริษัท :" placeholder="-- Select --"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtl1YOfficeName" [hidden]="fieldProps.gtl1YOfficeName.hidden"
+                    [required]="fieldProps.gtl1YOfficeName.required" [editing]="fieldProps.gtl1YOfficeName.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.gtl1YOfficeName"
+                    [selectedValue]="formData.gtl1YOfficeName"
+                    [options]="ddl?.companyNames">
+                </custom-select>
+                <custom-select name="gtl1YCompanyType" label=" ประเภทบริษัท :" placeholder="-- Select --"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtl1YCompanyType" [hidden]="fieldProps.gtl1YOfficeName.hidden"
+                    [required]="fieldProps.gtl1YCompanyType.required" [editing]="fieldProps.gtl1YCompanyType.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.gtl1YCompanyType"
+                    [selectedValue]="formData.gtl1YCompanyType"
+                    [options]="ddl?.companyTypes">
+                </custom-select>
+
+                <custom-text-field name="gtl1YOfficePhoneNo" label="เบอร์ติดต่อที่บริษัท :" [(ngModel)]="formData.gtl1YOfficePhoneNo"
+                    [hidden]="fieldProps.gtl1YOfficePhoneNo.hidden" [required]="fieldProps.gtl1YOfficePhoneNo.required"
+                    [editing]="fieldProps.gtl1YOfficePhoneNo.editing" [submitted]="submitted"
+                    [maxlength]="maxlen.phoneNo">
+                </custom-text-field>
+
+                <custom-text-field name="gtl1YExpWorkYear" label="ประสบการณ์ทำงาน (กี่ปี) :"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtl1YExpWorkYear" [hidden]="fieldProps.gtl1YExpWorkYear.hidden"
+                    [required]="fieldProps.gtl1YExpWorkYear.required" [editing]="fieldProps.gtl1YExpWorkYear.editing"
+                    [submitted]="submitted" maxlength="{{ maxlen.expWorkYear }}">
+                </custom-text-field>
+
+                <custom-text-field name="gtl1YExpWorkMonth" label="ประสบการณ์ทำงาน (กี่เดือน) :"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtl1YExpWorkMonth" [hidden]="fieldProps.gtl1YExpWorkMonth.hidden"
+                    [required]="fieldProps.gtl1YExpWorkMonth.required" [editing]="fieldProps.gtl1YExpWorkMonth.editing"
+                    [submitted]="submitted" maxlength="{{ maxlen.expWorkMonth }}"
+                    numberFormatter (change)="greaterThanYear('gtl1YExpWorkMonth')">
+                </custom-text-field>
+
+                <custom-select name="gtl1YJobPosition" label="ตำแหน่งงานปัจจุบัน :" placeholder="-- Select --"
+                    [hidden]="fieldProps.gtl1YJobPosition.hidden" [(ngModel)]="formData.gtl1YJobPosition"
+                    [required]="fieldProps.gtl1YJobPosition.required" [editing]="fieldProps.gtl1YJobPosition.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.gtl1YJobPosition"
+                    [selectedValue]="formData.gtl1YJobPosition"
+                    [options]="ddl?.jobPositions">
+                </custom-select>
+            </ng-container>
+        </div>
+    </fieldset>
+
+    <fieldset *ngIf="!hideSection.familyInfo" id="businessOwner" class="border">
+        <legend>Family Information</legend>
+        <div class="form-data">
+            <custom-select name="gtmaritalStatus" label="สถานะสมรส :" placeholder="-- Select --"
+                [hidden]="fieldProps.gtmaritalStatus.hidden" [(ngModel)]="formData.gtmaritalStatus"
+                [required]="fieldProps.gtmaritalStatus.required" [editing]="fieldProps.gtmaritalStatus.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.gtmaritalStatus"
+                [selectedValue]="formData.gtmaritalStatus"
+                (change)="showSpouseChild()"
+                [options]="ddl?.maritalStatus">
+            </custom-select>
+
+            <custom-text-field name="gtspouseIdNo" label="เลขที่บัตรประชาชนของคู่สมรส :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtspouseIdNo" [hidden]="fieldProps.gtspouseIdNo.hidden"
+                [required]="fieldProps.gtspouseIdNo.required" [editing]="fieldProps.gtspouseIdNo.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.idNo }}">
+            </custom-text-field>
+
+            <custom-text-field name="gtspouseFirstNameTh" label="ชื่อ(ไทย) :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtspouseFirstNameTh" [hidden]="fieldProps.gtspouseFirstNameTh.hidden"
+                [required]="fieldProps.gtspouseFirstNameTh.required" [editing]="fieldProps.gtspouseFirstNameTh.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.firstNameTh }}">
+            </custom-text-field>
+
+            <custom-text-field name="gtspouseLastNameTh" label="นามสกุล(ไทย) :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtspouseLastNameTh" [hidden]="fieldProps.gtspouseLastNameTh.hidden"
+                [required]="fieldProps.gtspouseLastNameTh.required" [editing]="fieldProps.gtspouseLastNameTh.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.lastNameTh }}">
+            </custom-text-field>
+
+            <custom-text-field name="gtspousePhoneNo" label="เบอร์ติดต่อ :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtspousePhoneNo" [hidden]="fieldProps.gtspousePhoneNo.hidden"
+                [required]="fieldProps.gtspousePhoneNo.required" [editing]="fieldProps.gtspousePhoneNo.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.phoneNo }}" numberFormatter>
+            </custom-text-field>
+
+            <custom-select name="gtchildNo" label="จำนวนบุตร: (เลือกจำนวน) :" placeholder="-- Select --"
+                [hidden]="fieldProps.gtchildNo.hidden" [(ngModel)]="formData.gtchildNo"
+                [required]="fieldProps.gtchildNo.required" [editing]="fieldProps.gtchildNo.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.gtchildNo"
+                [selectedValue]="formData.gtchildNo"
+                (change)="childrenCountSelectChange()"
+                [options]="ddl?.childrenCount">
+            </custom-select>
+
+            <custom-text-field name="gtchildIdNo1" label="เลขที่บัตรประชาชนของบุตรคนที่ 1 :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtchildIdNo1" [hidden]="fieldProps.gtchildIdNo1.hidden"
+                [required]="fieldProps.gtchildIdNo1.required" [editing]="fieldProps.gtchildIdNo1.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.idNo }}"
+                numberFormatter>
+            </custom-text-field>
+
+            <custom-text-field name="gtchildIdNo2" label="เลขที่บัตรประชาชนของบุตรคนที่ 2 :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtchildIdNo2" [hidden]="fieldProps.gtchildIdNo2.hidden"
+                [required]="fieldProps.gtchildIdNo2.required" [editing]="fieldProps.gtchildIdNo2.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.idNo }}"
+                numberFormatter>
+            </custom-text-field>
+
+            <custom-text-field name="gtchildIdNo3" label="เลขที่บัตรประชาชนของบุตรคนที่ 3 :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtchildIdNo3" [hidden]="fieldProps.gtchildIdNo3.hidden"
+                [required]="fieldProps.gtchildIdNo3.required" [editing]="fieldProps.gtchildIdNo3.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.idNo }}"
+                numberFormatter>
+            </custom-text-field>
+
+            <custom-text-field name="gtchildIdNo4" label="เลขที่บัตรประชาชนของบุตรคนที่ 4 :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.gtchildIdNo4" [hidden]="fieldProps.gtchildIdNo4.hidden"
+                [required]="fieldProps.gtchildIdNo4.required" [editing]="fieldProps.gtchildIdNo4.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.idNo }}"
+                numberFormatter>
+            </custom-text-field>
+        </div>
+    </fieldset>
+
+    <fieldset *ngIf="!hideSection.educationInfo" id="educationInfo" class="border">
+        <legend>Education Information</legend>
+        <div class="form-data">
+            <custom-select name="gteducationLevel" label="ระดับการศึกษาสูงสุด :" placeholder="-- Select --"
+                [hidden]="fieldProps.gteducationLevel.hidden" [(ngModel)]="formData.gteducationLevel"
+                [required]="fieldProps.gteducationLevel.required" [editing]="fieldProps.gteducationLevel.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.gteducationLevel"
+                [selectedValue]="formData.gteducationLevel"
+                [options]="ddl?.educationLevels">
+            </custom-select>
+        </div>
+    </fieldset>
+
+    <app-person [hidden]="!hideSection.contactPerson" [componentName]="'GuarantorCustomerInfoComponent'" [prefix]="'gtcontact'" [header]="'บุคคลติดต่อกรณีจำเป็น'" [formData]="formData"></app-person>
+    <app-person [hidden]="!hideSection.guarantorPerson" [componentName]="'GuarantorCustomerInfoComponent'" [prefix]="'gtguarantor'" [header]="'ผู้ค้ำประกัน'" [formData]="formData"></app-person>
+    <app-person [hidden]="!hideSection.coborrowerPerson" [componentName]="'GuarantorCustomerInfoComponent'" [prefix]="'gtcoborrower'" [header]="'ผู้กู้ร่วม'" [formData]="formData"></app-person>
+</form>

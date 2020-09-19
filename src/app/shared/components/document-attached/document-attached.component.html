@@ -1,0 +1,36 @@
+<custom-file-upload label="อัปโหลดไฟล์ :" name="fileUpload" [(ngModel)]="formData.fileUpload" [hidden]="fieldProps.fileUpload.hidden"
+    [required]="fieldProps.fileUpload.required" [editing]="fieldProps.fileUpload.editing"
+    [submitted]="submitted" (fileUploadChanged)="onUploadFile($event)">
+</custom-file-upload>
+<div class="form-group row" [hidden]="fieldProps.fileUpload.hidden">
+    <label class="col-form-label col-sm-3">&nbsp;</label>
+    <div class="col-sm-6 col-xs-9">
+        <div class="table-scrollable">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>File name</th>
+                        <th>Upload date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr [hidden]="fileUploads?.length > 0">
+                        <td class="text-center" colspan="4">
+                            {{ 'msg.noRecordFound' | translate }}
+                        </td>
+                    </tr>
+                    <tr *ngFor="let fileUpload of fileUploads; trackBy: trackByFn; let i = index">
+                        <td>{{ fileUpload.name }}</td>
+                        <td class="text-center">{{ fileUpload.dt | dateFormat:['DD MMM YYYY HH:mm:ss'] }}</td>
+                        <td class="text-center">
+                            <a href="javascript:;" class="btn btn-outline red btn-sm" (click)="deleteItem(i)">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

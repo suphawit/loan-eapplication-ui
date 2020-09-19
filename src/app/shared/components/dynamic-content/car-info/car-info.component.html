@@ -1,0 +1,410 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.carInfo" id="carInfo" class="border">
+        <legend>Car Information</legend>
+        <div class="form-data">
+        <custom-text-field name="carHubbReferenceNo" label=" ระบุเลข Refer ของ HuBB :"
+            [(ngModel)]="formData.carHubbReferenceNo" [hidden]="fieldProps.carHubbReferenceNo.hidden"
+            [required]="fieldProps.carHubbReferenceNo.required" [editing]="fieldProps.carHubbReferenceNo.editing">
+        </custom-text-field>
+        <custom-text-field name="carRegisterId" label="เลขทะเบียน :"
+            [(ngModel)]="formData.carRegisterId" [hidden]="fieldProps.carRegisterId.hidden"
+            [required]="fieldProps.carRegisterId.required" [editing]="fieldProps.carRegisterId.editing"
+            [maxlength]="maxlen.carRegisterId">
+        </custom-text-field>
+        <custom-input-filter name="carRegisterProvince" label="จังหวัดทะเบียน :" placeholder="Autocomplete"
+            [(ngModel)]="formData.carRegisterProvince" [hidden]="fieldProps.carRegisterProvince.hidden"
+            [required]="fieldProps.carRegisterProvince.required" [editing]="fieldProps.carRegisterProvince.editing"
+            [submitted]="submitted" (onComplete)="provinceSelectChange($event)"
+            [selectedValue] = "formData.carRegisterProvince"
+            [displayName]="displayName.carRegisterProvince"
+            [options]="ddl?.provinces">
+        </custom-input-filter>
+        <custom-input-filter name="carBrand" label="ยี่ห้อ :" placeholder="Autocomplete"
+            [(ngModel)]="formData.carBrand" [hidden]="fieldProps.carBrand.hidden"
+            [required]="fieldProps.carBrand.required" [editing]="fieldProps.carBrand.editing"
+            [submitted]="submitted" (onComplete)="carBrandSelectChange($event)"
+            [selectedValue] = "formData.carBrand"
+            [displayName]="displayName.carBrand"
+            [options]="ddl?.carBrands">
+        </custom-input-filter>
+        <custom-input-filter name="carModel" label="รุ่น :" placeholder="Autocomplete"
+            [(ngModel)]="formData.carModel" [hidden]="fieldProps.carModel.hidden"
+            [required]="fieldProps.carModel.required" [editing]="fieldProps.carModel.editing"
+            [submitted]="submitted" (onComplete)="carModelSelectChange($event)"
+            [selectedValue] = "formData.carModel"
+            [displayName]="displayName.carModel"
+            [options]="ddl?.carModels">
+        </custom-input-filter>
+        <custom-input-filter name="carYear" label="ปีผลิต :" placeholder="Autocomplete"
+            [(ngModel)]="formData.carYear" [hidden]="fieldProps.carYear.hidden"
+            [required]="fieldProps.carYear.required" [editing]="fieldProps.carYear.editing"
+            [submitted]="submitted" (onComplete)="carYearSelectChange($event)"
+            [selectedValue] = "formData.carYear"
+            [displayName]="displayName.carYear"
+            [options]="ddl?.carYears">
+        </custom-input-filter>
+        <custom-input-filter name="carSubModel" label="รุ่นย่อย :" placeholder="Autocomplete"
+            [(ngModel)]="formData.carSubModel" [hidden]="fieldProps.carSubModel.hidden"
+            [required]="fieldProps.carSubModel.required" [editing]="fieldProps.carSubModel.editing"
+            [submitted]="submitted" (onComplete)="carSubModelSelectChange($event)"
+            [selectedValue] = "formData.carSubModel"
+            [displayName]="displayName.carSubModel"
+            [options]="ddl?.carSubmodels">
+        </custom-input-filter>
+        <custom-label label="ประเภทรถ :">
+            {{ formData.carType }}
+        </custom-label>
+        <custom-select name="carGearType" label="ประเภทเกียร์ :" placeholder="-- Select --"
+            [(ngModel)]="formData.carGearType" [hidden]="fieldProps.carGearType.hidden"
+            [required]="fieldProps.carGearType.required" [editing]="fieldProps.carGearType.editing"
+            [submitted]="submitted"
+            [selectedValue] = "formData.carGearType"
+            [displayName]="displayName.carGearType"
+            [options]="ddl?.carGearTypes">
+        </custom-select>
+        <custom-select name="carFuelType" label="ประเภทเชื้อเพลิง :" placeholder="-- Select --"
+            [(ngModel)]="formData.carFuelType" [hidden]="fieldProps.carFuelType.hidden"
+            [required]="fieldProps.carFuelType.required" [editing]="fieldProps.carFuelType.editing"
+            [submitted]="submitted"
+            [selectedValue] = "formData.carFuelType"
+            [displayName]="displayName.carFuelType"
+            [options]="ddl?.carFuelTypes">
+        </custom-select>
+        <custom-text-field name="carMileNo" label="เลขไมล์ :"
+            [(ngModel)]="formData.carMileNo" [hidden]="fieldProps.carMileNo.hidden"
+            [required]="fieldProps.carMileNo.required" [editing]="fieldProps.carMileNo.editing">
+        </custom-text-field>
+        <custom-text-field name="carEngineNo" label="เลขเครื่อง :"
+            [(ngModel)]="formData.carEngineNo" [hidden]="fieldProps.carEngineNo.hidden"
+            [required]="fieldProps.carEngineNo.required" [editing]="fieldProps.carEngineNo.editing">
+        </custom-text-field>
+        <custom-text-field name="carBodyNo" label="เลขถัง :"
+            [(ngModel)]="formData.carBodyNo" [hidden]="fieldProps.carBodyNo.hidden"
+            [required]="fieldProps.carBodyNo.required" [editing]="fieldProps.carBodyNo.editing"
+            [maxlength]="maxlen.carBodyNo">
+        </custom-text-field>
+        <div class="form-group row" *ngIf="!fieldProps.carSellPrice.hidden">
+            <label class="col-form-label col-sm-3">
+                ราคาซื้อขาย :
+                <span class="form-required-field" *ngIf="fieldProps.carSellPrice.required">*</span>
+            </label>
+            <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.carSellPrice.editing">
+                <input type="text" name="carSellPrice" class="form-control label-title text-right" [required]="fieldProps.carSellPrice.required"
+                    [(ngModel)]="formData.carSellPrice" #carSellPrice="ngModel" currencyFormatter currencyValidator [maxDigit]="15"
+                    autocomplete="off" />
+                <ng-container *ngIf="carSellPrice?.invalid && submitted">
+                    <span *ngIf="carSellPrice.errors.required" class="help-block with-errors">Please enter a value</span>
+                    <span *ngIf="carSellPrice.errors.currency" class="help-block with-errors">{{ carSellPrice.errors.currency.message }}</span>
+                </ng-container>
+            </div>
+            <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.carSellPrice.editing">
+                {{ formData.carSellPrice }}
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="!fieldProps.carEstimateByBank.hidden">
+            <label class="col-form-label col-sm-3">
+                ราคาประเมินธนาคาร :
+                <span class="form-required-field" *ngIf="fieldProps.carEstimateByBank.required">*</span>
+            </label>
+            <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.carEstimateByBank.editing">
+                <input type="text" name="carEstimateByBank" class="form-control label-title text-right" [required]="fieldProps.carEstimateByBank.required"
+                    [(ngModel)]="formData.carEstimateByBank" #carEstimateByBank="ngModel" currencyFormatter currencyValidator [maxDigit]="15"
+                    autocomplete="off" />
+                <ng-container *ngIf="carEstimateByBank?.invalid && submitted">
+                    <span *ngIf="carEstimateByBank.errors.required" class="help-block with-errors">Please enter a value</span>
+                    <span *ngIf="carEstimateByBank.errors.currency" class="help-block with-errors">{{ carEstimateByBank.errors.currency.message }}</span>
+                </ng-container>
+            </div>
+            <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.carEstimateByBank.editing">
+                {{ formData.carEstimateByBank }}
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="!fieldProps.carEstimateFromWebsite.hidden">
+            <label class="col-form-label col-sm-3">
+                ราคาประเมินจาก Website :
+                <span class="form-required-field" *ngIf="fieldProps.carEstimateFromWebsite.required">*</span>
+            </label>
+            <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.carEstimateFromWebsite.editing">
+                <input type="text" name="carEstimateFromWebsite" class="form-control label-title text-right" [required]="fieldProps.carEstimateFromWebsite.required"
+                    [(ngModel)]="formData.carEstimateFromWebsite" #carEstimateFromWebsite="ngModel" currencyFormatter currencyValidator [maxDigit]="15"
+                    autocomplete="off" />
+                <ng-container *ngIf="carEstimateFromWebsite?.invalid && submitted">
+                    <span *ngIf="carEstimateFromWebsite.errors.required" class="help-block with-errors">Please enter a value</span>
+                    <span *ngIf="carEstimateFromWebsite.errors.currency" class="help-block with-errors">{{ carEstimateFromWebsite.errors.currency.message }}</span>
+                </ng-container>
+            </div>
+            <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.carEstimateFromWebsite.editing">
+                {{ formData.carEstimateFromWebsite }}
+            </div>
+        </div>
+        <custom-select name="carUseType" label="ลักษณะการใช้งาน (กรณีรถใช้งานสาธารณะ) :" placeholder="-- Select --"
+            [(ngModel)]="formData.carUseType" [hidden]="fieldProps.carUseType.hidden"
+            [required]="fieldProps.carUseType.required" [editing]="fieldProps.carUseType.editing"
+            [submitted]="submitted"
+            [selectedValue] = "formData.carUseType"
+            [displayName]="displayName.carUseType"
+            [options]="ddl?.carUseTypes">
+        </custom-select>
+        <custom-radio-button-list
+            name="carVatFlg"
+            label="ราคาขายรวม VAT :"
+            [(ngModel)]="formData.carVatFlg"
+            [required]="fieldProps.carVatFlg.required"
+            [hidden]="fieldProps.carVatFlg.hidden"
+            [selectedValue] = "formData.carVatFlg"
+            [editing]="fieldProps.carVatFlg.editing"
+            [displayName]="displayName.carVatFlg"
+            [submitted]="submitted"
+            [choices]="ddl?.carVatFlgs">
+        </custom-radio-button-list>
+        <custom-datepicker name="carOwnershipDate" label="วันที่โอนกรรมสิทธิ์รถยนต์ :" [(ngModel)]="formData.carOwnershipDate"
+            [hidden]="fieldProps.carOwnershipDate.hidden" [required]="fieldProps.carOwnershipDate.required"
+            [editing]="fieldProps.carOwnershipDate.editing" [submitted]="submitted">
+        </custom-datepicker>
+        <div class="form-group row" *ngIf="!fieldProps.carSpecialColorAmt.hidden">
+            <label class="col-form-label col-sm-3">
+                ค่าสีพิเศษ :
+                <span class="form-required-field" *ngIf="fieldProps.carSpecialColorAmt.required">*</span>
+            </label>
+            <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.carSpecialColorAmt.editing">
+                <input type="text" name="carSpecialColorAmt" class="form-control text-right" [required]="fieldProps.carSpecialColorAmt.required"
+                    [(ngModel)]="formData.carSpecialColorAmt" #carSpecialColorAmt="ngModel" currencyFormatter currencyValidator [maxDigit]="15"
+                    autocomplete="off" />
+                <ng-container *ngIf="carSpecialColorAmt?.invalid && submitted">
+                    <span *ngIf="carSpecialColorAmt.errors.required" class="help-block with-errors">Please enter a value</span>
+                    <span *ngIf="carSpecialColorAmt.errors.currency" class="help-block with-errors">{{ carSpecialColorAmt.errors.currency.message }}</span>
+                </ng-container>
+            </div>
+            <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.carSpecialColorAmt.editing">
+                {{ formData.carSpecialColorAmt }}
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="!fieldProps.carEquipmentAmt.hidden">
+            <label class="col-form-label col-sm-3">
+                ค่าอุปกรณ์ตกแต่ง :
+                <span class="form-required-field" *ngIf="fieldProps.carEquipmentAmt.required">*</span>
+            </label>
+            <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.carEquipmentAmt.editing">
+                <input type="text" name="carEquipmentAmt" class="form-control label-title text-right" [required]="fieldProps.carEquipmentAmt.required"
+                    [(ngModel)]="formData.carEquipmentAmt" #carEquipmentAmt="ngModel" currencyFormatter currencyValidator [maxDigit]="15"
+                    autocomplete="off" />
+                <ng-container *ngIf="carEquipmentAmt?.invalid && submitted">
+                    <span *ngIf="carEquipmentAmt.errors.required" class="help-block with-errors">Please enter a value</span>
+                    <span *ngIf="carEquipmentAmt.errors.currency" class="help-block with-errors">{{ carEquipmentAmt.errors.currency.message }}</span>
+                </ng-container>
+            </div>
+            <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.carEquipmentAmt.editing">
+                {{ formData.carEquipmentAmt }}
+            </div>
+        </div>
+        <custom-text-field name="carEquipmentDetail" label="รายละเอียดอุปกรณ์ตกแต่ง :"
+            [(ngModel)]="formData.carEquipmentDetail" [hidden]="fieldProps.carEquipmentDetail.hidden"
+            [required]="fieldProps.carEquipmentDetail.required" [editing]="fieldProps.carEquipmentDetail.editing">
+        </custom-text-field>
+    </div>
+    </fieldset>
+    <fieldset class="border" *ngIf="!fieldProps.carOwnership.hidden">
+        <legend>ส่วนเจ้าของกรรมสิทธิ์</legend>
+        <div class="form-data">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-3">
+                </label>
+                <div class="input-radio col-sm-4 col-xs-9 padding-left-15">
+                    <input type="radio" name="carOwnership" id="radio-carOwnership-1"
+                    [hidden]="fieldProps.carOwnership.hidden" [(ngModel)]="formData.carOwnership"
+                    [value]="'1'" (change)="carOwnershipCheckChange()"
+                    [required]="fieldProps.carOwnership.required" /> เป็นเจ้าของกรรมสิทธิ์
+                </div>
+            </div>
+            <div class="padding-left-20" *ngIf="formData.carOwnership === '1'">
+                <custom-radio-button-list
+                    name="carOwnerPerson"
+                    label="เจ้าของหลักประกัน :"
+                    [(ngModel)]="formData.carOwnerPerson"
+                    [required]="fieldProps.carOwnerPerson.required"
+                    [hidden]="fieldProps.carOwnerPerson.hidden"
+                    [selectedValue] = "formData.carOwnerPerson"
+                    [editing]="fieldProps.carOwnerPerson.editing"
+                    [displayName]="displayName.carOwnerPerson"
+                    [submitted]="submitted"
+                    [choices]="ddl?.carOwnerPersons">
+                </custom-radio-button-list>
+
+                <label class="label-title">
+                    สถานะหลักประกัน :
+                    <span class="form-required-field" *ngIf="fieldProps.carOwnerStatus.required">*</span>
+                </label><br />
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-3">
+                    </label>
+                    <div class="input-radio col-sm-4 col-xs-9 padding-left-15">
+                        <input type="radio" name="carOwnerStatus" id="radio-carOwnerStatus-1"
+                            [hidden]="fieldProps.carOwnerStatus.hidden" [(ngModel)]="formData.carOwnerStatus"
+                            [value]="'1'" (change)="carOwnerStatusCheckChange()"
+                            [required]="fieldProps.carOwnerStatus.required" /> ปลอดหนี้
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-3">
+                    </label>
+                    <div class="input-radio col-sm-4 col-xs-9 padding-left-15">
+                        <input type="radio" name="carOwnerStatus" id="radio-carOwnerStatus-2"
+                            [hidden]="fieldProps.carOwnerStatus.hidden" [(ngModel)]="formData.carOwnerStatus"
+                            [value]="'2'" (change)="carOwnerStatusCheckChange()"
+                            [required]="fieldProps.carOwnerStatus.required" /> กําลังผ่อนเช่าซื้อ
+                    </div>
+                </div>
+
+                <div class="padding-left-20" *ngIf="formData.carOwnerStatus === '2'">
+                    <custom-input-filter name="bankCurrentHP" label="สถาบันการเงิน :" placeholder="Autocomplete"
+                        [(ngModel)]="formData.bankCurrentHP" [hidden]="fieldProps.bankCurrentHP.hidden"
+                        [required]="fieldProps.bankCurrentHP.required" [editing]="fieldProps.bankCurrentHP.editing"
+                        [submitted]="submitted" [selectedValue] = "formData.bankCurrentHP"
+                        [displayName]="displayName.bankCurrentHP" (onComplete)="bankCurrentHPSelectChange($event)"
+                        [options]="ddl?.bankCurrentHPs">
+                    </custom-input-filter>
+                    <div class="form-group row">
+                        <label class="col-form-label" class="col-sm-3"  [hidden]="fieldProps.loanAmtCurrentHP.hidden">
+                            ยอดหนี้คงเหลือ :
+                            <span class="form-required-field" *ngIf="fieldProps.loanAmtCurrentHP.required">*</span>
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" name="loanAmtCurrentHP" class="form-control" [required]="fieldProps.loanAmtCurrentHP.required"
+                                [(ngModel)]="formData.loanAmtCurrentHP"
+                                [hidden]="fieldProps.loanAmtCurrentHP.hidden"
+                                currencyFormatter currencyValidator [maxDigit]="15"
+                                #loanAmtCurrentHP="ngModel" />
+                            <ng-container *ngIf="loanAmtCurrentHP?.invalid && submitted">
+                                <span *ngIf="loanAmtCurrentHP.errors.required" class="help-block with-errors">Please enter a value</span>
+                                <span *ngIf="loanAmtCurrentHP.errors.currency" class="help-block with-errors">{{ loanAmtCurrentHP.errors.currency.message }}</span>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label" class="col-sm-3"  [hidden]="fieldProps.installmentAmtCurrentHP.hidden">
+                            ยอดผ่อนรายเดือน :
+                            <span class="form-required-field" *ngIf="fieldProps.installmentAmtCurrentHP.required">*</span>
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" name="installmentAmtCurrentHP" class="form-control" [required]="fieldProps.installmentAmtCurrentHP.required"
+                                [(ngModel)]="formData.installmentAmtCurrentHP"
+                                currencyFormatter currencyValidator [maxDigit]="15"
+                                [hidden]="fieldProps.installmentAmtCurrentHP.hidden" #installmentAmtCurrentHP="ngModel" />
+                                <ng-container *ngIf="installmentAmtCurrentHP?.invalid && submitted">
+                                <span *ngIf="installmentAmtCurrentHP.errors.required" class="help-block with-errors">Please enter a value</span>
+                                <span *ngIf="installmentAmtCurrentHP.errors.currency" class="help-block with-errors">{{ installmentAmtCurrentHP.errors.currency.message }}</span>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-3">
+                    </label>
+                    <div class="input-radio col-sm-4 col-xs-9 padding-left-15">
+                        <input type="radio" name="carOwnerStatus" id="radio-carOwnerStatus-3"
+                            [hidden]="fieldProps.carOwnerStatus.hidden" [(ngModel)]="formData.carOwnerStatus"
+                            [value]="'3'" (change)="carOwnerStatusCheckChange()"
+                            [required]="fieldProps.carOwnerStatus.required" /> ผ่อนจำนำทะเบียน
+                    </div>
+                </div>
+
+                <div class="padding-left-20" *ngIf="formData.carOwnerStatus === '3'">
+                    <custom-input-filter name="bankCarRegisterPawn" label="สถาบันการเงิน :" placeholder="-- Select --"
+                        [(ngModel)]="formData.bankCarRegisterPawn" [hidden]="fieldProps.bankCarRegisterPawn.hidden"
+                        [required]="fieldProps.bankCarRegisterPawn.required" [editing]="fieldProps.bankCarRegisterPawn.editing"
+                        [submitted]="submitted" [selectedValue] = "formData.bankCarRegisterPawn"
+                        [displayName]="displayName.bankCarRegisterPawn"
+                        [options]="ddl?.bankCurrentHPs">
+                    </custom-input-filter>
+                    <div class="form-group row">
+                        <label class="col-form-label" class="col-sm-3"  [hidden]="fieldProps.loanAmtCarRegisterPawn.hidden">
+                            ยอดหนี้คงเหลือ :
+                            <span class="form-required-field" *ngIf="fieldProps.loanAmtCarRegisterPawn.required">*</span>
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" name="loanAmtCarRegisterPawn" class="form-control" [required]="fieldProps.loanAmtCarRegisterPawn.required"
+                                [(ngModel)]="formData.loanAmtCarRegisterPawn"
+                                [hidden]="fieldProps.loanAmtCarRegisterPawn.hidden"
+                                currencyFormatter currencyValidator [maxDigit]="15"
+                                #loanAmtCarRegisterPawn="ngModel" />
+                                <ng-container *ngIf="loanAmtCarRegisterPawn?.invalid && submitted">
+                                <span *ngIf="loanAmtCarRegisterPawn.errors.required" class="help-block with-errors">Please enter a value</span>
+                                <span *ngIf="loanAmtCarRegisterPawn.errors.currency" class="help-block with-errors">{{ loanAmtCarRegisterPawn.errors.currency.message }}</span>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label" class="col-sm-3"  [hidden]="fieldProps.installmentAmtCarRegisterPawn.hidden">
+                            ยอดผ่อนรายเดือน :
+                            <span class="form-required-field" *ngIf="fieldProps.installmentAmtCarRegisterPawn.required">*</span>
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" name="installmentAmtCarRegisterPawn" class="form-control" [required]="fieldProps.installmentAmtCarRegisterPawn.required"
+                                [(ngModel)]="formData.installmentAmtCarRegisterPawn"
+                                currencyFormatter currencyValidator [maxDigit]="15"
+                                [hidden]="fieldProps.installmentAmtCarRegisterPawn.hidden" #installmentAmtCarRegisterPawn="ngModel" />
+                                <ng-container *ngIf="installmentAmtCarRegisterPawn?.invalid && submitted">
+                                <span *ngIf="installmentAmtCarRegisterPawn.errors.required" class="help-block with-errors">Please enter a value</span>
+                                <span *ngIf="installmentAmtCarRegisterPawn.errors.currency" class="help-block with-errors">{{ installmentAmtCarRegisterPawn.errors.currency.message }}</span>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
+                <ng-container *ngIf="!form.valid && submitted && !fieldProps.carOwnerStatus.hidden">
+                    <span *ngIf="util.isNullOrEmpty(formData.carOwnerStatus)" class="help-block with-errors">Please enter a value</span>
+                </ng-container>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-3">
+                </label>
+                <div class="input-radio col-sm-4 col-xs-9 padding-left-15">
+                    <input type="radio" name="carOwnership" id="radio-carOwnership-2"
+                        [hidden]="fieldProps.carOwnership.hidden" [(ngModel)]="formData.carOwnership"
+                        [value]="'2'" (change)="carOwnershipCheckChange()"
+                        [required]="fieldProps.carOwnership.required" /> ซื้อรถใหม่/รถเต้นท์ (จาก Dealer/Tents)
+                </div>
+            </div>
+            <div class="padding-left-20" *ngIf="formData.carOwnership === '2'">
+                <custom-text-field name="dealerCodeNewCar" label="Dealer Code :" [(ngModel)]="formData.dealerCodeNewCar"
+                    [hidden]="fieldProps.dealerCodeNewCar.hidden" [required]="fieldProps.dealerCodeNewCar.required"
+                    [editing]="fieldProps.dealerCodeNewCar.editing" [submitted]="submitted">
+                </custom-text-field>
+                <custom-text-field name="dealerNameNewCar" label="Dealer Name :" [(ngModel)]="formData.dealerNameNewCar"
+                    [hidden]="fieldProps.dealerNameNewCar.hidden" [required]="fieldProps.dealerNameNewCar.required"
+                    [editing]="fieldProps.dealerNameNewCar.editing" [submitted]="submitted">
+                </custom-text-field>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-3">
+                </label>
+                <div class="input-radio col-sm-4 col-xs-9 padding-left-15">
+                    <input type="radio" name="carOwnership" id="radio-carOwnership-3"
+                    [hidden]="fieldProps.carOwnership.hidden" [(ngModel)]="formData.carOwnership"
+                    [value]="'3'" (change)="carOwnershipCheckChange()"
+                    [required]="fieldProps.carOwnership.required" /> ซื้อรถมือสอง จากบุคคลทั่วไป
+                </div>
+            </div>
+            <div class="padding-left-20" *ngIf="formData.carOwnership === '3'">
+                <custom-text-field name="buyerFirstNameUsedCar" label="ชื่อผู้ติดต่อ :" [(ngModel)]="formData.buyerFirstNameUsedCar"
+                    [hidden]="fieldProps.buyerFirstNameUsedCar.hidden" [required]="fieldProps.buyerFirstNameUsedCar.required"
+                    [editing]="fieldProps.buyerFirstNameUsedCar.editing" [submitted]="submitted">
+                </custom-text-field>
+                <custom-text-field name="buyerLastNameUsedCar" label="นามสกุลผู้ติดต่อ :" [(ngModel)]="formData.buyerLastNameUsedCar"
+                    [hidden]="fieldProps.buyerLastNameUsedCar.hidden" [required]="fieldProps.buyerLastNameUsedCar.required"
+                    [editing]="fieldProps.buyerLastNameUsedCar.editing" [submitted]="submitted">
+                </custom-text-field>
+                <custom-text-field name="buyerPhoneNoUsedCar" label="เบอร์ผู้ติดต่อ :" [(ngModel)]="formData.buyerPhoneNoUsedCar"
+                    [hidden]="fieldProps.buyerPhoneNoUsedCar.hidden" [required]="fieldProps.buyerPhoneNoUsedCar.required"
+                    [editing]="fieldProps.buyerPhoneNoUsedCar.editing" [submitted]="submitted">
+                </custom-text-field>
+            </div>
+            <ng-container *ngIf="!form.valid && submitted  && !fieldProps.carOwnership.hidden">
+                <span *ngIf="util.isNullOrEmpty(formData.carOwnership)" class="help-block with-errors">Please enter a value</span>
+            </ng-container>
+        </div>
+    </fieldset>
+</form>

@@ -1,0 +1,19 @@
+@import "../../theme/variables.scss";
+
+label {
+    color: #635F98 !important;
+}
+.input-radio {
+    margin-top: 13px;
+}
+.toggle .col {
+    color: $primary-dark!important;
+    background: #f1f5fb;
+    border: 1px solid $primary-dark;
+    border-style: solid solid solid solid;
+}
+.toggle .col.selected {
+    background: $primary-dark !important;
+    color: #fff !important;
+}
+

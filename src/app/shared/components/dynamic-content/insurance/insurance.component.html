@@ -1,0 +1,609 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.carInsurance" id="carInsurance" class="border">
+        <legend>ประกันรถยนต์</legend>
+        <div class="form-data">
+            <custom-select name="motorSelect" label="ประเภทบัตร :" placeholder="-- Select --"
+                [(ngModel)]="formData.motorSelect" [hidden]="fieldProps.motorSelect.hidden"
+                [required]="fieldProps.motorSelect.required" [editing]="fieldProps.motorSelect.editing"
+                [submitted]="submitted" (change)="motorSelectChange()"
+                [displayName]="displayName.motorSelect"
+                [selectedValue] = "formData.motorSelect"
+                [options]="ddl?.insuranceList">
+            </custom-select>
+
+            <custom-radio-button-list
+                name="motorPaymentMethod"
+                label="ต้องการการหักหน้าเช็ค/ต้องการชำระเอง :"
+                [(ngModel)]="formData.motorPaymentMethod"
+                [required]="fieldProps.motorPaymentMethod.required"
+                [hidden]="fieldProps.motorPaymentMethod.hidden"
+                [selectedValue] = "formData.motorPaymentMethod"
+                [editing]="fieldProps.motorPaymentMethod.editing"
+                [displayName]="displayName.motorPaymentMethod"
+                [submitted]="submitted"
+                [choices]="ddl?.paymentMethod">
+            </custom-radio-button-list>
+
+            <custom-text-field name="motorProductCode" label="รหัส product :" [(ngModel)]="formData.motorProductCode"
+                [hidden]="fieldProps.motorProductCode.hidden" [required]="fieldProps.motorProductCode.required"
+                [editing]="fieldProps.motorProductCode.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-select name="motorUsageFlg" label="ประเภทบัตร :" placeholder="-- Select --"
+                [(ngModel)]="formData.motorUsageFlg" [hidden]="fieldProps.motorUsageFlg.hidden"
+                [required]="fieldProps.motorUsageFlg.required" [editing]="fieldProps.motorUsageFlg.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.motorUsageFlg"
+                [selectedValue] = "formData.motorUsageFlg"
+                [options]="[
+                    {
+                        name: 'val 1',
+                        value: '1'
+                    },
+                    {
+                        name: 'val 2',
+                        value: '2'
+                    }
+                ]">
+            </custom-select>
+
+            <custom-text-field name="motorRenewFlg" label="รหัส product :" [(ngModel)]="formData.motorRenewFlg"
+                [hidden]="fieldProps.motorRenewFlg.hidden" [required]="fieldProps.motorRenewFlg.required"
+                [editing]="fieldProps.motorRenewFlg.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-datepicker name="motorEffectiveDate" label="วันที่เริ่มต้นความคุ้มครอง :" [(ngModel)]="formData.motorEffectiveDate"
+                [hidden]="fieldProps.motorEffectiveDate.hidden" [required]="fieldProps.motorEffectiveDate.required"
+                [editing]="fieldProps.motorEffectiveDate.editing" [submitted]="submitted">
+            </custom-datepicker>
+
+            <custom-datepicker name="motorExpiredDate" label="วันที่สิ้นสุดความคุ้มครอง :" [(ngModel)]="formData.motorExpiredDate"
+                [hidden]="fieldProps.motorExpiredDate.hidden" [required]="fieldProps.motorExpiredDate.required"
+                [editing]="fieldProps.motorExpiredDate.editing" [submitted]="submitted">
+            </custom-datepicker>
+
+            <custom-text-field name="motorNoticeNo" label="เลขที่รับแจ้ง :" [(ngModel)]="formData.motorNoticeNo"
+                [hidden]="fieldProps.motorNoticeNo.hidden" [required]="fieldProps.motorNoticeNo.required"
+                [editing]="fieldProps.motorNoticeNo.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-input-filter name="motorInsurerCode" label="บริษัทประกันภัย :" placeholder="Autocomplete"
+                [(ngModel)]="formData.motorInsurerCode" [hidden]="fieldProps.motorInsurerCode.hidden"
+                [required]="fieldProps.motorInsurerCode.required" [editing]="fieldProps.motorInsurerCode.editing"
+                [submitted]="submitted" (onComplete)="motorInsurerSelectChange($event)"
+                [displayName]="displayName.motorInsurerCode"
+                [selectedValue] = "formData.motorInsurerCode"
+                [options]="[
+                    {
+                        name: 'val 1',
+                        value: '1'
+                    },
+                    {
+                        name: 'val 2',
+                        value: '2'
+                    }
+                ]">
+            </custom-input-filter>
+
+            <custom-select name="motorPackageCode" label="Pricing INS :" placeholder="-- Select --"
+                [(ngModel)]="formData.motorPackageCode" [hidden]="fieldProps.motorPackageCode.hidden"
+                [required]="fieldProps.motorPackageCode.required" [editing]="fieldProps.motorPackageCode.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.motorPackageCode"
+                [selectedValue] = "formData.motorPackageCode"
+                [options]="[
+                    {
+                        name: 'val 1',
+                        value: '1'
+                    },
+                    {
+                        name: 'val 2',
+                        value: '2'
+                    }
+                ]">
+            </custom-select>
+
+            <custom-text-field name="motorOtherPremium" label="ค่าเบี้ยนอก :" [(ngModel)]="formData.motorOtherPremium"
+                [hidden]="fieldProps.motorOtherPremium.hidden" [required]="fieldProps.motorOtherPremium.required"
+                [editing]="fieldProps.motorOtherPremium.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-select name="motorPricingTaylormade" label="Pricing INS :" placeholder="-- Select --"
+                [(ngModel)]="formData.motorPricingTaylormade" [hidden]="fieldProps.motorPricingTaylormade.hidden"
+                [required]="fieldProps.motorPricingTaylormade.required" [editing]="fieldProps.motorPricingTaylormade.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.motorPricingTaylormade"
+                [selectedValue] = "formData.motorPricingTaylormade"
+                [options]="[
+                    {
+                        name: 'val 1',
+                        value: '1'
+                    },
+                    {
+                        name: 'val 2',
+                        value: '2'
+                    }
+                ]">
+            </custom-select>
+
+            <custom-text-field name="motorDiscount" label="ส่วนลด :" [(ngModel)]="formData.motorDiscount"
+                [hidden]="fieldProps.motorDiscount.hidden" [required]="fieldProps.motorDiscount.required"
+                [editing]="fieldProps.motorDiscount.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-checkbox
+                name="motorWHT"
+                label="หักภาษี ณ ที่จ่าย หัก 1% จากราคาค่าเบี้ยประกัน :"
+                [(ngModel)]="formData.motorWHT"
+                [required]="fieldProps.motorWHT.required"
+                [hidden]="fieldProps.motorWHT.hidden"
+                [selectedValue] = "formData.motorWHT"
+                [editing]="fieldProps.motorWHT.editing"
+                [displayName]="displayName.motorWHT"
+                [submitted]="submitted">
+            </custom-checkbox>
+
+            <custom-text-field name="motorPremium" label="ค่าเบี้ยที่ต้องชำระ :" [(ngModel)]="formData.motorPremium"
+                [hidden]="fieldProps.motorPremium.hidden" [required]="fieldProps.motorPremium.required"
+                [editing]="fieldProps.motorPremium.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-text-field name="motorReceiptName" label="ชื่อสำหรับจัดส่งใบเสร็จ :" [(ngModel)]="formData.motorReceiptName"
+                [hidden]="fieldProps.motorReceiptName.hidden" [required]="fieldProps.motorReceiptName.required"
+                [editing]="fieldProps.motorReceiptName.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-text-field name="motorReceiptTaxNo" label="เลขประจำตัวผู้เสียภาษี :" [(ngModel)]="formData.motorReceiptTaxNo"
+                [hidden]="fieldProps.motorReceiptTaxNo.hidden" [required]="fieldProps.motorReceiptTaxNo.required"
+                [editing]="fieldProps.motorReceiptTaxNo.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+        </div>
+    </fieldset>
+
+
+    <app-insurance-receipt
+        [prefix]="'motor'"
+        [header]="'ที่อยู่ในการส่งใบเสร็จประกันรถยนต์'"
+        [section]="!hideSection.motorReceipt"
+        [formData]="formData"
+        [fieldProps]="fieldProps"
+        [submitted]="submitted"
+        [displayName]="displayName">
+    </app-insurance-receipt>
+
+    <fieldset *ngIf="!hideSection.actSelect" id="actSelect" class="border">
+        <legend>พรบ.</legend>
+        <div class="form-data">
+
+            <custom-select name="actSelect" label="พรบ. :" placeholder="-- Select --"
+                [(ngModel)]="formData.actSelect" [hidden]="fieldProps.actSelect.hidden"
+                [required]="fieldProps.actSelect.required" [editing]="fieldProps.actSelect.editing"
+                [submitted]="submitted"
+                (change)="paymentMethodChange('act')"
+                [displayName]="displayName.actSelect"
+                [selectedValue] = "formData.actSelect"
+                [options]="ddl?.insuranceList">
+            </custom-select>
+
+            <custom-radio-button-list
+                name="actPaymentMethod"
+                label="ต้องการการหักหน้าเช็ค/ต้องการชำระเอง :"
+                [(ngModel)]="formData.actPaymentMethod"
+                [required]="fieldProps.actPaymentMethod.required"
+                [hidden]="fieldProps.actPaymentMethod.hidden"
+                [selectedValue] = "formData.actPaymentMethod"
+                [editing]="fieldProps.actPaymentMethod.editing"
+                [displayName]="displayName.actPaymentMethod"
+                [submitted]="submitted"
+                [choices]="ddl?.paymentMethod">
+            </custom-radio-button-list>
+
+            <custom-text-field name="actProductCode" label="รหัส product :" [(ngModel)]="formData.actProductCode"
+                [hidden]="fieldProps.actProductCode.hidden" [required]="fieldProps.actProductCode.required"
+                [editing]="fieldProps.actProductCode.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-datepicker name="actEffectiveDate" label="วันที่เริ่มต้นความคุ้มครอง :" [(ngModel)]="formData.actEffectiveDate"
+                [hidden]="fieldProps.actEffectiveDate.hidden" [required]="fieldProps.actEffectiveDate.required"
+                [editing]="fieldProps.actEffectiveDate.editing" [submitted]="submitted">
+            </custom-datepicker>
+
+            <custom-datepicker name="actExpiredDate" label="วันที่สิ้นสุดความคุ้มครอง :" [(ngModel)]="formData.actExpiredDate"
+                [hidden]="fieldProps.actExpiredDate.hidden" [required]="fieldProps.actExpiredDate.required"
+                [editing]="fieldProps.actExpiredDate.editing" [submitted]="submitted">
+            </custom-datepicker>
+
+            <custom-select name="actPackageCode" label="Pricing INS :" placeholder="-- Select --"
+                [(ngModel)]="formData.actPackageCode" [hidden]="fieldProps.actPackageCode.hidden"
+                [required]="fieldProps.actPackageCode.required" [editing]="fieldProps.actPackageCode.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.actPackageCode"
+                [selectedValue] = "formData.actPackageCode"
+                [options]="[
+                    {
+                        name: 'val 1',
+                        value: '1'
+                    },
+                    {
+                        name: 'val 2',
+                        value: '2'
+                    }
+                ]">
+            </custom-select>
+
+            <custom-text-field name="actDiscount" label="ส่วนลด :" [(ngModel)]="formData.actDiscount"
+                [hidden]="fieldProps.actDiscount.hidden" [required]="fieldProps.actDiscount.required"
+                [editing]="fieldProps.actDiscount.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-checkbox
+                name="actWHT"
+                label="หักภาษี ณ ที่จ่าย หัก 1% จากราคาค่าเบี้ยประกัน :"
+                [(ngModel)]="formData.actWHT"
+                [required]="fieldProps.actWHT.required"
+                [hidden]="fieldProps.actWHT.hidden"
+                [selectedValue] = "formData.actWHT"
+                [editing]="fieldProps.actWHT.editing"
+                [displayName]="displayName.actWHT"
+                [submitted]="submitted">
+            </custom-checkbox>
+
+            <custom-text-field name="actPremium" label="ค่าเบี้ยที่ต้องชำระ :" [(ngModel)]="formData.actPremium"
+                [hidden]="fieldProps.actPremium.hidden" [required]="fieldProps.actPremium.required"
+                [editing]="fieldProps.actPremium.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-text-field name="actReceiptName" label="ชื่อสำหรับจัดส่งใบเสร็จ :" [(ngModel)]="formData.actReceiptName"
+                [hidden]="fieldProps.actReceiptName.hidden" [required]="fieldProps.actReceiptName.required"
+                [editing]="fieldProps.actReceiptName.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-text-field name="actReceiptTaxNo" label="เลขประจำตัวผู้เสียภาษี :" [(ngModel)]="formData.actReceiptTaxNo"
+                [hidden]="fieldProps.actReceiptTaxNo.hidden" [required]="fieldProps.actReceiptTaxNo.required"
+                [editing]="fieldProps.actReceiptTaxNo.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+        </div>
+    </fieldset>
+
+    <app-insurance-receipt
+        [prefix]="'act'"
+        [header]="'ที่อยู่ในการส่งพรบ'"
+        [section]="!hideSection.actReceipt"
+        [formData]="formData"
+        [fieldProps]="fieldProps"
+        [submitted]="submitted"
+        [displayName]="displayName">
+    </app-insurance-receipt>
+
+    <fieldset *ngIf="!hideSection.actSelect" id="actSelect" class="border">
+        <legend>พรบ.</legend>
+        <div class="form-data">
+
+            <custom-select name="carshieldSelect" label="ประกันชีวิตคุ้มครองสินเชื่อ :" placeholder="-- Select --"
+                [(ngModel)]="formData.carshieldSelect" [hidden]="fieldProps.carshieldSelect.hidden"
+                [required]="fieldProps.carshieldSelect.required" [editing]="fieldProps.carshieldSelect.editing"
+                [submitted]="submitted" (change)="paymentMethodChange('carshield')"
+                [displayName]="displayName.carshieldSelect"
+                [selectedValue] = "formData.carshieldSelect"
+                [options]="ddl?.insuranceList">
+            </custom-select>
+
+            <custom-radio-button-list
+                name="carshieldPaymentMethod"
+                label="ต้องการการหักหน้าเช็ค/ต้องการชำระเอง :"
+                [(ngModel)]="formData.carshieldPaymentMethod"
+                [required]="fieldProps.carshieldPaymentMethod.required"
+                [hidden]="fieldProps.carshieldPaymentMethod.hidden"
+                [selectedValue] = "formData.carshieldPaymentMethod"
+                [editing]="fieldProps.carshieldPaymentMethod.editing"
+                [displayName]="displayName.carshieldPaymentMethod"
+                [submitted]="submitted"
+                [choices]="ddl?.paymentMethod">
+            </custom-radio-button-list>
+
+            <custom-select name="carshieldInsurerCode" label="บริษัทประกัน :" placeholder="-- Select --"
+                [(ngModel)]="formData.carshieldInsurerCode" [hidden]="fieldProps.carshieldInsurerCode.hidden"
+                [required]="fieldProps.carshieldInsurerCode.required" [editing]="fieldProps.carshieldInsurerCode.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.carshieldInsurerCode"
+                [selectedValue] = "formData.carshieldInsurerCode"
+                [options]="[
+                    {
+                        name: 'val 1',
+                        value: '1'
+                    },
+                    {
+                        name: 'val 2',
+                        value: '2'
+                    }
+                ]">
+            </custom-select>
+
+            <custom-text-field name="carshieldNewCarFlg" label="NEW_CAR_FLAG :" [(ngModel)]="formData.carshieldNewCarFlg"
+                [hidden]="fieldProps.carshieldNewCarFlg.hidden" [required]="fieldProps.carshieldNewCarFlg.required"
+                [editing]="fieldProps.carshieldNewCarFlg.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-select name="carshieldPackageCode" label="Pricing INS :" placeholder="-- Select --"
+                [(ngModel)]="formData.carshieldPackageCode" [hidden]="fieldProps.carshieldPackageCode.hidden"
+                [required]="fieldProps.carshieldPackageCode.required" [editing]="fieldProps.carshieldPackageCode.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.carshieldPackageCode"
+                [selectedValue] = "formData.carshieldPackageCode"
+                [options]="[
+                    {
+                        name: 'val 1',
+                        value: '1'
+                    },
+                    {
+                        name: 'val 2',
+                        value: '2'
+                    }
+                ]">
+            </custom-select>
+
+            <custom-text-field name="carshieldDiscount" label="ส่วนลด :" [(ngModel)]="formData.carshieldDiscount"
+                [hidden]="fieldProps.carshieldDiscount.hidden" [required]="fieldProps.carshieldDiscount.required"
+                [editing]="fieldProps.carshieldDiscount.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-checkbox
+                name="carshieldWHT"
+                label="หักภาษี ณ ที่จ่าย หัก 1% จากราคาค่าเบี้ยประกัน :"
+                [(ngModel)]="formData.carshieldWHT"
+                [required]="fieldProps.carshieldWHT.required"
+                [hidden]="fieldProps.carshieldWHT.hidden"
+                [selectedValue] = "formData.carshieldWHT"
+                [editing]="fieldProps.carshieldWHT.editing"
+                [displayName]="displayName.carshieldWHT"
+                [submitted]="submitted">
+            </custom-checkbox>
+
+            <custom-text-field name="carshieldPremium" label="ค่าเบี้ยที่ต้องชำระ :" [(ngModel)]="formData.carshieldPremium"
+                [hidden]="fieldProps.carshieldPremium.hidden" [required]="fieldProps.carshieldPremium.required"
+                [editing]="fieldProps.carshieldPremium.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-text-field name="carshieldReceiptName" label="ชื่อสำหรับจัดส่งใบเสร็จ :" [(ngModel)]="formData.carshieldReceiptName"
+                [hidden]="fieldProps.carshieldReceiptName.hidden" [required]="fieldProps.carshieldReceiptName.required"
+                [editing]="fieldProps.carshieldReceiptName.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-text-field name="carshieldReceiptTaxNo" label="เลขประจำตัวผู้เสียภาษี :" [(ngModel)]="formData.carshieldReceiptTaxNo"
+                [hidden]="fieldProps.carshieldReceiptTaxNo.hidden" [required]="fieldProps.carshieldReceiptTaxNo.required"
+                [editing]="fieldProps.carshieldReceiptTaxNo.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+        </div>
+    </fieldset>
+
+    <app-insurance-receipt
+        [prefix]="'carshield'"
+        [header]="'ที่อยู่ในการส่งพรบ'"
+        [section]="!hideSection.carshieldReceipt"
+        [formData]="formData"
+        [fieldProps]="fieldProps"
+        [submitted]="submitted"
+        [displayName]="displayName">
+    </app-insurance-receipt>
+
+    <fieldset *ngIf="!hideSection.ewSelect" id="ewSelect" class="border">
+        <legend>ประกันเครื่องยนต์</legend>
+        <div class="form-data">
+
+            <custom-select name="ewSelect" label="ประกันเครื่องยนต์ :" placeholder="-- Select --"
+                [(ngModel)]="formData.ewSelect" [hidden]="fieldProps.ewSelect.hidden"
+                [required]="fieldProps.ewSelect.required" [editing]="fieldProps.ewSelect.editing"
+                [submitted]="submitted"
+                (change)="paymentMethodChange('ew')"
+                [displayName]="displayName.ewSelect"
+                [selectedValue] = "formData.ewSelect"
+                [options]="ddl?.insuranceList">
+            </custom-select>
+
+            <custom-radio-button-list
+                name="ewPaymentMethod"
+                label="ต้องการการหักหน้าเช็ค/ต้องการชำระเอง :"
+                [(ngModel)]="formData.ewPaymentMethod"
+                [required]="fieldProps.ewPaymentMethod.required"
+                [hidden]="fieldProps.ewPaymentMethod.hidden"
+                [selectedValue] = "formData.ewPaymentMethod"
+                [editing]="fieldProps.ewPaymentMethod.editing"
+                [displayName]="displayName.ewPaymentMethod"
+                [submitted]="submitted"
+                [choices]="ddl?.paymentMethod">
+            </custom-radio-button-list>
+
+            <custom-text-field name="ewMile" label="เลขไมล์ :" [(ngModel)]="formData.ewMile"
+                [hidden]="fieldProps.ewMile.hidden" [required]="fieldProps.ewMile.required"
+                [editing]="fieldProps.ewMile.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-datepicker name="ewEffectiveDate" label="วันที่เริ่มต้นความคุ้มครอง :" [(ngModel)]="formData.ewEffectiveDate"
+                [hidden]="fieldProps.ewEffectiveDate.hidden" [required]="fieldProps.ewEffectiveDate.required"
+                [editing]="fieldProps.ewEffectiveDate.editing" [submitted]="submitted">
+            </custom-datepicker>
+
+            <custom-datepicker name="ewExpiredDate" label="วันที่สิ้นสุดความคุ้มครอง :" [(ngModel)]="formData.ewExpiredDate"
+                [hidden]="fieldProps.ewExpiredDate.hidden" [required]="fieldProps.ewExpiredDate.required"
+                [editing]="fieldProps.ewExpiredDate.editing" [submitted]="submitted">
+            </custom-datepicker>
+
+            <custom-select name="ewPackageCode" label="Pricing INS :" placeholder="-- Select --"
+                [(ngModel)]="formData.ewPackageCode" [hidden]="fieldProps.ewPackageCode.hidden"
+                [required]="fieldProps.ewPackageCode.required" [editing]="fieldProps.ewPackageCode.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.ewPackageCode"
+                [selectedValue] = "formData.ewPackageCode"
+                [options]="[
+                    {
+                        name: 'val 1',
+                        value: '1'
+                    },
+                    {
+                        name: 'val 2',
+                        value: '2'
+                    }
+                ]">
+            </custom-select>
+
+            <custom-text-field name="ewDiscount" label="ส่วนลด :" [(ngModel)]="formData.ewDiscount"
+                [hidden]="fieldProps.ewDiscount.hidden" [required]="fieldProps.ewDiscount.required"
+                [editing]="fieldProps.ewDiscount.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-checkbox
+                name="ewWHT"
+                label="หักภาษี ณ ที่จ่าย หัก 1% จากราคาค่าเบี้ยประกัน :"
+                [(ngModel)]="formData.ewWHT"
+                [required]="fieldProps.ewWHT.required"
+                [hidden]="fieldProps.ewWHT.hidden"
+                [selectedValue] = "formData.ewWHT"
+                [editing]="fieldProps.ewWHT.editing"
+                [displayName]="displayName.ewWHT"
+                [submitted]="submitted">
+            </custom-checkbox>
+
+            <custom-text-field name="ewPremium" label="ค่าเบี้ยที่ต้องชำระ :" [(ngModel)]="formData.ewPremium"
+                [hidden]="fieldProps.ewPremium.hidden" [required]="fieldProps.ewPremium.required"
+                [editing]="fieldProps.ewPremium.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-text-field name="ewReceiptName" label="ชื่อสำหรับจัดส่งใบเสร็จ :" [(ngModel)]="formData.ewReceiptName"
+                [hidden]="fieldProps.ewReceiptName.hidden" [required]="fieldProps.ewReceiptName.required"
+                [editing]="fieldProps.ewReceiptName.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-text-field name="ewReceiptTaxNo" label="เลขประจำตัวผู้เสียภาษี :" [(ngModel)]="formData.ewReceiptTaxNo"
+                [hidden]="fieldProps.ewReceiptTaxNo.hidden" [required]="fieldProps.ewReceiptTaxNo.required"
+                [editing]="fieldProps.ewReceiptTaxNo.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+        </div>
+    </fieldset>
+
+    <app-insurance-receipt
+        [prefix]="'ew'"
+        [header]="'ที่อยู่ในการส่งใบเสร็จประกันเครื่องยนต์'"
+        [section]="!hideSection.ewReceipt"
+        [formData]="formData"
+        [fieldProps]="fieldProps"
+        [submitted]="submitted"
+        [displayName]="displayName">
+    </app-insurance-receipt>
+
+    <fieldset *ngIf="!hideSection.paSelect" id="paSelect" class="border">
+        <legend>ประกันอุบัติเหตุ</legend>
+        <div class="form-data">
+            <custom-select name="paSelect" label="ประกันอุบัติเหตุ :" placeholder="-- Select --"
+                [(ngModel)]="formData.paSelect" [hidden]="fieldProps.paSelect.hidden"
+                [required]="fieldProps.paSelect.required" [editing]="fieldProps.paSelect.editing"
+                [submitted]="submitted"
+                (change)="paymentMethodChange('pa')"
+                [displayName]="displayName.paSelect"
+                [selectedValue] = "formData.paSelect"
+                [options]="ddl?.insuranceList">
+            </custom-select>
+
+            <custom-radio-button-list
+                name="paPaymentMethod"
+                label="ต้องการการหักหน้าเช็ค/ต้องการชำระเอง :"
+                [(ngModel)]="formData.paPaymentMethod"
+                [required]="fieldProps.paPaymentMethod.required"
+                [hidden]="fieldProps.paPaymentMethod.hidden"
+                [selectedValue] = "formData.paPaymentMethod"
+                [editing]="fieldProps.paPaymentMethod.editing"
+                [displayName]="displayName.paPaymentMethod"
+                [submitted]="submitted"
+                [choices]="ddl?.paymentMethod">
+            </custom-radio-button-list>
+
+            <custom-select name="paPackageCode" label="Pricing INS :" placeholder="-- Select --"
+                [(ngModel)]="formData.paPackageCode" [hidden]="fieldProps.paPackageCode.hidden"
+                [required]="fieldProps.paPackageCode.required" [editing]="fieldProps.paPackageCode.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.paPackageCode"
+                [selectedValue] = "formData.paPackageCode"
+                [options]="[
+                    {
+                        name: 'val 1',
+                        value: '1'
+                    },
+                    {
+                        name: 'val 2',
+                        value: '2'
+                    }
+                ]">
+            </custom-select>
+
+            <custom-text-field name="paDiscount" label="ส่วนลด :" [(ngModel)]="formData.paDiscount"
+                [hidden]="fieldProps.paDiscount.hidden" [required]="fieldProps.paDiscount.required"
+                [editing]="fieldProps.paDiscount.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-checkbox
+                name="paWHT"
+                label="หักภาษี ณ ที่จ่าย หัก 1% จากราคาค่าเบี้ยประกัน :"
+                [(ngModel)]="formData.paWHT"
+                [required]="fieldProps.paWHT.required"
+                [hidden]="fieldProps.paWHT.hidden"
+                [selectedValue] = "formData.paWHT"
+                [editing]="fieldProps.paWHT.editing"
+                [displayName]="displayName.paWHT"
+                [submitted]="submitted">
+            </custom-checkbox>
+
+            <custom-text-field name="paPremium" label="ค่าเบี้ยที่ต้องชำระ :" [(ngModel)]="formData.paPremium"
+                [hidden]="fieldProps.paPremium.hidden" [required]="fieldProps.paPremium.required"
+                [editing]="fieldProps.paPremium.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-text-field name="paReceiptName" label="ชื่อสำหรับจัดส่งใบเสร็จ :" [(ngModel)]="formData.paReceiptName"
+                [hidden]="fieldProps.paReceiptName.hidden" [required]="fieldProps.paReceiptName.required"
+                [editing]="fieldProps.paReceiptName.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+
+            <custom-text-field name="paReceiptTaxNo" label="เลขประจำตัวผู้เสียภาษี :" [(ngModel)]="formData.paReceiptTaxNo"
+                [hidden]="fieldProps.paReceiptTaxNo.hidden" [required]="fieldProps.paReceiptTaxNo.required"
+                [editing]="fieldProps.paReceiptTaxNo.editing" [submitted]="submitted"
+            >
+            </custom-text-field>
+        </div>
+    </fieldset>
+
+    <app-insurance-receipt
+        [prefix]="'pa'"
+        [header]="'ที่อยู่ในการส่งใบเสร็จประกันอุบัติเหตุ'"
+        [section]="!hideSection.paReceipt"
+        [formData]="formData"
+        [fieldProps]="fieldProps"
+        [submitted]="submitted"
+        [displayName]="displayName">
+    </app-insurance-receipt>
+</form>

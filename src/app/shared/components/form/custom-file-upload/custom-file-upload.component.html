@@ -1,0 +1,22 @@
+<div class="form-group row">
+    <label class="col-form-label" [ngClass]="labelCss"
+        *ngIf="label" [attr.for]="identifier">
+        {{ label }}
+        <span class="form-required-field" *ngIf="required">*</span>
+    </label>
+    <div [ngClass]="inputCss" [hidden]="!editing">
+        <input type="file" class="form-control" [placeholder]="placeholder" [(ngModel)]="value"
+            [ngClass]="{ invalid: (invalid | async) }" [id]="identifier" [required]="required"
+            (change)="handleFileSelect($event)" #fileInput />
+        <validation [@flyInOut]="'in,out'" *ngIf="submitted && invalid | async"
+            [messages]="failures | async">
+        </validation>
+    </div>
+    <div class="col-auto">
+        <button type="button" class="btn green" (click)="onUploadFile()">Upload</button>
+      </div>
+    <div class="clearfix"></div>
+    <div [ngClass]="inputCss" [hidden]="editing">
+        {{ value }}
+    </div>
+</div>

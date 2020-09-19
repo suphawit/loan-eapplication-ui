@@ -1,0 +1,8 @@
+<div class="form-group row">
+    <label class="col-form-label" [ngClass]="labelCss" *ngIf="label">
+        {{ label }}
+    </label>
+    <div [ngClass]="inputCss" class="padding-left-15">
+        <ng-content #contentWrapper></ng-content>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.loanExpectationInfo" id="loanExpectationInfo" class="border">
+        <legend>Loan Expectation Information</legend>
+        <div class="form-data">
+        <custom-select name="loanPurpuse" label="วัตถุประสงค์การขอสินเชื่อ :" placeholder="-- Select --"
+            [(ngModel)]="formData.loanPurpuse" [hidden]="fieldProps.loanPurpuse.hidden"
+            [required]="fieldProps.loanPurpuse.required" [editing]="fieldProps.loanPurpuse.editing"
+            [submitted]="submitted"
+            [selectedValue] = "formData.loanPurpuse"
+            [displayName]="displayName.loanPurpuse"
+            [options]="ddl?.loanPurpuses">
+        </custom-select>
+        <div class="form-group row" *ngIf="!fieldProps.requestCreditLimitAmt.hidden">
+            <label class="col-form-label col-sm-3">
+                วงเงินที่ต้องการ :
+                <span class="form-required-field" *ngIf="fieldProps.requestCreditLimitAmt.required">*</span>
+            </label>
+            <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.requestCreditLimitAmt.editing">
+                <input type="text" name="requestCreditLimitAmt" class="form-control text-right" [required]="fieldProps.requestCreditLimitAmt.required"
+                    [(ngModel)]="formData.requestCreditLimitAmt" #requestCreditLimitAmt="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                <ng-container *ngIf="requestCreditLimitAmt?.invalid && submitted">
+                    <span *ngIf="requestCreditLimitAmt.errors.required" class="help-block with-errors">Please enter a value</span>
+                    <span *ngIf="requestCreditLimitAmt.errors.currency" class="help-block with-errors">{{ requestCreditLimitAmt.errors.currency.message }}</span>
+                </ng-container>
+            </div>
+            <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.requestCreditLimitAmt.editing">
+                {{ formData.requestCreditLimitAmt }}
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="!fieldProps.requestInstallmentTerm.hidden">
+            <label class="col-form-label col-sm-3">
+                ระยะเวลาที่ต้องการผ่อนชําระ :
+                <span class="form-required-field" *ngIf="fieldProps.requestInstallmentTerm.required">*</span>
+            </label>
+            <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.requestInstallmentTerm.editing">
+                <input type="text" name="requestInstallmentTerm" class="form-control text-right" [required]="fieldProps.requestInstallmentTerm.required"
+                    [(ngModel)]="formData.requestInstallmentTerm" #requestInstallmentTerm="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                <ng-container *ngIf="requestInstallmentTerm?.invalid && submitted">
+                    <span *ngIf="requestInstallmentTerm.errors.required" class="help-block with-errors">Please enter a value</span>
+                    <span *ngIf="requestInstallmentTerm.errors.currency" class="help-block with-errors">{{ requestInstallmentTerm.errors.currency.message }}</span>
+                </ng-container>
+            </div>
+            <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.requestInstallmentTerm.editing">
+                {{ formData.requestInstallmentTerm }}
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="!fieldProps.requestInstallmentAmt.hidden">
+            <label class="col-form-label col-sm-3">
+                ยอดเงินที่ต้องการผ่อนต่อเดือน :
+                <span class="form-required-field" *ngIf="fieldProps.requestInstallmentAmt.required">*</span>
+            </label>
+            <div class="col-sm-4 col-xs-9" *ngIf="fieldProps.requestInstallmentAmt.editing">
+                <input type="text" name="requestInstallmentAmt" class="form-control text-right" [required]="fieldProps.requestInstallmentAmt.required"
+                    [(ngModel)]="formData.requestInstallmentAmt" #requestInstallmentAmt="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                <ng-container *ngIf="requestInstallmentAmt?.invalid && submitted">
+                    <span *ngIf="requestInstallmentAmt.errors.required" class="help-block with-errors">Please enter a value</span>
+                    <span *ngIf="requestInstallmentAmt.errors.currency" class="help-block with-errors">{{ requestInstallmentAmt.errors.currency.message }}</span>
+                </ng-container>
+            </div>
+            <div class="col-sm-4 col-xs-9" *ngIf="!fieldProps.requestInstallmentAmt.editing">
+                {{ formData.requestInstallmentAmt }}
+            </div>
+        </div>
+        <custom-checkbox
+            name="buyInsuranceFlg"
+            label="ต้องการซื้อประกันคุ้มครองสินเชื่อ :"
+            [(ngModel)]="formData.buyInsuranceFlg"
+            [required]="fieldProps.buyInsuranceFlg.required"
+            [hidden]="fieldProps.buyInsuranceFlg.hidden"
+            [selectedValue] = "formData.buyInsuranceFlg"
+            [editing]="fieldProps.buyInsuranceFlg.editing"
+            [displayName]="displayName.buyInsuranceFlg"
+            [submitted]="submitted">
+        </custom-checkbox>
+    </div>
+    </fieldset>
+</form>

@@ -1,0 +1,21 @@
+<div class="form-group row">
+    <label class="col-form-label" [ngClass]="labelCss"
+        *ngIf="label" [attr.for]="identifier">
+        {{ label }}
+        <span class="form-required-field" *ngIf="required">*</span>
+    </label>
+    <div [ngClass]="inputCss" [hidden]="!editing">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" [placeholder]="placeholder" [(ngModel)]="value"
+                [ngClass]="{ invalid: (invalid | async) }" [id]="identifier" [required]="required"
+                [checked]="selectedValue === value" />
+        </div>
+        <validation [@flyInOut]="'in,out'" *ngIf="submitted && invalid | async"
+            [messages]="failures | async">
+        </validation>
+    </div>
+    <div class="clearfix"></div>
+    <div [ngClass]="inputCss" [hidden]="editing">
+        {{ displayName }}
+    </div>
+</div>

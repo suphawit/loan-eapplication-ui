@@ -1,0 +1,24 @@
+<div class="form-group row">
+    <label class="col-form-label" [ngClass]="labelCss"
+        *ngIf="label" [attr.for]="identifier">
+        {{ label }}
+        <span class="form-required-field" *ngIf="required">*</span>
+    </label>
+    <div [ngClass]="inputCss" [hidden]="!editing">
+        <input type="hidden" class="form-control" [(ngModel)]="value" />
+        <input type="text" class="form-control" [placeholder]="placeholder" [(ngModel)]="displayName"
+            [ngClass]="{ invalid: (invalid | async) }" [id]="identifier" [required]="required"
+            [typeahead]="options" typeaheadOptionField="name"
+            [typeaheadMinLength]="0" [typeaheadScrollable]="true"
+            (typeaheadOnSelect)="onSelect($event)" [typeaheadOptionsInScrollableView]="5"
+            (typeaheadNoResults)="typeaheadNoResults($event)" autocomplete="off"
+            (change)="onTextChange()" />
+        <validation [@flyInOut]="'in,out'" *ngIf="submitted && invalid | async"
+            [messages]="failures | async">
+        </validation>
+    </div>
+    <div class="clearfix"></div>
+    <div [ngClass]="inputCss" [hidden]="editing">
+        {{ displayName }}
+    </div>
+</div>

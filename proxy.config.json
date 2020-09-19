@@ -1,0 +1,11 @@
+{
+    "/api/*": {
+        "target": "http://10.202.105.72/spt-gw/MKT",
+        "secure": false,
+        "pathRewrite": {
+            "^/api": ""
+        },
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}

@@ -1,0 +1,13 @@
+@import "../../../theme/variables.scss";
+
+::ng-deep breadcrumb {
+    .navbar-brand {
+        font-size: 1rem !important;
+        padding-top: .8rem;
+        padding-bottom: 0 !important;
+        color: $primary-light !important;
+    }
+    .navbar {
+        color: $primary-light !important;
+    }
+}

@@ -1,0 +1,469 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.contactInfo" id="contactInfo" class="border">
+        <legend>Contact Information</legend>
+        <div class="form-data">
+            <h3 class="subheader">ที่อยู่ตามบัตรประชาชน</h3>
+
+            <custom-text-field name="registerAddrNumber" label="เลขที่ :" [(ngModel)]="formData.registerAddrNumber"
+                [hidden]="fieldProps.registerAddrNumber.hidden" [required]="fieldProps.registerAddrNumber.required"
+                [editing]="fieldProps.registerAddrNumber.editing" [submitted]="submitted"
+                [maxlength]="maxlen.addrNumber">
+            </custom-text-field>
+
+            <custom-text-field name="registerAddrMoo" label="หมู่ที่ :" [(ngModel)]="formData.registerAddrMoo"
+                [hidden]="fieldProps.registerAddrMoo.hidden" [required]="fieldProps.registerAddrMoo.required"
+                [editing]="fieldProps.registerAddrMoo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.moo">
+            </custom-text-field>
+
+            <custom-text-field name="registerAddrFloor" label="ชั้น :" [(ngModel)]="formData.registerAddrFloor"
+                [hidden]="fieldProps.registerAddrFloor.hidden" [required]="fieldProps.registerAddrFloor.required"
+                [editing]="fieldProps.registerAddrFloor.editing" [submitted]="submitted"
+                [maxlength]="maxlen.floor">
+            </custom-text-field>
+
+            <custom-text-field name="registerAddrRoom" label="ห้อง :" [(ngModel)]="formData.registerAddrRoom"
+                [hidden]="fieldProps.registerAddrRoom.hidden" [required]="fieldProps.registerAddrRoom.required"
+                [editing]="fieldProps.registerAddrRoom.editing" [submitted]="submitted"
+                [maxlength]="maxlen.room">
+            </custom-text-field>
+
+            <custom-text-field name="registerAddrVillage" label="อาคาร/หมู่บ้าน :" [(ngModel)]="formData.registerAddrVillage"
+                [hidden]="fieldProps.registerAddrVillage.hidden" [required]="fieldProps.registerAddrVillage.required"
+                [editing]="fieldProps.registerAddrVillage.editing" [submitted]="submitted"
+                [maxlength]="maxlen.village">
+            </custom-text-field>
+
+            <custom-text-field name="registerAddrSoi" label="ตรอก/ซอย :" [(ngModel)]="formData.registerAddrSoi"
+                [hidden]="fieldProps.registerAddrSoi.hidden" [required]="fieldProps.registerAddrSoi.required"
+                [editing]="fieldProps.registerAddrSoi.editing" [submitted]="submitted"
+                [maxlength]="maxlen.soi">
+            </custom-text-field>
+
+            <custom-text-field name="registerAddrRoad" label="ถนน :" [(ngModel)]="formData.registerAddrRoad"
+                [hidden]="fieldProps.registerAddrRoad.hidden" [required]="fieldProps.registerAddrRoad.required"
+                [editing]="fieldProps.registerAddrRoad.editing" [submitted]="submitted"
+                [maxlength]="maxlen.road">
+            </custom-text-field>
+
+            <custom-input-filter name="registerAddrProvince" label="จังหวัด :" placeholder="Autocomplete"
+                [(ngModel)]="formData.registerAddrProvince" [hidden]="fieldProps.registerAddrProvince.hidden"
+                [required]="fieldProps.registerAddrProvince.required" [editing]="fieldProps.registerAddrProvince.editing"
+                [submitted]="submitted" (onComplete)="provinceSelectChange({
+                    name: $event,
+                    prefix: 'register'
+                })"
+                [displayName]="displayName.registerAddrProvince"
+                [selectedValue]="formData.registerAddrProvince"
+                [options]="ddl?.provinces">
+            </custom-input-filter>
+
+            <custom-input-filter name="registerAddrDistrict" label="เขต/อำเภอ :" placeholder="Autocomplete"
+                [hidden]="fieldProps.registerAddrDistrict.hidden" [(ngModel)]="formData.registerAddrDistrict"
+                [required]="fieldProps.registerAddrDistrict.required" [editing]="fieldProps.registerAddrDistrict.editing"
+                [submitted]="submitted" (onComplete)="districtSelectChange({
+                    name: $event,
+                    prefix: 'register'
+                })"
+                [displayName]="displayName.registerAddrDistrict"
+                [selectedValue]="formData.registerAddrDistrict"
+                [options]="ddl?.districts">
+            </custom-input-filter>
+
+            <custom-input-filter name="registerAddrSubdistrict" label="แขวง/ตำบล :" placeholder="Autocomplete"
+                [hidden]="fieldProps.registerAddrSubdistrict.hidden" [(ngModel)]="formData.registerAddrSubdistrict"
+                [required]="fieldProps.registerAddrSubdistrict.required" [editing]="fieldProps.registerAddrSubdistrict.editing"
+                [submitted]="submitted" (onComplete)="subdistrictSelectChange({
+                    name: $event,
+                    prefix: 'register'})"
+                [displayName]="displayName.registerAddrSubdistrict"
+                [selectedValue]="formData.registerAddrSubdistrict"
+                [options]="ddl?.subdistricts">
+            </custom-input-filter>
+
+            <custom-text-field name="registerAddrPostal" label=" รหัสไปรษณีย์ :" [(ngModel)]="formData.registerAddrPostal"
+                [hidden]="fieldProps.registerAddrPostal.hidden" [required]="fieldProps.registerAddrPostal.required"
+                [editing]="fieldProps.registerAddrPostal.editing" [submitted]="submitted"
+                [maxlength]="maxlen.postal" [minlength]="maxlen.postal"
+                numberFormatter>
+            </custom-text-field>
+
+            <custom-input-filter name="registerAddrCountry" label="ประเทศ :" placeholder="Autocomplete"
+                [hidden]="fieldProps.registerAddrCountry.hidden" [(ngModel)]="formData.registerAddrCountry"
+                [required]="fieldProps.registerAddrCountry.required" [editing]="fieldProps.registerAddrCountry.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.registerAddrCountry"
+                [selectedValue]="formData.registerAddrCountry"
+                [options]="ddl?.countries">
+            </custom-input-filter>
+
+            <h3 class="subheader">ที่อยู่ตามทะเบียนบ้าน</h3>
+
+            <custom-checkbox
+                name="homeAddrSameRegisterFlg"
+                label="ที่อยู่เหมือนตามบัตรประชาชน :"
+                [(ngModel)]="formData.homeAddrSameRegisterFlg"
+                [required]="fieldProps.homeAddrSameRegisterFlg.required"
+                [hidden]="fieldProps.homeAddrSameRegisterFlg.hidden"
+                [selectedValue] = "formData.homeAddrSameRegisterFlg"
+                (change)="disableAddressField($event, 'home')"
+                [editing]="fieldProps.homeAddrSameRegisterFlg.editing"
+                [displayName]="displayName.homeAddrSameRegisterFlg"
+                [submitted]="submitted">
+            </custom-checkbox>
+
+            <custom-text-field name="homeAddrNumber" label="เลขที่ :" [(ngModel)]="formData.homeAddrNumber"
+                [hidden]="fieldProps.homeAddrNumber.hidden" [required]="fieldProps.homeAddrNumber.required"
+                [editing]="fieldProps.homeAddrNumber.editing" [submitted]="submitted"
+                [maxlength]="maxlen.addrNumber" [ngClass]="{ disabled: formData.homeAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-text-field name="homeAddrMoo" label="หมู่ที่ :" [(ngModel)]="formData.homeAddrMoo"
+                [hidden]="fieldProps.homeAddrMoo.hidden" [required]="fieldProps.homeAddrMoo.required"
+                [editing]="fieldProps.homeAddrMoo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.moo" [ngClass]="{ disabled: formData.homeAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-text-field name="homeAddrFloor" label="ชั้น :" [(ngModel)]="formData.homeAddrFloor"
+                [hidden]="fieldProps.homeAddrFloor.hidden" [required]="fieldProps.homeAddrFloor.required"
+                [editing]="fieldProps.homeAddrFloor.editing" [submitted]="submitted"
+                [maxlength]="maxlen.floor" [ngClass]="{ disabled: formData.homeAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-text-field name="homeAddrRoom" label="ห้อง :" [(ngModel)]="formData.homeAddrRoom"
+                [hidden]="fieldProps.homeAddrRoom.hidden" [required]="fieldProps.homeAddrRoom.required"
+                [editing]="fieldProps.homeAddrRoom.editing" [submitted]="submitted"
+                [maxlength]="maxlen.room" [ngClass]="{ disabled: formData.homeAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-text-field name="homeAddrVillage" label="อาคาร/หมู่บ้าน :" [(ngModel)]="formData.homeAddrVillage"
+                [hidden]="fieldProps.homeAddrVillage.hidden" [required]="fieldProps.homeAddrVillage.required"
+                [editing]="fieldProps.homeAddrVillage.editing" [submitted]="submitted"
+                [maxlength]="maxlen.village" [ngClass]="{ disabled: formData.homeAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-text-field name="homeAddrSoi" label="ตรอก/ซอย :" [(ngModel)]="formData.homeAddrSoi"
+                [hidden]="fieldProps.homeAddrSoi.hidden" [required]="fieldProps.homeAddrSoi.required"
+                [editing]="fieldProps.homeAddrSoi.editing" [submitted]="submitted"
+                [maxlength]="maxlen.soi" [ngClass]="{ disabled: formData.homeAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-text-field name="homeAddrRoad" label="ถนน :" [(ngModel)]="formData.homeAddrRoad"
+                [hidden]="fieldProps.homeAddrRoad.hidden" [required]="fieldProps.homeAddrRoad.required"
+                [editing]="fieldProps.homeAddrRoad.editing" [submitted]="submitted"
+                [maxlength]="maxlen.road" [ngClass]="{ disabled: formData.homeAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-input-filter name="homeAddrProvince" label="จังหวัด :" placeholder="Autocomplete"
+                [(ngModel)]="formData.homeAddrProvince" [hidden]="fieldProps.homeAddrProvince.hidden"
+                [required]="fieldProps.homeAddrProvince.required" [editing]="fieldProps.homeAddrProvince.editing"
+                [submitted]="submitted" (onComplete)="provinceSelectChange({
+                    name: $event,
+                    prefix: 'home'
+                })"
+                [displayName]="displayName.homeAddrProvince"
+                [selectedValue]="formData.homeAddrProvince"
+                [options]="ddl?.provinces" [ngClass]="{ disabled: formData.homeAddrSameRegisterFlg }">
+            </custom-input-filter>
+
+            <custom-input-filter name="homeAddrDistrict" label="เขต/อำเภอ :" placeholder="Autocomplete"
+                [hidden]="fieldProps.homeAddrDistrict.hidden" [(ngModel)]="formData.homeAddrDistrict"
+                [required]="fieldProps.homeAddrDistrict.required" [editing]="fieldProps.homeAddrDistrict.editing"
+                [submitted]="submitted" (onComplete)="districtSelectChange({
+                    name: $event,
+                    prefix: 'home'
+                })"
+                [displayName]="displayName.homeAddrDistrict"
+                [selectedValue]="formData.homeAddrDistrict"
+                [options]="ddl?.districts" [ngClass]="{ disabled: formData.homeAddrSameRegisterFlg }">
+            </custom-input-filter>
+
+            <custom-input-filter name="homeAddrSubdistrict" label="แขวง/ตำบล :" placeholder="Autocomplete"
+                [hidden]="fieldProps.homeAddrSubdistrict.hidden" [(ngModel)]="formData.homeAddrSubdistrict"
+                [required]="fieldProps.homeAddrSubdistrict.required" [editing]="fieldProps.homeAddrSubdistrict.editing"
+                [submitted]="submitted" (onComplete)="subdistrictSelectChange({
+                    name: $event,
+                    prefix: 'home'})"
+                [displayName]="displayName.homeAddrSubdistrict"
+                [selectedValue]="formData.homeAddrSubdistrict"
+                [options]="ddl?.subdistricts" [ngClass]="{ disabled: formData.homeAddrSameRegisterFlg }">
+            </custom-input-filter>
+
+            <custom-text-field name="homeAddrPostal" label=" รหัสไปรษณีย์ :" [(ngModel)]="formData.homeAddrPostal"
+                [hidden]="fieldProps.homeAddrPostal.hidden" [required]="fieldProps.homeAddrPostal.required"
+                [editing]="fieldProps.homeAddrPostal.editing" [submitted]="submitted"
+                [maxlength]="maxlen.postal" [minlength]="maxlen.postal"
+                numberFormatter [ngClass]="{ disabled: formData.homeAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-input-filter name="homeAddrCountry" label="ประเทศ :" placeholder="Autocomplete"
+                [hidden]="fieldProps.homeAddrCountry.hidden" [(ngModel)]="formData.homeAddrCountry"
+                [required]="fieldProps.homeAddrCountry.required" [editing]="fieldProps.homeAddrCountry.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.homeAddrCountry"
+                [selectedValue]="formData.homeAddrCountry"
+                [options]="ddl?.countries" [ngClass]="{ disabled: formData.homeAddrSameRegisterFlg }">
+            </custom-input-filter>
+
+            <h3 class="subheader">ที่อยู่ปัจจุบัน</h3>
+
+            <custom-text-field name="mailingAddrNumber" label="เลขที่ :" [(ngModel)]="formData.mailingAddrNumber"
+                [hidden]="fieldProps.mailingAddrNumber.hidden" [required]="fieldProps.mailingAddrNumber.required"
+                [editing]="fieldProps.mailingAddrNumber.editing" [submitted]="submitted"
+                [maxlength]="maxlen.addrNumber">
+            </custom-text-field>
+
+            <custom-text-field name="mailingAddrMoo" label="หมู่ที่ :" [(ngModel)]="formData.mailingAddrMoo"
+                [hidden]="fieldProps.mailingAddrMoo.hidden" [required]="fieldProps.mailingAddrMoo.required"
+                [editing]="fieldProps.mailingAddrMoo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.moo">
+            </custom-text-field>
+
+            <custom-text-field name="mailingAddrFloor" label="ชั้น :" [(ngModel)]="formData.mailingAddrFloor"
+                [hidden]="fieldProps.mailingAddrFloor.hidden" [required]="fieldProps.mailingAddrFloor.required"
+                [editing]="fieldProps.mailingAddrFloor.editing" [submitted]="submitted"
+                [maxlength]="maxlen.floor">
+            </custom-text-field>
+
+            <custom-text-field name="mailingAddrRoom" label="ห้อง :" [(ngModel)]="formData.mailingAddrRoom"
+                [hidden]="fieldProps.mailingAddrRoom.hidden" [required]="fieldProps.mailingAddrRoom.required"
+                [editing]="fieldProps.mailingAddrRoom.editing" [submitted]="submitted"
+                [maxlength]="maxlen.room">
+            </custom-text-field>
+
+            <custom-text-field name="mailingAddrVillage" label="อาคาร/หมู่บ้าน :" [(ngModel)]="formData.mailingAddrVillage"
+                [hidden]="fieldProps.mailingAddrVillage.hidden" [required]="fieldProps.mailingAddrVillage.required"
+                [editing]="fieldProps.mailingAddrVillage.editing" [submitted]="submitted"
+                [maxlength]="maxlen.village">
+            </custom-text-field>
+
+            <custom-text-field name="mailingAddrSoi" label="ตรอก/ซอย :" [(ngModel)]="formData.mailingAddrSoi"
+                [hidden]="fieldProps.mailingAddrSoi.hidden" [required]="fieldProps.mailingAddrSoi.required"
+                [editing]="fieldProps.mailingAddrSoi.editing" [submitted]="submitted"
+                [maxlength]="maxlen.soi">
+            </custom-text-field>
+
+            <custom-text-field name="mailingAddrRoad" label="ถนน :" [(ngModel)]="formData.mailingAddrRoad"
+                [hidden]="fieldProps.mailingAddrRoad.hidden" [required]="fieldProps.mailingAddrRoad.required"
+                [editing]="fieldProps.mailingAddrRoad.editing" [submitted]="submitted"
+                [maxlength]="maxlen.road">
+            </custom-text-field>
+
+            <custom-input-filter name="mailingAddrProvince" label="จังหวัด :" placeholder="Autocomplete"
+                [(ngModel)]="formData.mailingAddrProvince" [hidden]="fieldProps.mailingAddrProvince.hidden"
+                [required]="fieldProps.mailingAddrProvince.required" [editing]="fieldProps.mailingAddrProvince.editing"
+                [submitted]="submitted" (onComplete)="provinceSelectChange({
+                    name: $event,
+                    prefix: 'mailing'
+                })"
+                [displayName]="displayName.mailingAddrProvince"
+                [selectedValue]="formData.mailingAddrProvince"
+                [options]="ddl?.provinces">
+            </custom-input-filter>
+
+            <custom-input-filter name="mailingAddrDistrict" label="เขต/อำเภอ :" placeholder="Autocomplete"
+                [hidden]="fieldProps.mailingAddrDistrict.hidden" [(ngModel)]="formData.mailingAddrDistrict"
+                [required]="fieldProps.mailingAddrDistrict.required" [editing]="fieldProps.mailingAddrDistrict.editing"
+                [submitted]="submitted" (onComplete)="districtSelectChange({
+                    name: $event,
+                    prefix: 'mailing'
+                })"
+                [displayName]="displayName.mailingAddrDistrict"
+                [selectedValue]="formData.mailingAddrDistrict"
+                [options]="ddl?.districts">
+            </custom-input-filter>
+
+            <custom-input-filter name="mailingAddrSubdistrict" label="แขวง/ตำบล :" placeholder="Autocomplete"
+                [hidden]="fieldProps.mailingAddrSubdistrict.hidden" [(ngModel)]="formData.mailingAddrSubdistrict"
+                [required]="fieldProps.mailingAddrSubdistrict.required" [editing]="fieldProps.mailingAddrSubdistrict.editing"
+                [submitted]="submitted" (onComplete)="subdistrictSelectChange({
+                    name: $event,
+                    prefix: 'mailing'})"
+                [displayName]="displayName.mailingAddrSubdistrict"
+                [selectedValue]="formData.mailingAddrSubdistrict"
+                [options]="ddl?.subdistricts">
+            </custom-input-filter>
+
+            <custom-text-field name="mailingAddrPostal" label=" รหัสไปรษณีย์ :" [(ngModel)]="formData.mailingAddrPostal"
+                [hidden]="fieldProps.mailingAddrPostal.hidden" [required]="fieldProps.mailingAddrPostal.required"
+                [editing]="fieldProps.mailingAddrPostal.editing" [submitted]="submitted"
+                [maxlength]="maxlen.postal" [minlength]="maxlen.postal"
+                numberFormatter>
+            </custom-text-field>
+
+            <custom-input-filter name="mailingAddrCountry" label="ประเทศ :" placeholder="Autocomplete"
+                [hidden]="fieldProps.mailingAddrCountry.hidden" [(ngModel)]="formData.mailingAddrCountry"
+                [required]="fieldProps.mailingAddrCountry.required" [editing]="fieldProps.mailingAddrCountry.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.mailingAddrCountry"
+                [selectedValue]="formData.mailingAddrCountry"
+                [options]="ddl?.countries">
+            </custom-input-filter>
+
+            <h3 class="subheader">ที่อยู่จัดส่งเอกสาร</h3>
+
+            <custom-checkbox
+                name="shippingAddrSameRegisterFlg"
+                label="ที่อยู่เหมือนตามบัตรประชาชน :"
+                [(ngModel)]="formData.shippingAddrSameRegisterFlg"
+                [required]="fieldProps.shippingAddrSameRegisterFlg.required"
+                [hidden]="fieldProps.shippingAddrSameRegisterFlg.hidden"
+                [selectedValue] = "formData.shippingAddrSameRegisterFlg"
+                (change)="disableAddressField($event, 'shipping')"
+                [editing]="fieldProps.shippingAddrSameRegisterFlg.editing"
+                [displayName]="displayName.shippingAddrSameRegisterFlg"
+                [submitted]="submitted">
+            </custom-checkbox>
+
+            <custom-text-field name="shippingAddrNumber" label="เลขที่ :" [(ngModel)]="formData.shippingAddrNumber"
+                [hidden]="fieldProps.shippingAddrNumber.hidden" [required]="fieldProps.shippingAddrNumber.required"
+                [editing]="fieldProps.shippingAddrNumber.editing" [submitted]="submitted"
+                [maxlength]="maxlen.addrNumber" [ngClass]="{ disabled: formData.shippingAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-text-field name="shippingAddrMoo" label="หมู่ที่ :" [(ngModel)]="formData.shippingAddrMoo"
+                [hidden]="fieldProps.shippingAddrMoo.hidden" [required]="fieldProps.shippingAddrMoo.required"
+                [editing]="fieldProps.shippingAddrMoo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.moo" [ngClass]="{ disabled: formData.shippingAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-text-field name="shippingAddrFloor" label="ชั้น :" [(ngModel)]="formData.shippingAddrFloor"
+                [hidden]="fieldProps.shippingAddrFloor.hidden" [required]="fieldProps.shippingAddrFloor.required"
+                [editing]="fieldProps.shippingAddrFloor.editing" [submitted]="submitted"
+                [maxlength]="maxlen.floor" [ngClass]="{ disabled: formData.shippingAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-text-field name="shippingAddrRoom" label="ห้อง :" [(ngModel)]="formData.shippingAddrRoom"
+                [hidden]="fieldProps.shippingAddrRoom.hidden" [required]="fieldProps.shippingAddrRoom.required"
+                [editing]="fieldProps.shippingAddrRoom.editing" [submitted]="submitted"
+                [maxlength]="maxlen.room" [ngClass]="{ disabled: formData.shippingAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-text-field name="shippingAddrVillage" label="อาคาร/หมู่บ้าน :" [(ngModel)]="formData.shippingAddrVillage"
+                [hidden]="fieldProps.shippingAddrVillage.hidden" [required]="fieldProps.shippingAddrVillage.required"
+                [editing]="fieldProps.shippingAddrVillage.editing" [submitted]="submitted"
+                [maxlength]="maxlen.village" [ngClass]="{ disabled: formData.shippingAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-text-field name="shippingAddrSoi" label="ตรอก/ซอย :" [(ngModel)]="formData.shippingAddrSoi"
+                [hidden]="fieldProps.shippingAddrSoi.hidden" [required]="fieldProps.shippingAddrSoi.required"
+                [editing]="fieldProps.shippingAddrSoi.editing" [submitted]="submitted"
+                [maxlength]="maxlen.soi" [ngClass]="{ disabled: formData.shippingAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-text-field name="shippingAddrRoad" label="ถนน :" [(ngModel)]="formData.shippingAddrRoad"
+                [hidden]="fieldProps.shippingAddrRoad.hidden" [required]="fieldProps.shippingAddrRoad.required"
+                [editing]="fieldProps.shippingAddrRoad.editing" [submitted]="submitted"
+                [maxlength]="maxlen.road" [ngClass]="{ disabled: formData.shippingAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-input-filter name="shippingAddrProvince" label="จังหวัด :" placeholder="Autocomplete"
+                [(ngModel)]="formData.shippingAddrProvince" [hidden]="fieldProps.shippingAddrProvince.hidden"
+                [required]="fieldProps.shippingAddrProvince.required" [editing]="fieldProps.shippingAddrProvince.editing"
+                [submitted]="submitted" (onComplete)="provinceSelectChange({
+                    name: $event,
+                    prefix: 'shipping'
+                })"
+                [displayName]="displayName.shippingAddrProvince"
+                [selectedValue]="formData.shippingAddrProvince"
+                [options]="ddl?.provinces" [ngClass]="{ disabled: formData.shippingAddrSameRegisterFlg }">
+            </custom-input-filter>
+
+            <custom-input-filter name="shippingAddrDistrict" label="เขต/อำเภอ :" placeholder="Autocomplete"
+                [hidden]="fieldProps.shippingAddrDistrict.hidden" [(ngModel)]="formData.shippingAddrDistrict"
+                [required]="fieldProps.shippingAddrDistrict.required" [editing]="fieldProps.shippingAddrDistrict.editing"
+                [submitted]="submitted" (onComplete)="districtSelectChange({
+                    name: $event,
+                    prefix: 'shipping'
+                })"
+                [displayName]="displayName.shippingAddrDistrict"
+                [selectedValue]="formData.shippingAddrDistrict"
+                [options]="ddl?.districts" [ngClass]="{ disabled: formData.shippingAddrSameRegisterFlg }">
+            </custom-input-filter>
+
+            <custom-input-filter name="shippingAddrSubdistrict" label="แขวง/ตำบล :" placeholder="Autocomplete"
+                [hidden]="fieldProps.shippingAddrSubdistrict.hidden" [(ngModel)]="formData.shippingAddrSubdistrict"
+                [required]="fieldProps.shippingAddrSubdistrict.required" [editing]="fieldProps.shippingAddrSubdistrict.editing"
+                [submitted]="submitted" (onComplete)="subdistrictSelectChange({
+                    name: $event,
+                    prefix: 'shipping'})"
+                [displayName]="displayName.shippingAddrSubdistrict"
+                [selectedValue]="formData.shippingAddrSubdistrict"
+                [options]="ddl?.subdistricts" [ngClass]="{ disabled: formData.shippingAddrSameRegisterFlg }">
+            </custom-input-filter>
+
+            <custom-text-field name="shippingAddrPostal" label=" รหัสไปรษณีย์ :" [(ngModel)]="formData.shippingAddrPostal"
+                [hidden]="fieldProps.shippingAddrPostal.hidden" [required]="fieldProps.shippingAddrPostal.required"
+                [editing]="fieldProps.shippingAddrPostal.editing" [submitted]="submitted"
+                [maxlength]="maxlen.postal" [minlength]="maxlen.postal"
+                numberFormatter [ngClass]="{ disabled: formData.shippingAddrSameRegisterFlg }">
+            </custom-text-field>
+
+            <custom-input-filter name="shippingAddrCountry" label="ประเทศ :" placeholder="Autocomplete"
+                [hidden]="fieldProps.shippingAddrCountry.hidden" [(ngModel)]="formData.shippingAddrCountry"
+                [required]="fieldProps.shippingAddrCountry.required" [editing]="fieldProps.shippingAddrCountry.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.shippingAddrCountry"
+                [selectedValue]="formData.shippingAddrCountry"
+                [options]="ddl?.countries" [ngClass]="{ disabled: formData.shippingAddrSameRegisterFlg }">
+            </custom-input-filter>
+
+            <h3 class="subheader">ข้อมูลติดต่อ</h3>
+
+            <custom-text-field name="mobileNo" label="เบอร์ติดต่อ(1) :" [(ngModel)]="formData.mobileNo"
+                [hidden]="fieldProps.mobileNo.hidden" [required]="fieldProps.mobileNo.required"
+                [editing]="fieldProps.mobileNo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.mobile" [minlength]="maxlen.mobile"
+                numberFormatter>
+            </custom-text-field>
+
+            <custom-text-field name="phoneNo" label="เบอร์ติดต่อ(2) :" [(ngModel)]="formData.phoneNo"
+                [hidden]="fieldProps.phoneNo.hidden" [required]="fieldProps.phoneNo.required"
+                [editing]="fieldProps.phoneNo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.phone" [minlength]="maxlen.phone">
+            </custom-text-field>
+
+            <custom-text-field name="email" label="Personal Email :" [(ngModel)]="formData.email"
+                [hidden]="fieldProps.email.hidden" [required]="fieldProps.email.required"
+                [editing]="fieldProps.email.editing" [submitted]="submitted"
+                [maxlength]="maxlen.email" email>
+            </custom-text-field>
+
+            <custom-text-field name="companyEmail" label="Company Email :" [(ngModel)]="formData.companyEmail"
+                [hidden]="fieldProps.companyEmail.hidden" [required]="fieldProps.companyEmail.required"
+                [editing]="fieldProps.companyEmail.editing" [submitted]="submitted"
+                [maxlength]="maxlen.email" email>
+            </custom-text-field>
+
+            <custom-text-field name="appleId" label="Apple ID :" [(ngModel)]="formData.appleId"
+                [hidden]="fieldProps.appleId.hidden" [required]="fieldProps.appleId.required"
+                [editing]="fieldProps.appleId.editing" [submitted]="submitted"
+                [maxlength]="maxlen.social">
+            </custom-text-field>
+
+            <custom-text-field name="googleId" label="Google ID :" [(ngModel)]="formData.googleId"
+                [hidden]="fieldProps.googleId.hidden" [required]="fieldProps.googleId.required"
+                [editing]="fieldProps.googleId.editing" [submitted]="submitted"
+                [maxlength]="maxlen.social">
+            </custom-text-field>
+
+            <custom-text-field name="lineId" label="Line ID :" [(ngModel)]="formData.lineId"
+                [hidden]="fieldProps.lineId.hidden" [required]="fieldProps.lineId.required"
+                [editing]="fieldProps.lineId.editing" [submitted]="submitted"
+                [maxlength]="maxlen.social">
+            </custom-text-field>
+
+            <custom-text-field name="facebookAcc" label="Facebook Account :" [(ngModel)]="formData.facebookAcc"
+                [hidden]="fieldProps.facebookAcc.hidden" [required]="fieldProps.facebookAcc.required"
+                [editing]="fieldProps.facebookAcc.editing" [submitted]="submitted"
+                [maxlength]="maxlen.social">
+            </custom-text-field>
+
+            <custom-text-field name="twitter" label="Twitter :" [(ngModel)]="formData.twitter"
+                [hidden]="fieldProps.twitter.hidden" [required]="fieldProps.twitter.required"
+                [editing]="fieldProps.twitter.editing" [submitted]="submitted"
+                [maxlength]="maxlen.social">
+            </custom-text-field>
+        </div>
+    </fieldset>
+</form>

@@ -1,0 +1,18 @@
+<div class="form-group row">
+    <label class="col-form-label" [ngClass]="labelCss" *ngIf="label">
+        {{ label }}<span class="form-required-field" *ngIf="required">*</span>
+    </label>
+    <div [ngClass]="inputCss" [hidden]="!editing" class="input-radio padding-left-15">
+        <div class="custom-control custom-radio custom-control-inline" *ngFor="let choice of choices; trackBy: trackByFn; let i = index">
+            <input type="radio" name="{{ name }}" id="{{ identifier + '-' + i }}" [(ngModel)]="value"
+                [value]="choice.value" class="custom-control-input" />
+            <label class="custom-control-label" for="{{ identifier + '-' + i }}">{{ choice.name }}</label>
+        </div>
+        <ng-container *ngIf="required && !selectedValue && submitted">
+            <br /><span class="help-block with-errors">Please enter a value</span>
+        </ng-container>
+    </div>
+    <div [hidden]="editing" [ngClass]="inputCss">
+        {{ displayName }}
+    </div>
+</div>

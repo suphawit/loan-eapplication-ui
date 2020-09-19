@@ -1,0 +1,61 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.livingCondition" id="livingCondition" class="border">
+        <legend>Guarantor Living Condition</legend>
+        <div class="form-data">
+            <custom-select name="gtlivingHomeType" label="ประเภทบ้าน :" placeholder="-- Select --"
+                [(ngModel)]="formData.gtlivingHomeType" [hidden]="fieldProps.gtlivingHomeType.hidden"
+                [required]="fieldProps.gtlivingHomeType.required" [editing]="fieldProps.gtlivingHomeType.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.gtlivingHomeType"
+                [selectedValue] = "formData.gtlivingHomeType"
+                [options]="ddl?.homeTypes">
+            </custom-select>
+            <custom-text-field name="gtlivingHomeYear" label="อยู่มานานกี่ปี :" [(ngModel)]="formData.gtlivingHomeYear"
+                [hidden]="fieldProps.gtlivingHomeYear.hidden" [required]="fieldProps.gtlivingHomeYear.required"
+                [editing]="fieldProps.gtlivingHomeYear.editing" [submitted]="submitted"
+                [maxlength]="maxlen.livingHomeYear" [minlength]="maxlen.livingHomeYear">
+            </custom-text-field>
+            <div class="form-group row" *ngFor="let status of ddl?.residentStatuses; trackBy: trackByFn; let i = index">
+                <label class="col-form-label" class="col-sm-3" *ngIf="status.name"
+                    [hidden]="fieldProps.gtlivingHomeStatus.hidden">
+                    <input type="radio" name="gtlivingHomeStatus" id="radio-{{status.value}}" [(ngModel)]="formData.gtlivingHomeStatus"
+                        [value]="status.value" (change)="residentStatusCheckChange()"
+                        [required]="fieldProps.gtlivingHomeStatus.required" />
+                    <span class="padding-left-10">{{ status.name }}</span>
+                </label>
+                <ng-container *ngIf="status.value === '2' && !fieldProps.gtrelationship.hidden">
+                    <div class="col-sm-4 col-xs-9">
+                        <select class="form-control" name="gtrelationship" [(ngModel)]="formData.gtrelationship"
+                            [required]="fieldProps.gtrelationship.required" #relationship="ngModel">
+                            <option value="" selected>-- Select--</option>
+                            <option [value]="relationship.value" [selected]="formData.gtrelationship === relationship.value"
+                                *ngFor="let relationship of ddl?.relationships; trackBy: trackByFn;">
+                                {{ relationship.name }}
+                            </option>
+                        </select>
+                        <ng-container *ngIf="relationship?.invalid && submitted">
+                            <span *ngIf="relationship.errors.required" class="help-block with-errors">Please enter a value</span>
+                        </ng-container>
+                    </div>
+                    <div class="form-required-field" *ngIf="fieldProps.gtrelationship.required">*</div>
+                    <div class="clearfix"></div>
+                </ng-container>
+                <ng-container *ngIf="status.value === '3' && !fieldProps.gtrentPerMonth.hidden">
+                    <div class="col-sm-4 col-xs-9">
+                        <input type="text" name="gtrentPerMonth" class="form-control text-right" [required]="fieldProps.gtrentPerMonth.required"
+                            [(ngModel)]="formData.gtrentPerMonth" #rentPerMonth="ngModel" currencyFormatter currencyValidator [maxDigit]="15" />
+                        <ng-container *ngIf="rentPerMonth?.invalid && submitted">
+                            <span *ngIf="rentPerMonth.errors.required" class="help-block with-errors">Please enter a value</span>
+                            <span *ngIf="rentPerMonth.errors.currency" class="help-block with-errors">{{ rentPerMonth.errors.currency.message }}</span>
+                        </ng-container>
+                    </div>
+                    <div class="form-required-field" *ngIf="fieldProps.gtrentPerMonth.required">*</div>
+                    <div class="clearfix"></div>
+                </ng-container>
+            </div>
+            <ng-container *ngIf="!form.valid && submitted">
+                <span *ngIf="util.isNullOrEmpty(formData.gtfinanHomeStatus)" class="help-block with-errors">Please enter a value</span>
+            </ng-container>
+        </div>
+    </fieldset>
+</form>

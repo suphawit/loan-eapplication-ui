@@ -1,0 +1,385 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.workingInfo" id="workingInfo" class="border">
+        <legend>Working Information</legend>
+        <div class="form-data">
+            <h3 class="subheader">ที่ทำงานปัจจุบัน</h3>
+
+            <custom-select name="currentOccupation" label="อาชีพหลัก :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.currentOccupation" [hidden]="fieldProps.currentOccupation.hidden"
+                [required]="fieldProps.currentOccupation.required" [editing]="fieldProps.currentOccupation.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.currentOccupation"
+                [selectedValue]="formData.currentOccupation"
+                (change)="changeOccupation('current')"
+                [options]="ddl?.occupations">
+            </custom-select>
+
+            <custom-select name="currentSubOccupation" label="อาชีพย่อย :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.currentSubOccupation" [hidden]="fieldProps.currentSubOccupation.hidden"
+                [required]="fieldProps.currentSubOccupation.required" [editing]="fieldProps.currentSubOccupation.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.currentSubOccupation"
+                [selectedValue]="formData.currentSubOccupation"
+                [options]="ddl?.subOccupations">
+            </custom-select>
+
+            <custom-input-filter name="currentJobBusinessType" label="ประเภทธุรกิจ :" placeholder="Autocomplete"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.currentJobBusinessType" [hidden]="fieldProps.currentJobBusinessType.hidden"
+                [required]="fieldProps.currentJobBusinessType.required" [editing]="fieldProps.currentJobBusinessType.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.currentJobBusinessType"
+                [selectedValue]="formData.currentJobBusinessType"
+                [options]="ddl?.jobBusinessTypes">
+            </custom-input-filter>
+
+            <custom-select name="currentOfficeTitle" label="คำนำหน้าบ. :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.currentOfficeTitle" [hidden]="fieldProps.currentOfficeTitle.hidden"
+                [required]="fieldProps.currentOfficeTitle.required" [editing]="fieldProps.currentOfficeTitle.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.currentOfficeTitle"
+                [selectedValue]="formData.currentOfficeTitle"
+                [options]="ddl?.officeTitles">
+            </custom-select>
+
+            <custom-select name="currentOfficeName" label="ชื่อบริษัท :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.currentOfficeName" [hidden]="fieldProps.currentOfficeName.hidden"
+                [required]="fieldProps.currentOfficeName.required" [editing]="fieldProps.currentOfficeName.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.currentOfficeName"
+                [selectedValue]="formData.currentOfficeName"
+                [options]="ddl?.companyNames">
+            </custom-select>
+
+            <custom-select name="currentCompanyType" label=" ประเภทบริษัท :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.currentCompanyType" [hidden]="fieldProps.currentOfficeName.hidden"
+                [required]="fieldProps.currentCompanyType.required" [editing]="fieldProps.currentCompanyType.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.currentCompanyType"
+                [selectedValue]="formData.currentCompanyType"
+                [options]="ddl?.companyTypes">
+            </custom-select>
+
+            <custom-text-field name="officeAddrNumber" label="เลขที่ :" [(ngModel)]="formData.officeAddrNumber"
+                [hidden]="fieldProps.officeAddrNumber.hidden" [required]="fieldProps.officeAddrNumber.required"
+                [editing]="fieldProps.officeAddrNumber.editing" [submitted]="submitted"
+                [maxlength]="maxlen.addrNumber">
+            </custom-text-field>
+
+            <custom-text-field name="officeAddrMoo" label="หมู่ที่ :" [(ngModel)]="formData.officeAddrMoo"
+                [hidden]="fieldProps.officeAddrMoo.hidden" [required]="fieldProps.officeAddrMoo.required"
+                [editing]="fieldProps.officeAddrMoo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.moo">
+            </custom-text-field>
+
+            <custom-text-field name="officeAddrFloor" label="ชั้น :" [(ngModel)]="formData.officeAddrFloor"
+                [hidden]="fieldProps.officeAddrFloor.hidden" [required]="fieldProps.officeAddrFloor.required"
+                [editing]="fieldProps.officeAddrFloor.editing" [submitted]="submitted"
+                [maxlength]="maxlen.floor">
+            </custom-text-field>
+
+            <custom-text-field name="officeAddrRoom" label="ห้อง :" [(ngModel)]="formData.officeAddrRoom"
+                [hidden]="fieldProps.officeAddrRoom.hidden" [required]="fieldProps.officeAddrRoom.required"
+                [editing]="fieldProps.officeAddrRoom.editing" [submitted]="submitted"
+                [maxlength]="maxlen.room">
+            </custom-text-field>
+
+            <custom-text-field name="officeAddrVillage" label="อาคาร/หมู่บ้าน :" [(ngModel)]="formData.officeAddrVillage"
+                [hidden]="fieldProps.officeAddrVillage.hidden" [required]="fieldProps.officeAddrVillage.required"
+                [editing]="fieldProps.officeAddrVillage.editing" [submitted]="submitted"
+                [maxlength]="maxlen.village">
+            </custom-text-field>
+
+            <custom-text-field name="officeAddrSoi" label="ตรอก/ซอย :" [(ngModel)]="formData.officeAddrSoi"
+                [hidden]="fieldProps.officeAddrSoi.hidden" [required]="fieldProps.officeAddrSoi.required"
+                [editing]="fieldProps.officeAddrSoi.editing" [submitted]="submitted"
+                [maxlength]="maxlen.soi">
+            </custom-text-field>
+
+            <custom-text-field name="officeAddrRoad" label="ถนน :" [(ngModel)]="formData.officeAddrRoad"
+                [hidden]="fieldProps.officeAddrRoad.hidden" [required]="fieldProps.officeAddrRoad.required"
+                [editing]="fieldProps.officeAddrRoad.editing" [submitted]="submitted"
+                [maxlength]="maxlen.road">
+            </custom-text-field>
+
+            <custom-input-filter name="officeAddrProvince" label="จังหวัด :" placeholder="Autocomplete"
+                [(ngModel)]="formData.officeAddrProvince" [hidden]="fieldProps.officeAddrProvince.hidden"
+                [required]="fieldProps.officeAddrProvince.required" [editing]="fieldProps.officeAddrProvince.editing"
+                [submitted]="submitted" (onComplete)="provinceSelectChange({
+                    name: $event,
+                    prefix: 'office'
+                })"
+                [displayName]="displayName.officeAddrProvince"
+                [selectedValue]="formData.officeAddrProvince"
+                [options]="ddl?.provinces">
+            </custom-input-filter>
+
+            <custom-input-filter name="officeAddrDistrict" label="เขต/อำเภอ :" placeholder="Autocomplete"
+                [hidden]="fieldProps.officeAddrDistrict.hidden" [(ngModel)]="formData.officeAddrDistrict"
+                [required]="fieldProps.officeAddrDistrict.required" [editing]="fieldProps.officeAddrDistrict.editing"
+                [submitted]="submitted" (onComplete)="districtSelectChange({
+                    name: $event,
+                    prefix: 'office'
+                })"
+                [displayName]="displayName.officeAddrDistrict"
+                [selectedValue]="formData.officeAddrDistrict"
+                [options]="ddl?.districts">
+            </custom-input-filter>
+
+            <custom-input-filter name="officeAddrSubdistrict" label="แขวง/ตำบล :" placeholder="Autocomplete"
+                [hidden]="fieldProps.officeAddrSubdistrict.hidden" [(ngModel)]="formData.officeAddrSubdistrict"
+                [required]="fieldProps.officeAddrSubdistrict.required" [editing]="fieldProps.officeAddrSubdistrict.editing"
+                [submitted]="submitted" (onComplete)="subdistrictSelectChange({
+                    name: $event,
+                    prefix: 'office'})"
+                [displayName]="displayName.officeAddrSubdistrict"
+                [selectedValue]="formData.officeAddrSubdistrict"
+                [options]="ddl?.subdistricts">
+            </custom-input-filter>
+
+            <custom-text-field name="officeAddrPostal" label=" รหัสไปรษณีย์ :" [(ngModel)]="formData.officeAddrPostal"
+                [hidden]="fieldProps.officeAddrPostal.hidden" [required]="fieldProps.officeAddrPostal.required"
+                [editing]="fieldProps.officeAddrPostal.editing" [submitted]="submitted"
+                [maxlength]="maxlen.postal" [minlength]="maxlen.postal"
+                numberFormatter>
+            </custom-text-field>
+
+            <custom-input-filter name="officeAddrCountry" label="ประเทศ :" placeholder="Autocomplete"
+                [hidden]="fieldProps.officeAddrCountry.hidden" [(ngModel)]="formData.officeAddrCountry"
+                [required]="fieldProps.officeAddrCountry.required" [editing]="fieldProps.officeAddrCountry.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.officeAddrCountry"
+                [selectedValue]="formData.officeAddrCountry"
+                [options]="ddl?.countries">
+            </custom-input-filter>
+
+            <custom-text-field name="officePhoneNo" label="เบอร์ติดต่อที่บริษัท :" [(ngModel)]="formData.officePhoneNo"
+                [hidden]="fieldProps.officePhoneNo.hidden" [required]="fieldProps.officePhoneNo.required"
+                [editing]="fieldProps.officePhoneNo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.phone" >
+            </custom-text-field>
+
+            <custom-text-field name="expWorkYear" label="ประสบการณ์ทำงาน (กี่ปี) :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.expWorkYear" [hidden]="fieldProps.expWorkYear.hidden"
+                [required]="fieldProps.expWorkYear.required" [editing]="fieldProps.expWorkYear.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.expWorkYear }}" currencyFormatter currencyValidator>
+            </custom-text-field>
+
+            <custom-text-field name="expWorkMonth" label="ประสบการณ์ทำงาน (กี่เดือน) :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.expWorkMonth" [hidden]="fieldProps.expWorkMonth.hidden"
+                [required]="fieldProps.expWorkMonth.required" [editing]="fieldProps.expWorkMonth.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.expWorkMonth }}" (change)="greaterThanYear('expWorkMonth')" currencyFormatter currencyValidator>
+            </custom-text-field>
+
+            <custom-select name="currentJobPosition" label="ตำแหน่งงานปัจจุบัน :" placeholder="-- Select --"
+                [hidden]="fieldProps.currentJobPosition.hidden" [(ngModel)]="formData.currentJobPosition"
+                [required]="fieldProps.currentJobPosition.required" [editing]="fieldProps.currentJobPosition.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.currentJobPosition"
+                [selectedValue]="formData.currentJobPosition"
+                [options]="ddl?.jobPositions">
+            </custom-select>
+
+            <custom-radio-button-list
+                name="receiveSalaryMethod"
+                label="วิธีรับเงินเดือน :"
+                [(ngModel)]="formData.receiveSalaryMethod"
+                [required]="fieldProps.receiveSalaryMethod.required"
+                [hidden]="fieldProps.receiveSalaryMethod.hidden"
+                [selectedValue] = "formData.receiveSalaryMethod"
+                [editing]="fieldProps.receiveSalaryMethod.editing"
+                [displayName]="displayName.receiveSalaryMethod"
+                [submitted]="submitted"
+                [choices]="ddl?.receiveSalaryMethods"
+            >
+            </custom-radio-button-list>
+
+            <custom-text-field name="otherOccupation" label="อาชีพเสริม (ถ้ามี) :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.otherOccupation" [hidden]="fieldProps.otherOccupation.hidden"
+                [required]="fieldProps.otherOccupation.required" [editing]="fieldProps.otherOccupation.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.otherOccupation }}">
+            </custom-text-field>
+
+            <!-- Work experience less than 1 year -->
+
+            <ng-container *ngIf="formData.expWorkYear<1">
+
+                <h3 class="subheader">ที่ทํางานก่อนหน้า (กรณีทํางานที่ปัจจุบัน ไม่ถึง 1 ปี)</h3>
+
+                <custom-select name="l1YOccupation" label="อาชีพ :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.l1YOccupation" [hidden]="fieldProps.l1YOccupation.hidden"
+                    [required]="fieldProps.l1YOccupation.required" [editing]="fieldProps.l1YOccupation.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.l1YOccupation"
+                    [selectedValue]="formData.l1YOccupation"
+                    (change)="changeOccupation('l1Y')"
+                    [options]="ddl?.occupations">
+                </custom-select>
+
+                <custom-select name="l1YSubOccupation" label="อาชีพย่อย :" placeholder="-- Select --"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.l1YSubOccupation" [hidden]="fieldProps.l1YSubOccupation.hidden"
+                    [required]="fieldProps.l1YSubOccupation.required" [editing]="fieldProps.l1YSubOccupation.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.l1YSubOccupation"
+                    [selectedValue]="formData.l1YSubOccupation"
+                    [options]="ddl?.subOccupations">
+                </custom-select>
+
+                <custom-input-filter name="l1YJobBusinessType" label="ประเภทธุรกิจ :" placeholder="Autocomplete"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.l1YJobBusinessType" [hidden]="fieldProps.l1YJobBusinessType.hidden"
+                    [required]="fieldProps.l1YJobBusinessType.required" [editing]="fieldProps.l1YJobBusinessType.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.l1YJobBusinessType"
+                    [selectedValue]="formData.l1YJobBusinessType"
+                    [options]="ddl?.jobBusinessTypes">
+                </custom-input-filter>
+
+                <custom-select name="l1YOfficeTitle" label="คำนำหน้าบ. :" placeholder="-- Select --"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.l1YOfficeTitle" [hidden]="fieldProps.l1YOfficeTitle.hidden"
+                    [required]="fieldProps.l1YOfficeTitle.required" [editing]="fieldProps.l1YOfficeTitle.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.l1YOfficeTitle"
+                    [selectedValue]="formData.l1YOfficeTitle"
+                    [options]="ddl?.officeTitles">
+                </custom-select>
+
+                <custom-select name="l1YOfficeName" label="ชื่อบริษัท :" placeholder="-- Select --"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.l1YOfficeName" [hidden]="fieldProps.l1YOfficeName.hidden"
+                    [required]="fieldProps.l1YOfficeName.required" [editing]="fieldProps.l1YOfficeName.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.l1YOfficeName"
+                    [selectedValue]="formData.l1YOfficeName"
+                    [options]="ddl?.companyNames">
+                </custom-select>
+
+                <custom-select name="l1YCompanyType" label=" ประเภทบริษัท :" placeholder="-- Select --"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.l1YCompanyType" [hidden]="fieldProps.l1YOfficeName.hidden"
+                    [required]="fieldProps.l1YCompanyType.required" [editing]="fieldProps.l1YCompanyType.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.l1YCompanyType"
+                    [selectedValue]="formData.l1YCompanyType"
+                    [options]="ddl?.companyTypes">
+                </custom-select>
+
+                <custom-text-field name="l1YOfficeAddrNumber" label="เลขที่ :" [(ngModel)]="formData.l1YOfficeAddrNumber"
+                    [hidden]="fieldProps.l1YOfficeAddrNumber.hidden" [required]="fieldProps.l1YOfficeAddrNumber.required"
+                    [editing]="fieldProps.l1YOfficeAddrNumber.editing" [submitted]="submitted"
+                    [maxlength]="maxlen.addrNumber">
+                </custom-text-field>
+
+                <custom-text-field name="l1YOfficeAddrMoo" label="หมู่ที่ :" [(ngModel)]="formData.l1YOfficeAddrMoo"
+                    [hidden]="fieldProps.l1YOfficeAddrMoo.hidden" [required]="fieldProps.l1YOfficeAddrMoo.required"
+                    [editing]="fieldProps.l1YOfficeAddrMoo.editing" [submitted]="submitted"
+                    [maxlength]="maxlen.moo">
+                </custom-text-field>
+
+                <custom-text-field name="l1YOfficeAddrFloor" label="ชั้น :" [(ngModel)]="formData.l1YOfficeAddrFloor"
+                    [hidden]="fieldProps.l1YOfficeAddrFloor.hidden" [required]="fieldProps.l1YOfficeAddrFloor.required"
+                    [editing]="fieldProps.l1YOfficeAddrFloor.editing" [submitted]="submitted"
+                    [maxlength]="maxlen.floor">
+                </custom-text-field>
+
+                <custom-text-field name="l1YOfficeAddrRoom" label="ห้อง :" [(ngModel)]="formData.l1YOfficeAddrRoom"
+                    [hidden]="fieldProps.l1YOfficeAddrRoom.hidden" [required]="fieldProps.l1YOfficeAddrRoom.required"
+                    [editing]="fieldProps.l1YOfficeAddrRoom.editing" [submitted]="submitted"
+                    [maxlength]="maxlen.room">
+                </custom-text-field>
+
+                <custom-text-field name="l1YOfficeAddrVillage" label="อาคาร/หมู่บ้าน :" [(ngModel)]="formData.l1YOfficeAddrVillage"
+                    [hidden]="fieldProps.l1YOfficeAddrVillage.hidden" [required]="fieldProps.l1YOfficeAddrVillage.required"
+                    [editing]="fieldProps.l1YOfficeAddrVillage.editing" [submitted]="submitted"
+                    [maxlength]="maxlen.village">
+                </custom-text-field>
+
+                <custom-text-field name="l1YOfficeAddrSoi" label="ตรอก/ซอย :" [(ngModel)]="formData.l1YOfficeAddrSoi"
+                    [hidden]="fieldProps.l1YOfficeAddrSoi.hidden" [required]="fieldProps.l1YOfficeAddrSoi.required"
+                    [editing]="fieldProps.l1YOfficeAddrSoi.editing" [submitted]="submitted"
+                    [maxlength]="maxlen.soi">
+                </custom-text-field>
+
+                <custom-text-field name="l1YOfficeAddrRoad" label="ถนน :" [(ngModel)]="formData.l1YOfficeAddrRoad"
+                    [hidden]="fieldProps.l1YOfficeAddrRoad.hidden" [required]="fieldProps.l1YOfficeAddrRoad.required"
+                    [editing]="fieldProps.l1YOfficeAddrRoad.editing" [submitted]="submitted"
+                    [maxlength]="maxlen.road">
+                </custom-text-field>
+
+                <custom-input-filter name="l1YOfficeAddrProvince" label="จังหวัด :" placeholder="Autocomplete"
+                    [(ngModel)]="formData.l1YOfficeAddrProvince" [hidden]="fieldProps.l1YOfficeAddrProvince.hidden"
+                    [required]="fieldProps.l1YOfficeAddrProvince.required" [editing]="fieldProps.l1YOfficeAddrProvince.editing"
+                    [submitted]="submitted" (onComplete)="provinceSelectChange({
+                        name: $event,
+                        prefix: 'l1YOffice'
+                    })"
+                    [displayName]="displayName.l1YOfficeAddrProvince"
+                    [selectedValue]="formData.l1YOfficeAddrProvince"
+                    [options]="ddl?.provinces">
+                </custom-input-filter>
+
+                <custom-input-filter name="l1YOfficeAddrDistrict" label="เขต/อำเภอ :" placeholder="Autocomplete"
+                    [hidden]="fieldProps.l1YOfficeAddrDistrict.hidden" [(ngModel)]="formData.l1YOfficeAddrDistrict"
+                    [required]="fieldProps.l1YOfficeAddrDistrict.required" [editing]="fieldProps.l1YOfficeAddrDistrict.editing"
+                    [submitted]="submitted" (onComplete)="districtSelectChange({
+                        name: $event,
+                        prefix: 'l1YOffice'
+                    })"
+                    [displayName]="displayName.l1YOfficeAddrDistrict"
+                    [selectedValue]="formData.l1YOfficeAddrDistrict"
+                    [options]="ddl?.districts">
+                </custom-input-filter>
+
+                <custom-input-filter name="l1YOfficeAddrSubdistrict" label="แขวง/ตำบล :" placeholder="Autocomplete"
+                    [hidden]="fieldProps.l1YOfficeAddrSubdistrict.hidden" [(ngModel)]="formData.l1YOfficeAddrSubdistrict"
+                    [required]="fieldProps.l1YOfficeAddrSubdistrict.required" [editing]="fieldProps.l1YOfficeAddrSubdistrict.editing"
+                    [submitted]="submitted" (onComplete)="subdistrictSelectChange({
+                        name: $event,
+                        prefix: 'l1YOffice'})"
+                    [displayName]="displayName.l1YOfficeAddrSubdistrict"
+                    [selectedValue]="formData.l1YOfficeAddrSubdistrict"
+                    [options]="ddl?.subdistricts">
+                </custom-input-filter>
+
+                <custom-text-field name="l1YOfficeAddrPostal" label=" รหัสไปรษณีย์ :" [(ngModel)]="formData.l1YOfficeAddrPostal"
+                    [hidden]="fieldProps.l1YOfficeAddrPostal.hidden" [required]="fieldProps.l1YOfficeAddrPostal.required"
+                    [editing]="fieldProps.l1YOfficeAddrPostal.editing" [submitted]="submitted"
+                    [maxlength]="maxlen.postal" [minlength]="maxlen.postal"
+                    numberFormatter>
+                </custom-text-field>
+
+                <custom-input-filter name="l1YOfficeAddrCountry" label="ประเทศ :" placeholder="Autocomplete"
+                    [hidden]="fieldProps.l1YOfficeAddrCountry.hidden" [(ngModel)]="formData.l1YOfficeAddrCountry"
+                    [required]="fieldProps.l1YOfficeAddrCountry.required" [editing]="fieldProps.l1YOfficeAddrCountry.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.l1YOfficeAddrCountry"
+                    [selectedValue]="formData.l1YOfficeAddrCountry"
+                    [options]="ddl?.countries">
+                </custom-input-filter>
+
+                <custom-text-field name="l1YOfficePhoneNo" label="เบอร์ติดต่อที่บริษัท :" [(ngModel)]="formData.l1YOfficePhoneNo"
+                    [hidden]="fieldProps.l1YOfficePhoneNo.hidden" [required]="fieldProps.l1YOfficePhoneNo.required"
+                    [editing]="fieldProps.l1YOfficePhoneNo.editing" [submitted]="submitted"
+                    [maxlength]="maxlen.phone">
+                </custom-text-field>
+
+                <custom-text-field name="l1YExpWorkYear" label="ประสบการณ์ทำงาน (กี่ปี) :"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.l1YExpWorkYear" [hidden]="fieldProps.l1YExpWorkYear.hidden"
+                    [required]="fieldProps.l1YExpWorkYear.required" [editing]="fieldProps.l1YExpWorkYear.editing"
+                    [submitted]="submitted" maxlength="{{ maxlen.expWorkYear }}" currencyFormatter currencyValidator>
+                </custom-text-field>
+
+                <custom-text-field name="l1YExpWorkMonth" label="ประสบการณ์ทำงาน (กี่เดือน) :"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.l1YExpWorkMonth" [hidden]="fieldProps.l1YExpWorkMonth.hidden"
+                    [required]="fieldProps.expWorkMonth.required" [editing]="fieldProps.l1YExpWorkMonth.editing"
+                    [submitted]="submitted" maxlength="{{ maxlen.expWorkMonth }}" (change)="greaterThanYear('l1YExpWorkMonth')" currencyFormatter currencyValidator>
+                </custom-text-field>
+
+                <custom-select name="l1YJobPosition" label="ตำแหน่งงานเดิม :" placeholder="-- Select --"
+                    [hidden]="fieldProps.l1YJobPosition.hidden" [(ngModel)]="formData.l1YJobPosition"
+                    [required]="fieldProps.l1YJobPosition.required" [editing]="fieldProps.l1YJobPosition.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.l1YJobPosition"
+                    [selectedValue]="formData.l1YJobPosition"
+                    [options]="ddl?.jobPositions">
+                </custom-select>
+            </ng-container>
+        </div>
+    </fieldset>
+</form>

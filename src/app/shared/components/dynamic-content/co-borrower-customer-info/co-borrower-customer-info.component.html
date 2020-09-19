@@ -1,0 +1,418 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.basicInfo" id="basicInfo" class="border">
+        <legend>Basic Information</legend>
+        <div class="form-data">
+            <custom-select name="codocTypeId" label="ประเภทบัตร :" placeholder="-- Select --"
+                [(ngModel)]="formData.codocTypeId" [hidden]="fieldProps.codocTypeId.hidden"
+                [required]="fieldProps.codocTypeId.required" [editing]="fieldProps.codocTypeId.editing"
+                [submitted]="submitted" (change)="docTypeSelectChange()"
+                [displayName]="displayName.codocTypeId"
+                [selectedValue] = "formData.codocTypeId"
+                [options]="ddl?.cardTypes">
+            </custom-select>
+
+            <custom-text-field name="coidNo" label="รหัสบัตรประชาชน :" [(ngModel)]="formData.coidNo"
+                [hidden]="fieldProps.coidNo.hidden" [required]="fieldProps.coidNo.required"
+                [editing]="fieldProps.coidNo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.idNo" [minlength]="maxlen.idNo"
+                numberFormatter>
+            </custom-text-field>
+
+            <custom-select name="cotitleTh" label="คำนำหน้าชื่อ :" placeholder="-- Select --"
+                [(ngModel)]="formData.cotitleTh" [hidden]="fieldProps.cotitleTh.hidden"
+                [required]="fieldProps.cotitleTh.required" [editing]="fieldProps.cotitleTh.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.cotitleTh"
+                [selectedValue] = "formData.cotitleTh"
+                [options]="ddl?.titleThs">
+            </custom-select>
+
+            <custom-text-field name="cofirstNameTh" label="ชื่อภาษาไทย :" [(ngModel)]="formData.cofirstNameTh"
+                [hidden]="fieldProps.cofirstNameTh.hidden" [required]="fieldProps.cofirstNameTh.required"
+                [editing]="fieldProps.cofirstNameTh.editing" [submitted]="submitted"
+                [maxlength]="maxlen.firstNameTh">
+            </custom-text-field>
+
+            <custom-text-field name="colastNameTh" label="นามสกุลภาษาไทย :" [(ngModel)]="formData.colastNameTh"
+                [hidden]="fieldProps.colastNameTh.hidden" [required]="fieldProps.colastNameTh.required"
+                [editing]="fieldProps.colastNameTh.editing" [submitted]="submitted"
+                [maxlength]="maxlen.lastNameTh">
+            </custom-text-field>
+
+            <custom-select name="cotitleEn" label="คำนำหน้าชื่อ :" placeholder="-- Select --"
+                [(ngModel)]="formData.cotitleEn" [hidden]="fieldProps.cotitleEn.hidden"
+                [required]="fieldProps.cotitleEn.required" [editing]="fieldProps.cotitleEn.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.cotitleEn"
+                [selectedValue] = "formData.cotitleEn"
+                [options]="ddl?.titleEns">
+            </custom-select>
+
+            <custom-text-field name="cofirstNameEn" label="ชื่อภาษาอังกฤษ :" [(ngModel)]="formData.cofirstNameEn"
+                [hidden]="fieldProps.cofirstNameEn.hidden" [required]="fieldProps.cofirstNameEn.required"
+                [editing]="fieldProps.cofirstNameEn.editing" [submitted]="submitted"
+                [maxlength]="maxlen.firstNameEn" textFormatter >
+            </custom-text-field>
+
+            <custom-text-field name="colastNameEn" label="นามสกุลภาษาอังกฤษ :" [(ngModel)]="formData.colastNameEn"
+                [hidden]="fieldProps.colastNameEn.hidden" [required]="fieldProps.colastNameEn.required"
+                [editing]="fieldProps.colastNameEn.editing" [submitted]="submitted"
+                [maxlength]="maxlen.lastNameEn" textFormatter >
+            </custom-text-field>
+
+            <custom-datepicker name="cobirthDate" label="วันเกิด :" [(ngModel)]="formData.cobirthDate"
+                [hidden]="fieldProps.cobirthDate.hidden" [required]="fieldProps.cobirthDate.required"
+                [editing]="fieldProps.cobirthDate.editing" [submitted]="submitted">
+            </custom-datepicker>
+
+            <custom-input-filter name="conationality" label="สัญชาติ :" placeholder="Autocomplete"
+                [(ngModel)]="formData.conationality" [hidden]="fieldProps.conationality.hidden"
+                [required]="fieldProps.conationality.required" [editing]="fieldProps.conationality.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.conationality"
+                [selectedValue] = "formData.conationality"
+                [options]="ddl?.nationalities">
+            </custom-input-filter>
+
+            <custom-radio-button-list
+                name="cogender"
+                label="เพศ :"
+                [(ngModel)]="formData.cogender"
+                [required]="fieldProps.cogender.required"
+                [hidden]="fieldProps.cogender.hidden"
+                [selectedValue] = "formData.cogender"
+                [editing]="fieldProps.cogender.editing"
+                [displayName]="displayName.cogender"
+                [submitted]="submitted"
+                [choices]="ddl?.genders">
+            </custom-radio-button-list>
+        </div>
+    </fieldset>
+
+    <fieldset *ngIf="!hideSection.contactInfo" id="contactInfo" class="border">
+        <legend>Contact Information</legend>
+        <div class="form-data">
+
+            <custom-text-field name="comobileNo" label="เบอร์ติดต่อ(1) :" [(ngModel)]="formData.comobileNo"
+                [hidden]="fieldProps.comobileNo.hidden" [required]="fieldProps.comobileNo.required"
+                [editing]="fieldProps.comobileNo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.mobileNo" numberFormatter>
+            </custom-text-field>
+
+            <custom-text-field name="cophoneNo" label="เบอร์ติดต่อ(2) :" [(ngModel)]="formData.cophoneNo"
+                [hidden]="fieldProps.cophoneNo.hidden" [required]="fieldProps.cophoneNo.required"
+                [editing]="fieldProps.cophoneNo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.phoneNo">
+            </custom-text-field>
+
+            <custom-text-field name="coemail" label="Personal Email :" [(ngModel)]="formData.coemail"
+                [hidden]="fieldProps.coemail.hidden" [required]="fieldProps.coemail.required"
+                [editing]="fieldProps.coemail.editing" [submitted]="submitted"
+                [maxlength]="maxlen.email" email>
+            </custom-text-field>
+            <custom-text-field name="cocompanyEmail" label="Company Email :" [(ngModel)]="formData.cocompanyEmail"
+                [hidden]="fieldProps.cocompanyEmail.hidden" [required]="fieldProps.cocompanyEmail.required"
+                [editing]="fieldProps.cocompanyEmail.editing" [submitted]="submitted"
+                [maxlength]="maxlen.companyEmail" email>
+            </custom-text-field>
+
+            <custom-text-field name="coappleId" label="Apple ID :" [(ngModel)]="formData.coappleId"
+                [hidden]="fieldProps.coappleId.hidden" [required]="fieldProps.coappleId.required"
+                [editing]="fieldProps.coappleId.editing" [submitted]="submitted"
+                [maxlength]="maxlen.appleId">
+            </custom-text-field>
+
+            <custom-text-field name="cogoogleId" label="Google ID :" [(ngModel)]="formData.cogoogleId"
+                [hidden]="fieldProps.cogoogleId.hidden" [required]="fieldProps.cogoogleId.required"
+                [editing]="fieldProps.cogoogleId.editing" [submitted]="submitted"
+                [maxlength]="maxlen.googleId">
+            </custom-text-field>
+
+            <custom-text-field name="colineId" label="Line ID :" [(ngModel)]="formData.colineId"
+                [hidden]="fieldProps.colineId.hidden" [required]="fieldProps.colineId.required"
+                [editing]="fieldProps.colineId.editing" [submitted]="submitted"
+                [maxlength]="maxlen.lineId">
+            </custom-text-field>
+
+            <custom-text-field name="cofacebookAcc" label="Facebook Account :" [(ngModel)]="formData.cofacebookAcc"
+                [hidden]="fieldProps.cofacebookAcc.hidden" [required]="fieldProps.cofacebookAcc.required"
+                [editing]="fieldProps.cofacebookAcc.editing" [submitted]="submitted"
+                [maxlength]="maxlen.facebookAcc">
+            </custom-text-field>
+
+            <custom-text-field name="cotwitter" label="Twitter :" [(ngModel)]="formData.cotwitter"
+                [hidden]="fieldProps.cotwitter.hidden" [required]="fieldProps.cotwitter.required"
+                [editing]="fieldProps.cotwitter.editing" [submitted]="submitted"
+                [maxlength]="maxlen.twitter">
+            </custom-text-field>
+        </div>
+    </fieldset>
+
+    <fieldset *ngIf="!hideSection.workingInfo" id="workingInfo" class="border">
+        <legend>Working Information</legend>
+        <div class="form-data">
+            <custom-select name="cocurrentOccupation" label="อาชีพหลัก :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.cocurrentOccupation" [hidden]="fieldProps.cocurrentOccupation.hidden"
+                [required]="fieldProps.cocurrentOccupation.required" [editing]="fieldProps.cocurrentOccupation.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.cocurrentOccupation"
+                [selectedValue]="formData.cocurrentOccupation"
+                (change)="changeOccupation('cocurrentOccupation', 'cocurrentSubOccupation')"
+                [options]="ddl?.occupations">
+            </custom-select>
+
+            <custom-select name="cocurrentSubOccupation" label="อาชีพย่อย :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.cocurrentSubOccupation" [hidden]="fieldProps.cocurrentSubOccupation.hidden"
+                [required]="fieldProps.cocurrentSubOccupation.required" [editing]="fieldProps.cocurrentSubOccupation.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.cocurrentSubOccupation"
+                [selectedValue]="formData.cocurrentSubOccupation"
+                [options]="ddl?.subOccupations">
+            </custom-select>
+            <custom-input-filter name="cocurrentJobBusinessType" label="ประเภทธุรกิจ :" placeholder="Autocomplete"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.cocurrentJobBusinessType" [hidden]="fieldProps.cocurrentJobBusinessType.hidden"
+                [required]="fieldProps.cocurrentJobBusinessType.required" [editing]="fieldProps.cocurrentJobBusinessType.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.cocurrentJobBusinessType"
+                [selectedValue]="formData.cocurrentJobBusinessType"
+                [options]="ddl?.jobBusinessTypes">
+            </custom-input-filter>
+            <custom-select name="cocurrentOfficeTitle" label="คำนำหน้าบ. :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.cocurrentOfficeTitle" [hidden]="fieldProps.cocurrentOfficeTitle.hidden"
+                [required]="fieldProps.cocurrentOfficeTitle.required" [editing]="fieldProps.cocurrentOfficeTitle.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.cocurrentOfficeTitle"
+                [selectedValue]="formData.cocurrentOfficeTitle"
+                [options]="ddl?.officeTitles">
+            </custom-select>
+            <custom-select name="cocurrentOfficeName" label="ชื่อบริษัท :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.cocurrentOfficeName" [hidden]="fieldProps.cocurrentOfficeName.hidden"
+                [required]="fieldProps.cocurrentOfficeName.required" [editing]="fieldProps.cocurrentOfficeName.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.cocurrentOfficeName"
+                [selectedValue]="formData.cocurrentOfficeName"
+                [options]="ddl?.companyNames">
+            </custom-select>
+            <custom-select name="cocurrentCompanyType" label=" ประเภทบริษัท :" placeholder="-- Select --"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.cocurrentCompanyType" [hidden]="fieldProps.cocurrentOfficeName.hidden"
+                [required]="fieldProps.cocurrentCompanyType.required" [editing]="fieldProps.cocurrentCompanyType.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.cocurrentCompanyType"
+                [selectedValue]="formData.cocurrentCompanyType"
+                [options]="ddl?.companyTypes">
+            </custom-select>
+
+            <custom-text-field name="coofficePhoneNo" label="เบอร์ติดต่อที่บริษัท :" [(ngModel)]="formData.coofficePhoneNo"
+                [hidden]="fieldProps.coofficePhoneNo.hidden" [required]="fieldProps.coofficePhoneNo.required"
+                [editing]="fieldProps.coofficePhoneNo.editing" [submitted]="submitted"
+                [maxlength]="maxlen.phoneNo" >
+            </custom-text-field>
+
+            <custom-text-field name="coexpWorkYear" label="ประสบการณ์ทำงาน (กี่ปี) :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.coexpWorkYear" [hidden]="fieldProps.coexpWorkYear.hidden"
+                [required]="fieldProps.coexpWorkYear.required" [editing]="fieldProps.coexpWorkYear.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.expWorkYear }}" (change)="expWorkYearTextChange()" numberFormatter>
+            </custom-text-field>
+
+            <custom-text-field name="coexpWorkMonth" label="ประสบการณ์ทำงาน (กี่เดือน) :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.coexpWorkMonth" [hidden]="fieldProps.coexpWorkMonth.hidden"
+                [required]="fieldProps.coexpWorkMonth.required" [editing]="fieldProps.coexpWorkMonth.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.expWorkMonth }}" (change)="greaterThanYear('gtexpWorkMonth')" numberFormatter>
+            </custom-text-field>
+
+            <custom-select name="cocurrentJobPosition" label="ตำแหน่งงานปัจจุบัน :" placeholder="-- Select --"
+                [hidden]="fieldProps.cocurrentJobPosition.hidden" [(ngModel)]="formData.cocurrentJobPosition"
+                [required]="fieldProps.cocurrentJobPosition.required" [editing]="fieldProps.cocurrentJobPosition.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.cocurrentJobPosition"
+                [selectedValue]="formData.cocurrentJobPosition"
+                [options]="ddl?.jobPositions">
+            </custom-select>
+
+            <custom-text-field name="cootherOccupation" label="อาชีพเสริม (ถ้ามี) :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.cootherOccupation" [hidden]="fieldProps.cootherOccupation.hidden"
+                [required]="fieldProps.cootherOccupation.required" [editing]="fieldProps.cootherOccupation.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.otherOccupation }}">
+            </custom-text-field>
+
+            <!-- Work experience less than 1 year -->
+
+            <ng-container *ngIf="formData.coexpWorkYear<1">
+                <legend>Working Information(Less than year)</legend>
+                <custom-select name="col1YOccupation" label="อาชีพ :" placeholder="-- Select --"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.col1YOccupation" [hidden]="fieldProps.col1YOccupation.hidden"
+                    [required]="fieldProps.col1YOccupation.required" [editing]="fieldProps.col1YOccupation.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.col1YOccupation"
+                    [selectedValue]="formData.col1YOccupation"
+                    (change)="changeOccupation('col1YOccupation', 'col1YSubOccupation')"
+                    [options]="ddl?.occupations">
+                </custom-select>
+                <custom-select name="col1YSubOccupation" label="อาชีพย่อย :" placeholder="-- Select --"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.col1YSubOccupation" [hidden]="fieldProps.col1YSubOccupation.hidden"
+                    [required]="fieldProps.col1YSubOccupation.required" [editing]="fieldProps.col1YSubOccupation.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.col1YSubOccupation"
+                    [selectedValue]="formData.col1YSubOccupation"
+                    [options]="ddl?.subOccupations">
+                </custom-select>
+                <custom-select name="col1YJobBusinessType" label="ประเภทธุรกิจ :" placeholder="-- Select --"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.col1YJobBusinessType" [hidden]="fieldProps.col1YJobBusinessType.hidden"
+                    [required]="fieldProps.col1YJobBusinessType.required" [editing]="fieldProps.col1YJobBusinessType.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.col1YJobBusinessType"
+                    [selectedValue]="formData.col1YJobBusinessType"
+                    [options]="ddl?.jobBusinessTypes">
+                </custom-select>
+                <custom-select name="col1YOfficeTitle" label="คำนำหน้าบ. :" placeholder="-- Select --"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.col1YOfficeTitle" [hidden]="fieldProps.col1YOfficeTitle.hidden"
+                    [required]="fieldProps.col1YOfficeTitle.required" [editing]="fieldProps.col1YOfficeTitle.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.col1YOfficeTitle"
+                    [selectedValue]="formData.col1YOfficeTitle"
+                    [options]="ddl?.officeTitles">
+                </custom-select>
+                <custom-select name="col1YOfficeName" label="ชื่อบริษัท :" placeholder="-- Select --"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.col1YOfficeName" [hidden]="fieldProps.col1YOfficeName.hidden"
+                    [required]="fieldProps.col1YOfficeName.required" [editing]="fieldProps.col1YOfficeName.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.col1YOfficeName"
+                    [selectedValue]="formData.col1YOfficeName"
+                    [options]="ddl?.companyNames">
+                </custom-select>
+                <custom-select name="col1YCompanyType" label=" ประเภทบริษัท :" placeholder="-- Select --"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.col1YCompanyType" [hidden]="fieldProps.col1YOfficeName.hidden"
+                    [required]="fieldProps.col1YCompanyType.required" [editing]="fieldProps.col1YCompanyType.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.col1YCompanyType"
+                    [selectedValue]="formData.col1YCompanyType"
+                    [options]="ddl?.companyTypes">
+                </custom-select>
+
+                <custom-text-field name="col1YOfficePhoneNo" label="เบอร์ติดต่อที่บริษัท :" [(ngModel)]="formData.col1YOfficePhoneNo"
+                    [hidden]="fieldProps.col1YOfficePhoneNo.hidden" [required]="fieldProps.col1YOfficePhoneNo.required"
+                    [editing]="fieldProps.col1YOfficePhoneNo.editing" [submitted]="submitted"
+                    [maxlength]="maxlen.phoneNo">
+                </custom-text-field>
+
+                <custom-text-field name="col1YExpWorkYear" label="ประสบการณ์ทำงาน (กี่ปี) :"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.col1YExpWorkYear" [hidden]="fieldProps.col1YExpWorkYear.hidden"
+                    [required]="fieldProps.col1YExpWorkYear.required" [editing]="fieldProps.col1YExpWorkYear.editing"
+                    [submitted]="submitted" maxlength="{{ maxlen.expWorkYear }}">
+                </custom-text-field>
+
+                <custom-text-field name="col1YExpWorkMonth" label="ประสบการณ์ทำงาน (กี่เดือน) :"
+                    inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.col1YExpWorkMonth" [hidden]="fieldProps.col1YExpWorkMonth.hidden"
+                    [required]="fieldProps.col1YExpWorkMonth.required" [editing]="fieldProps.col1YExpWorkMonth.editing"
+                    [submitted]="submitted" maxlength="{{ maxlen.expWorkMonth }}"
+                    numberFormatter (change)="greaterThanYear('gtl1YExpWorkMonth')">
+                </custom-text-field>
+
+                <custom-select name="col1YJobPosition" label="ตำแหน่งงานปัจจุบัน :" placeholder="-- Select --"
+                    [hidden]="fieldProps.col1YJobPosition.hidden" [(ngModel)]="formData.col1YJobPosition"
+                    [required]="fieldProps.col1YJobPosition.required" [editing]="fieldProps.col1YJobPosition.editing"
+                    [submitted]="submitted"
+                    [displayName]="displayName.col1YJobPosition"
+                    [selectedValue]="formData.col1YJobPosition"
+                    [options]="ddl?.jobPositions">
+                </custom-select>
+            </ng-container>
+        </div>
+    </fieldset>
+
+    <fieldset *ngIf="!hideSection.familyInfo" id="familyInfo" class="border">
+        <legend>Family Information</legend>
+        <div class="form-data">
+            <custom-select name="comaritalStatus" label="สถานะสมรส :" placeholder="-- Select --"
+                [hidden]="fieldProps.comaritalStatus.hidden" [(ngModel)]="formData.comaritalStatus"
+                [required]="fieldProps.comaritalStatus.required" [editing]="fieldProps.comaritalStatus.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.comaritalStatus"
+                [selectedValue]="formData.comaritalStatus"
+                (change)="showSpouseChild()"
+                [options]="ddl?.maritalStatus">
+            </custom-select>
+
+            <custom-text-field name="cospouseIdNo" label="เลขที่บัตรประชาชนของคู่สมรส :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.cospouseIdNo" [hidden]="fieldProps.cospouseIdNo.hidden"
+                [required]="fieldProps.cospouseIdNo.required" [editing]="fieldProps.cospouseIdNo.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.idNo }}">
+            </custom-text-field>
+
+            <custom-text-field name="cospouseFirstNameTh" label="ชื่อ(ไทย) :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.cospouseFirstNameTh" [hidden]="fieldProps.cospouseFirstNameTh.hidden"
+                [required]="fieldProps.cospouseFirstNameTh.required" [editing]="fieldProps.cospouseFirstNameTh.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.firstNameTh }}">
+            </custom-text-field>
+
+            <custom-text-field name="cospouseLastNameTh" label="นามสกุล(ไทย) :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.cospouseLastNameTh" [hidden]="fieldProps.cospouseLastNameTh.hidden"
+                [required]="fieldProps.cospouseLastNameTh.required" [editing]="fieldProps.cospouseLastNameTh.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.lastNameTh }}">
+            </custom-text-field>
+
+            <custom-text-field name="cospousePhoneNo" label="เบอร์ติดต่อ :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.cospousePhoneNo" [hidden]="fieldProps.cospousePhoneNo.hidden"
+                [required]="fieldProps.cospousePhoneNo.required" [editing]="fieldProps.cospousePhoneNo.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.phoneNo }}" numberFormatter>
+            </custom-text-field>
+
+            <custom-select name="cochildNo" label="จำนวนบุตร: (เลือกจำนวน) :" placeholder="-- Select --"
+                [hidden]="fieldProps.cochildNo.hidden" [(ngModel)]="formData.cochildNo"
+                [required]="fieldProps.cochildNo.required" [editing]="fieldProps.cochildNo.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.cochildNo"
+                [selectedValue]="formData.cochildNo"
+                (change)="childrenCountSelectChange()"
+                [options]="ddl?.childrenCount">
+            </custom-select>
+
+            <custom-text-field name="cochildIdNo1" label="เลขที่บัตรประชาชนของบุตรคนที่ 1 :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.cochildIdNo1" [hidden]="fieldProps.cochildIdNo1.hidden"
+                [required]="fieldProps.cochildIdNo1.required" [editing]="fieldProps.cochildIdNo1.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.idNo }}"
+                numberFormatter>
+            </custom-text-field>
+
+            <custom-text-field name="cochildIdNo2" label="เลขที่บัตรประชาชนของบุตรคนที่ 2 :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.cochildIdNo2" [hidden]="fieldProps.cochildIdNo2.hidden"
+                [required]="fieldProps.cochildIdNo2.required" [editing]="fieldProps.cochildIdNo2.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.idNo }}"
+                numberFormatter>
+            </custom-text-field>
+
+            <custom-text-field name="cochildIdNo3" label="เลขที่บัตรประชาชนของบุตรคนที่ 3 :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.cochildIdNo3" [hidden]="fieldProps.cochildIdNo3.hidden"
+                [required]="fieldProps.cochildIdNo3.required" [editing]="fieldProps.cochildIdNo3.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.idNo }}"
+                numberFormatter>
+            </custom-text-field>
+
+            <custom-text-field name="cochildIdNo4" label="เลขที่บัตรประชาชนของบุตรคนที่ 4 :"
+                inputCss="col-sm-4 col-xs-9" [(ngModel)]="formData.cochildIdNo4" [hidden]="fieldProps.cochildIdNo4.hidden"
+                [required]="fieldProps.cochildIdNo4.required" [editing]="fieldProps.cochildIdNo4.editing"
+                [submitted]="submitted" maxlength="{{ maxlen.idNo }}"
+                numberFormatter>
+            </custom-text-field>
+        </div>
+    </fieldset>
+
+    <fieldset *ngIf="!hideSection.educationInfo" id="educationInfo" class="border">
+        <legend>Education Information</legend>
+        <div class="form-data">
+            <custom-select name="coeducationLevel" label="ระดับการศึกษาสูงสุด :" placeholder="-- Select --"
+                [hidden]="fieldProps.coeducationLevel.hidden" [(ngModel)]="formData.coeducationLevel"
+                [required]="fieldProps.coeducationLevel.required" [editing]="fieldProps.coeducationLevel.editing"
+                [submitted]="submitted"
+                [displayName]="displayName.coeducationLevel"
+                [selectedValue]="formData.coeducationLevel"
+                [options]="ddl?.educationLevels">
+            </custom-select>
+
+        </div>
+    </fieldset>
+
+    <app-person [hidden]="!hideSection.contactPerson" [componentName]="'CoBorrowerCustomerInfoComponent'" [prefix]="'cocontact'" [header]="'บุคคลติดต่อกรณีจำเป็น'" [formData]="formData"></app-person>
+    <app-person [hidden]="!hideSection.guarantorPerson" [componentName]="'CoBorrowerCustomerInfoComponent'" [prefix]="'coguarantor'" [header]="'ผู้ค้ำประกัน'" [formData]="formData"></app-person>
+    <app-person [hidden]="!hideSection.coborrowerPerson" [componentName]="'CoBorrowerCustomerInfoComponent'" [prefix]="'cocoborrower'" [header]="'ผู้กู้ร่วม'" [formData]="formData"></app-person>
+</form>

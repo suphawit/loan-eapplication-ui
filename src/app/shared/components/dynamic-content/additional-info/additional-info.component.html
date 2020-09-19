@@ -1,0 +1,26 @@
+<form name="form" #form="ngForm" class="form-horizontal" novalidate>
+    <fieldset *ngIf="!hideSection.additionalInfo" id="additionalInfo" class="border">
+        <legend>Additional Information</legend>
+        <div class="form-data">
+            <custom-text-field name="slmTicketId" label="Ticket ID :"
+                [(ngModel)]="formData.slmTicketId" [hidden]="fieldProps.slmTicketId.hidden"
+                [required]="fieldProps.slmTicketId.required" [editing]="fieldProps.slmTicketId.editing">
+            </custom-text-field>
+
+            <custom-text-field name="slmChannel" label="Channel :"
+                [(ngModel)]="formData.slmChannel" [hidden]="fieldProps.slmChannel.hidden"
+                [required]="fieldProps.slmChannel.required" [editing]="fieldProps.slmChannel.editing">
+            </custom-text-field>
+
+            <custom-text-field name="ncbResult" label="NCB Result :"
+                [(ngModel)]="formData.ncbResult" [hidden]="fieldProps.ncbResult.hidden"
+                [required]="fieldProps.ncbResult.required" [editing]="fieldProps.ncbResult.editing">
+            </custom-text-field>
+
+            <custom-text-field name="additionalRemark" label="Remark :"
+                [(ngModel)]="formData.additionalRemark" [hidden]="fieldProps.additionalRemark.hidden"
+                [required]="fieldProps.additionalRemark.required" [editing]="fieldProps.additionalRemark.editing">
+            </custom-text-field>
+        </div>
+    </fieldset>
+</form>

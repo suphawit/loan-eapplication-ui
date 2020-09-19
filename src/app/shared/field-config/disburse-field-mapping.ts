@@ -1,0 +1,19 @@
+export const fieldMapping = [
+    'disbursementMethod',
+    'promptpayIdNo',
+    'bankTransfer',
+    'accountNoTransfer',
+    'chequeFirstNameItem1',
+    'chequeLastNameItem1',
+    'chequeAmtItem1',
+    'chequeFirstNameItem2',
+    'chequeLastNameItem2',
+    'chequeAmtItem2',
+    'chequeFirstNameItem3',
+    'chequeLastNameItem3',
+    'chequeAmtItem3',
+    'repaymentMethod',
+    'bankDirectDebit',
+    'accountDirectDebit',
+    'notificationMethod'
+];
